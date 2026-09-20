@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>三崎精密工業株式会社</title>
+<meta name="description" content="精密切削加工・治具設計・小ロット試作。三崎精密工業株式会社（架空の企業を題材にした制作サンプルです）">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@500;700&family=Barlow+Condensed:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101418;
+  --ink-soft:#525d68;
+  --ink-faint:#8a949d;
+  --line:#dde2e6;
+  --line-soft:#eceff1;
+  --bg:#ffffff;
+  --surface:#f4f6f7;
+  --surface-2:#eaeef0;
+  --accent:#0d4f8b;
+  --accent-2:#c2521e;
+  --pad:clamp(20px,5vw,64px);
+  --f-body:"Noto Sans JP",system-ui,sans-serif;
+  --f-head:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;
+  --f-num:"Barlow Condensed","Noto Sans JP",sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--f-body);font-size:15px;line-height:1.9;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:var(--pad)}
+
+/* ── デモ帯 ───────────────────── */
+.demo{
+  background:var(--ink);color:#fff;font-size:11px;letter-spacing:.06em;
+  text-align:center;padding:7px 14px;
+}
+
+/* ── ヘッダー ─────────────────── */
+.hd{
+  position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(1.6) blur(10px);border-bottom:1px solid var(--line-soft);
+}
+.hd-in{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:70px}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.logo svg{flex:none}
+.logo b{font-family:var(--f-head);font-size:16.5px;letter-spacing:.06em;font-weight:700;display:block;line-height:1.3}
+.logo span{font-family:var(--f-num);font-size:10px;letter-spacing:.2em;color:var(--ink-faint);display:block;line-height:1}
+.nav{display:flex;align-items:center;gap:clamp(14px,2.2vw,30px)}
+.nav a{
+  text-decoration:none;font-size:13px;font-weight:500;color:var(--ink-soft);
+  position:relative;padding-block:6px;transition:color .2s;
+}
+.nav a::after{
+  content:"";position:absolute;left:0;right:100%;bottom:0;height:1.5px;
+  background:var(--accent);transition:right .3s cubic-bezier(.2,.7,.3,1);
+}
+.nav a:hover{color:var(--ink)}
+.nav a:hover::after{right:0}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  font-size:13px;font-weight:500;padding:11px 20px;border-radius:2px;
+  background:var(--accent);color:#fff;transition:background .2s;
+}
+.btn .arw{display:inline-block;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+.btn:hover{background:#0a3f70}
+.btn:hover .arw{transform:translateX(5px)}
+.btn--ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn--ghost:hover{background:var(--surface);border-color:var(--ink-faint)}
+.hd .btn{padding:10px 17px}
+.navtoggle{display:none}
+
+/* ── ヒーロー ─────────────────── */
+.hero{position:relative;overflow:hidden;background:var(--surface)}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(120deg,rgba(13,79,139,.09),rgba(13,79,139,0) 52%),
+    repeating-linear-gradient(0deg,rgba(16,20,24,.045) 0 1px,transparent 1px 34px),
+    repeating-linear-gradient(90deg,rgba(16,20,24,.045) 0 1px,transparent 1px 34px);
+  pointer-events:none;
+}
+.hero-in{position:relative;display:grid;grid-template-columns:1fr 380px;gap:clamp(30px,5vw,70px);align-items:center;padding-block:clamp(56px,8vw,104px)}
+.eyebrow{
+  font-family:var(--f-num);font-size:12px;letter-spacing:.26em;color:var(--accent);
+  display:flex;align-items:center;gap:12px;margin:0 0 20px;
+}
+.eyebrow::before{content:"";width:34px;height:1.5px;background:var(--accent)}
+.hero h1{
+  font-family:var(--f-head);font-weight:700;margin:0 0 22px;
+  font-size:clamp(28px,4.6vw,50px);line-height:1.34;letter-spacing:.01em;
+}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{margin:0 0 30px;color:var(--ink-soft);max-width:44ch;font-size:15px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero-fig{position:relative;aspect-ratio:1/1}
+.hero-fig svg{width:100%;height:100%;display:block}
+
+/* ── 数値帯 ───────────────────── */
+.stats{border-block:1px solid var(--line);background:var(--bg)}
+.stats-in{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:clamp(24px,3.4vw,38px) 8px;text-align:center;border-left:1px solid var(--line-soft)}
+.stat:first-child{border-left:0}
+.stat dt{font-size:11.5px;letter-spacing:.1em;color:var(--ink-faint);margin-bottom:8px}
+.stat dd{margin:0;font-family:var(--f-num);font-size:clamp(32px,4.4vw,46px);font-weight:600;line-height:1;letter-spacing:.01em}
+.stat dd small{font-family:var(--f-body);font-size:13px;font-weight:500;margin-left:4px;color:var(--ink-soft)}
+
+/* ── セクション共通 ───────────── */
+section{padding-block:clamp(56px,7vw,104px)}
+.sec-h{margin-bottom:clamp(30px,4vw,52px)}
+.sec-h .ttl{
+  font-family:var(--f-head);font-weight:700;margin:0 0 10px;
+  font-size:clamp(22px,3vw,32px);line-height:1.4;letter-spacing:.02em;
+}
+.sec-h .en{font-family:var(--f-num);font-size:12px;letter-spacing:.24em;color:var(--accent);display:block;margin-bottom:12px}
+.sec-h p{margin:0;color:var(--ink-soft);max-width:60ch}
+
+/* ── 事業内容 ─────────────────── */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,26px)}
+.card{
+  border:1px solid var(--line);border-radius:3px;padding:clamp(24px,2.6vw,34px);
+  background:var(--bg);position:relative;overflow:hidden;
+  transition:transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s,border-color .35s;
+}
+.card::after{
+  content:"";position:absolute;left:0;top:0;width:100%;height:3px;
+  background:linear-gradient(90deg,var(--accent),#3f8ccb);
+  transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.2,.7,.3,1);
+}
+.card:hover{transform:translateY(-5px);box-shadow:0 16px 36px -22px rgba(16,20,24,.45);border-color:var(--line-soft)}
+.card:hover::after{transform:scaleX(1)}
+.card .no{font-family:var(--f-num);font-size:12px;letter-spacing:.2em;color:var(--ink-faint)}
+.card svg{margin:16px 0 14px}
+.card h3{font-family:var(--f-head);font-size:17px;margin:0 0 10px;letter-spacing:.03em}
+.card p{margin:0 0 16px;font-size:14px;color:var(--ink-soft)}
+.card ul{margin:0;padding-left:1.1em;font-size:13px;color:var(--ink-soft)}
+.card li{margin-bottom:3px}
+
+/* ── 設備・技術 ───────────────── */
+.spec{background:var(--surface)}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,4vw,60px);align-items:start}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th,.tbl td{text-align:left;padding:14px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{width:38%;font-weight:500;color:var(--ink-soft);white-space:nowrap}
+.tbl td{color:var(--ink)}
+.tbl tr:first-child th,.tbl tr:first-child td{border-top:1px solid var(--line)}
+.note{margin:16px 0 0;font-size:12.5px;color:var(--ink-faint)}
+
+/* ── 品質 ─────────────────────── */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:st}
+.step{
+  position:relative;padding:22px 18px 20px;border:1px solid var(--line);
+  border-radius:3px;background:var(--bg);counter-increment:st;
+}
+.step::before{
+  content:"0" counter(st);position:absolute;top:14px;right:16px;
+  font-family:var(--f-num);font-size:26px;line-height:1;color:var(--surface-2);font-weight:600;
+}
+.step h4{font-family:var(--f-head);font-size:15px;margin:0 0 8px;letter-spacing:.03em}
+.step p{margin:0;font-size:13px;color:var(--ink-soft)}
+
+/* ── 会社概要 ─────────────────── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,4vw,60px);align-items:start}
+.map{aspect-ratio:4/3;border:1px solid var(--line);overflow:hidden;background:var(--surface-2)}
+.map iframe{width:100%;height:100%;border:0;display:block}
+
+/* ── CTA ──────────────────────── */
+.cta{position:relative;overflow:hidden;background:var(--ink);color:#fff}
+.cta::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(900px 340px at 78% 12%,rgba(13,79,139,.65),transparent 62%),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 30px);
+}
+.cta-in{position:relative;text-align:center}
+.cta .en{color:#7fb6e6}
+.cta h2{font-family:var(--f-head);font-size:clamp(21px,3vw,32px);margin:0 0 14px;letter-spacing:.03em;line-height:1.5}
+.cta p{margin:0 auto 28px;color:#b9c3cc;max-width:46ch}
+.cta .btn{background:#fff;color:var(--ink)}
+.cta .btn:hover{background:#e6ecf1}
+.cta .btn--ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.34)}
+.cta .btn--ghost:hover{background:rgba(255,255,255,.1)}
+.cta-btns{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+
+/* ── フッター ─────────────────── */
+.ft{background:var(--ink);color:#909aa4;border-top:1px solid rgba(255,255,255,.1);font-size:13px}
+.ft-in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:22px;padding-block:34px}
+.ft a{color:#c3cbd2;text-decoration:none;margin-right:20px;transition:color .2s}
+.ft a:hover{color:#fff}
+.ft small{display:block;margin-top:10px;font-size:11.5px;color:#6d7780}
+
+/* ── スクロール演出 ───────────── */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ── レスポンシブ ─────────────── */
+@media (max-width:920px){
+  .hero-in{grid-template-columns:1fr}
+  .hero-fig{max-width:330px;order:-1}
+  .cards{grid-template-columns:1fr}
+  .spec-grid,.about-grid{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  body{font-size:14.5px}
+  .nav{display:none}
+  .navtoggle{display:inline-flex}
+  .hd-in{min-height:60px}
+  .stats-in{grid-template-columns:1fr 1fr}
+  .stat{border-left:0;border-top:1px solid var(--line-soft);text-align:left;padding-inline:0}
+  .stat:nth-child(2n){padding-left:18px;border-left:1px solid var(--line-soft)}
+  .stats-in .stat:nth-child(-n+2){border-top:0}
+  .flow{grid-template-columns:1fr}
+  .hero-cta .btn,.cta-btns .btn{flex:1 1 100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<p class="demo">DEMO — これはデザインサンプルです。架空の企業を題材にしており、実在の企業とは関係ありません。</p>
+
+<header class="hd">
+  <div class="wrap hd-in">
+    <a class="logo" href="#top">
+      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
+        <circle cx="15" cy="15" r="13.2" fill="none" stroke="#0d4f8b" stroke-width="1.6"/>
+        <circle cx="15" cy="15" r="5.2" fill="none" stroke="#0d4f8b" stroke-width="1.6"/>
+        <path d="M15 1.8v5M15 23.2v5M1.8 15h5M23.2 15h5" stroke="#0d4f8b" stroke-width="1.6"/>
+      </svg>
+      <span>
+        <b>三崎精密工業</b>
+        <span>MISAKI PRECISION</span>
+      </span>
+    </a>
+    <nav class="nav">
+      <a href="#business">事業内容</a>
+      <a href="#spec">設備・技術</a>
+      <a href="#quality">品質管理</a>
+      <a href="#about">会社概要</a>
+      <a class="btn" href="#contact">お問い合わせ <span class="arw">→</span></a>
+    </nav>
+    <a class="btn navtoggle" href="#contact">お問い合わせ <span class="arw">→</span></a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div>
+        <p class="eyebrow">PRECISION MACHINING</p>
+        <h1>ミクロン単位の精度を、<br><em>一個</em>からつくる。</h1>
+        <p>半導体製造装置・医療機器向けの精密切削部品を手がけて48年。試作一個から量産まで、図面をお預かりした日から動きます。</p>
+        <div class="hero-cta">
+          <a class="btn" href="#contact">図面を送って見積もる <span class="arw">→</span></a>
+          <a class="btn btn--ghost" href="#spec">設備一覧を見る</a>
+        </div>
+      </div>
+      <div class="hero-fig" aria-hidden="true">
+        <svg viewBox="0 0 360 360" fill="none">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#0d4f8b" stop-opacity=".16"/>
+              <stop offset="1" stop-color="#0d4f8b" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <circle cx="180" cy="180" r="150" fill="url(#g1)"/>
+          <circle cx="180" cy="180" r="150" stroke="#0d4f8b" stroke-opacity=".28" stroke-width="1"/>
+          <circle cx="180" cy="180" r="112" stroke="#0d4f8b" stroke-opacity=".5" stroke-width="1.4"/>
+          <circle cx="180" cy="180" r="52" stroke="#101418" stroke-opacity=".55" stroke-width="1.4"/>
+          <circle cx="180" cy="180" r="30" stroke="#c2521e" stroke-width="1.6"/>
+          <g stroke="#101418" stroke-opacity=".38" stroke-width="1">
+            <path d="M180 18v44M180 298v44M18 180h44M298 180h44"/>
+            <path d="M65 65l31 31M264 264l31 31M295 65l-31 31M96 264l-31 31"/>
+          </g>
+          <g fill="#0d4f8b" fill-opacity=".85">
+            <circle cx="180" cy="98" r="5"/><circle cx="262" cy="180" r="5"/>
+            <circle cx="180" cy="262" r="5"/><circle cx="98" cy="180" r="5"/>
+          </g>
+          <g stroke="#c2521e" stroke-width="1" stroke-dasharray="4 4" stroke-opacity=".75">
+            <path d="M180 180L284 120"/>
+          </g>
+          <text x="290" y="116" font-family="Barlow Condensed, sans-serif" font-size="14" fill="#c2521e" letter-spacing="1">±0.002</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats" style="padding-block:0">
+    <dl class="wrap stats-in">
+      <div class="stat"><dt>創業</dt><dd>1978<small>年</small></dd></div>
+      <div class="stat"><dt>加工公差</dt><dd>±0.002<small>mm</small></dd></div>
+      <div class="stat"><dt>取引先</dt><dd>214<small>社</small></dd></div>
+      <div class="stat"><dt>試作リードタイム</dt><dd>5<small>日〜</small></dd></div>
+    </dl>
+  </section>
+
+  <section id="business">
+    <div class="wrap">
+      <div class="sec-h rv">
+        <span class="en">BUSINESS</span>
+        <h2 class="ttl">図面一枚から、量産ラインまで。</h2>
+        <p>単品の試作から月産数万個の量産まで、同じ工場の中で完結させています。工程を外に出さないぶん、精度も納期もこちらで握れます。</p>
+      </div>
+      <div class="cards">
+        <article class="card rv">
+          <span class="no">01</span>
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect x="4" y="12" width="32" height="18" rx="2" stroke="#0d4f8b" stroke-width="1.6"/>
+            <path d="M12 12V7h16v5M4 21h32" stroke="#0d4f8b" stroke-width="1.6"/>
+            <circle cx="20" cy="25" r="3" stroke="#c2521e" stroke-width="1.6"/>
+          </svg>
+          <h3>精密切削加工</h3>
+          <p>5軸マシニングセンタで、複雑形状の部品を一度の段取りで仕上げます。</p>
+          <ul>
+            <li>ステンレス・チタン・インコネル</li>
+            <li>最小径 φ0.3mm の穴あけ</li>
+            <li>面粗さ Ra0.2 まで対応</li>
+          </ul>
+        </article>
+        <article class="card rv">
+          <span class="no">02</span>
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path d="M6 30V10l14-4 14 4v20l-14 4-14-4Z" stroke="#0d4f8b" stroke-width="1.6"/>
+            <path d="M20 6v28M6 10l14 5 14-5" stroke="#0d4f8b" stroke-width="1.6"/>
+            <circle cx="20" cy="20" r="2.6" fill="#c2521e"/>
+          </svg>
+          <h3>治具・金型設計</h3>
+          <p>お客様の工程に合わせた治具を設計から製作まで。既存ラインへの後付けも承ります。</p>
+          <ul>
+            <li>3D CAD による事前検証</li>
+            <li>量産治具・検査治具</li>
+            <li>既存設備への適合調整</li>
+          </ul>
+        </article>
+        <article class="card rv">
+          <span class="no">03</span>
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path d="M8 34V16l12-9 12 9v18" stroke="#0d4f8b" stroke-width="1.6"/>
+            <path d="M8 34h24M16 34v-9h8v9" stroke="#0d4f8b" stroke-width="1.6"/>
+            <path d="M28 8l4 4-4 4" stroke="#c2521e" stroke-width="1.6"/>
+          </svg>
+          <h3>試作・小ロット</h3>
+          <p>一個からお受けします。量産前の形状確認や、廃番部品の復元にもご利用いただいています。</p>
+          <ul>
+            <li>最短5営業日で初品納入</li>
+            <li>現物からの図面起こし</li>
+            <li>材料手配込みの一括対応</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="spec" class="spec">
+    <div class="wrap">
+      <div class="sec-h rv">
+        <span class="en">FACILITIES</span>
+        <h2 class="ttl">設備と対応範囲</h2>
+      </div>
+      <div class="spec-grid">
+        <div class="rv">
+          <table class="tbl">
+            <tbody>
+              <tr><th>マシニングセンタ</th><td>立形5軸 3台／立形3軸 8台</td></tr>
+              <tr><th>NC旋盤</th><td>複合加工機 4台／CNC旋盤 6台</td></tr>
+              <tr><th>研削盤</th><td>平面研削 3台／円筒研削 2台</td></tr>
+              <tr><th>測定機</th><td>三次元測定機 2台／輪郭形状測定機 1台</td></tr>
+              <tr><th>対応材質</th><td>ステンレス、アルミ、チタン、インコネル、樹脂</td></tr>
+              <tr><th>対応ロット</th><td>1個〜月産30,000個</td></tr>
+            </tbody>
+          </table>
+          <p class="note">※ 記載の内容はサンプル用に作成した架空のものです。</p>
+        </div>
+        <div class="rv">
+          <div class="sec-h" style="margin-bottom:22px">
+            <h3 class="ttl" style="font-size:20px">24時間の無人運転</h3>
+          </div>
+          <p style="margin:0 0 18px;color:var(--ink-soft)">夜間はパレットチェンジャーによる無人運転に切り替えています。日中は段取りと検査に人手を集中させることで、短納期と精度を両立させています。</p>
+          <p style="margin:0 0 26px;color:var(--ink-soft)">加工条件はすべてデータベース化し、同じ図面なら誰が回しても同じ品質になる状態を保っています。</p>
+          <a class="btn btn--ghost" href="#contact">対応可否を相談する <span class="arw">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="quality">
+    <div class="wrap">
+      <div class="sec-h rv">
+        <span class="en">QUALITY</span>
+        <h2 class="ttl">受け入れから出荷まで、記録を残す。</h2>
+        <p>工程ごとに検査記録を残し、出荷後に問い合わせをいただいた際も、どのロットで何が起きたかを追えるようにしています。</p>
+      </div>
+      <div class="flow">
+        <div class="step rv"><h4>受入検査</h4><p>材料のミルシートを照合し、ロット番号を紐づけて管理します。</p></div>
+        <div class="step rv"><h4>初品検査</h4><p>三次元測定機で全寸法を測定。合格まで量産には進みません。</p></div>
+        <div class="step rv"><h4>工程内検査</h4><p>規定数ごとに抜き取り、傾向をデータで監視しています。</p></div>
+        <div class="step rv"><h4>出荷検査</h4><p>外観と寸法を確認し、検査成績書を添えて出荷します。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="spec">
+    <div class="wrap">
+      <div class="sec-h rv">
+        <span class="en">COMPANY</span>
+        <h2 class="ttl">会社概要</h2>
+      </div>
+      <div class="about-grid">
+        <div class="rv">
+          <table class="tbl">
+            <tbody>
+              <tr><th>商号</th><td>三崎精密工業株式会社</td></tr>
+              <tr><th>創業</th><td>1978年4月</td></tr>
+              <tr><th>代表者</th><td>代表取締役　三崎 和彦</td></tr>
+              <tr><th>所在地</th><td>〒146-0092　東京都大田区下丸子2丁目</td></tr>
+              <tr><th>従業員数</th><td>68名</td></tr>
+              <tr><th>事業内容</th><td>精密切削加工、治具・金型設計製作、試作品製作</td></tr>
+              <tr><th>主要取引先</th><td>半導体製造装置メーカー、医療機器メーカーほか</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="rv">
+          <div class="map">
+            <iframe src="https://maps.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%A4%A7%E7%94%B0%E5%8C%BA%E4%B8%8B%E4%B8%B8%E5%AD%902%E4%B8%81%E7%9B%AE&z=16&output=embed" title="所在地の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <p class="note">東急多摩川線 下丸子駅から徒歩7分。お車でお越しの場合は正門横に駐車場がございます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="cta">
+    <div class="wrap cta-in">
+      <span class="en" style="font-family:var(--f-num);font-size:12px;letter-spacing:.24em;display:block;margin-bottom:14px">CONTACT</span>
+      <h2>図面をお持ちでしたら、<br>まずは可否だけでもご確認ください。</h2>
+      <p>対応できるかどうかは、通常1営業日以内にご返答しています。量産前の相談段階でも構いません。</p>
+      <div class="cta-btns">
+        <a class="btn" href="#contact">お問い合わせフォーム <span class="arw">→</span></a>
+        <a class="btn btn--ghost" href="#contact">03-0000-0000</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ft">
+  <div class="wrap ft-in">
+    <div>
+      <a href="#business">事業内容</a><a href="#spec">設備・技術</a><a href="#quality">品質管理</a><a href="#about">会社概要</a>
+      <small>© 三崎精密工業株式会社（架空）</small>
+    </div>
+    <div style="text-align:right">
+      <small style="margin-top:0">制作サンプル／実在の企業・団体とは関係ありません</small>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('in')});
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en,i){
+      if(en.isIntersecting){
+        var el = en.target;
+        setTimeout(function(){el.classList.add('in')}, (Array.prototype.indexOf.call(el.parentNode.children, el) % 4) * 90);
+        io.unobserve(el);
+      }
+    });
+  },{rootMargin:'0px 0px -12% 0px',threshold:.08});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>麦と焙煎</title>
+<meta name="description" content="カフェ＆ベーカリーのWebサイト制作サンプル（架空店舗のデザインデモ）">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Jost:wght@400;500&display=swap">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<style>
+:root{
+  /* ── 方向A：ナチュラル（既定） ───────────── */
+  --ground:#EDEBE4;      /* 粉白 */
+  --surface:#F7F5F0;
+  --surface-2:#E3DFD4;
+  --ink:#201E1A;         /* 窯墨 */
+  --ink-soft:#5B564D;
+  --ink-faint:#8D877A;
+  --line:#D2CDC1;
+  --accent:#6B3B21;      /* 焼き色 */
+  --accent-2:#8C9AA3;    /* 粉青 */
+  --slot-a:#E0DBCD;
+  --slot-b:#C9C1AE;
+  --slot-ink:#6E6758;
+  --shadow:0 1px 0 rgba(32,30,26,.06);
+
+  --f-display:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  --f-label:"Jost","Zen Kaku Gothic New",system-ui,sans-serif;
+
+  --pad:clamp(20px,5vw,72px);
+  --maxw:1120px;
+}
+:root[data-dir="modern"]{
+  /* ── 方向B：スタイリッシュ／都会的 ─────────── */
+  --ground:#121210;
+  --surface:#1B1B18;
+  --surface-2:#25251F;
+  --ink:#EDEBE4;
+  --ink-soft:#A8A59B;
+  --ink-faint:#757269;
+  --line:#33332C;
+  --accent:#A6BBC6;      /* 粉青 */
+  --accent-2:#C08A5E;    /* 焼き色 */
+  --slot-a:#232320;
+  --slot-b:#171714;
+  --slot-ink:#83807A;
+  --shadow:none;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--f-body);font-size:15px;line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+  transition:background-color .5s ease,color .5s ease;
+}
+h1,h2,h3{margin:0;font-weight:500;text-wrap:balance;line-height:1.4}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
+
+/* ── サンプル告知 ───────────────────── */
+.flag{
+  background:var(--ink);color:var(--ground);
+  font-family:var(--f-label);font-size:11.5px;letter-spacing:.06em;
+  padding-block:7px;text-align:center;
+}
+
+/* ── ヘッダー ──────────────────────── */
+.hdr{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+  background:color-mix(in srgb,var(--ground) 88%,transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.hdr-in{
+  display:flex;align-items:center;gap:16px;
+  padding-block:13px;flex-wrap:wrap;
+}
+.mark{font-family:var(--f-display);font-weight:700;font-size:19px;letter-spacing:.14em;margin-right:auto}
+.mark small{display:block;font-family:var(--f-label);font-weight:400;font-size:9.5px;letter-spacing:.3em;color:var(--ink-faint);margin-top:1px}
+.nav{display:flex;gap:clamp(12px,2.4vw,26px);font-size:12.5px;letter-spacing:.08em}
+.nav a{text-decoration:none;color:var(--ink-soft);padding-block:4px;border-bottom:1px solid transparent}
+.nav a:hover{color:var(--ink);border-bottom-color:var(--accent)}
+
+/* ── 方向スイッチ ───────────────────── */
+.dirsw{display:flex;align-items:center;gap:8px}
+.dirsw span{font-family:var(--f-label);font-size:9.5px;letter-spacing:.18em;color:var(--ink-faint);white-space:nowrap}
+.dirsw .seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface)}
+.dirsw button{
+  font-family:var(--f-body);font-size:11.5px;letter-spacing:.06em;
+  border:0;background:transparent;color:var(--ink-faint);
+  padding:5px 13px;cursor:pointer;transition:background-color .3s,color .3s;
+}
+.dirsw button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+
+/* ── ヒーロー ──────────────────────── */
+.hero{padding-block:clamp(40px,7vw,86px) clamp(44px,7vw,92px)}
+.hero-grid{display:grid;grid-template-columns:1fr minmax(260px,42%);gap:clamp(28px,5vw,64px);align-items:end}
+.hero-lead{display:flex;gap:clamp(20px,3.5vw,40px);align-items:flex-start}
+.vtag{
+  writing-mode:vertical-rl;font-family:var(--f-display);font-weight:500;
+  font-size:clamp(21px,3.2vw,30px);line-height:1.85;letter-spacing:.22em;
+  color:var(--ink);margin:0;height:auto;white-space:nowrap;
+}
+.vtag em{font-style:normal;color:var(--accent)}
+.hero-copy{padding-top:6px;max-width:34ch}
+.eyebrow{
+  font-family:var(--f-label);font-size:10px;letter-spacing:.34em;
+  color:var(--accent);margin-bottom:18px;
+}
+.hero-copy h1{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);letter-spacing:.06em;margin-bottom:18px}
+.hero-copy p{color:var(--ink-soft);font-size:14px}
+.hero-meta{
+  display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;
+}
+.chip{
+  font-family:var(--f-label);font-size:11px;letter-spacing:.1em;
+  border:1px solid var(--line);border-radius:999px;padding:5px 13px;color:var(--ink-soft);
+}
+.chip strong{font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* ── 写真スロット ───────────────────── */
+.shot{
+  position:relative;border:1px solid var(--line);
+  background:
+    radial-gradient(120% 90% at 30% 22%,var(--slot-a),transparent 62%),
+    radial-gradient(100% 100% at 78% 88%,var(--slot-b),transparent 70%),
+    var(--slot-a);
+  display:grid;place-items:center;overflow:hidden;
+  transition:background .5s ease,border-color .5s ease;
+}
+.shot::before{
+  content:"";width:26px;height:26px;opacity:.42;
+  background:
+    linear-gradient(var(--slot-ink),var(--slot-ink)) center/1px 100% no-repeat,
+    linear-gradient(var(--slot-ink),var(--slot-ink)) center/100% 1px no-repeat;
+}
+.shot b{
+  position:absolute;left:10px;bottom:9px;
+  font-family:var(--f-label);font-weight:400;font-size:9.5px;letter-spacing:.2em;
+  color:var(--slot-ink);
+}
+.shot i{
+  position:absolute;right:10px;top:9px;font-style:normal;
+  font-family:var(--f-label);font-size:9px;letter-spacing:.14em;
+  color:var(--slot-ink);opacity:.8;
+}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.shot--photo::before{content:none}
+.shot--photo b,.shot--photo i{display:none}
+.shot--hero{aspect-ratio:3/4;max-width:100%}
+.shot--wide{aspect-ratio:16/9}
+.map{aspect-ratio:16/9;border:1px solid var(--line);overflow:hidden;background:var(--surface-2)}
+.map iframe{width:100%;height:100%;border:0;display:block}
+.shot--sq{aspect-ratio:1/1}
+
+/* ── セクション共通 ──────────────────── */
+section{scroll-margin-top:96px}
+.band{border-top:1px solid var(--line);padding-block:clamp(48px,7vw,92px)}
+.band--fill{background:var(--surface);transition:background-color .5s ease}
+.shead{margin-bottom:clamp(28px,4vw,48px)}
+.shead h2{font-family:var(--f-display);font-size:clamp(21px,2.6vw,27px);letter-spacing:.14em}
+.shead p{color:var(--ink-soft);font-size:13.5px;margin-top:10px;max-width:56ch}
+
+/* ── こだわり ──────────────────────── */
+.craft{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(24px,3.6vw,48px)}
+.craft article h3{font-family:var(--f-display);font-size:17px;letter-spacing:.1em;margin:20px 0 10px}
+.craft article p{color:var(--ink-soft);font-size:13.5px}
+.craft .no{
+  font-family:var(--f-label);font-size:10px;letter-spacing:.24em;color:var(--accent);
+}
+
+/* ── メニュー ──────────────────────── */
+.menus{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:clamp(28px,4vw,56px)}
+.menu-h{
+  display:flex;align-items:baseline;gap:12px;
+  padding-bottom:12px;border-bottom:1px solid var(--ink);margin-bottom:6px;
+}
+.menu-h h3{font-family:var(--f-display);font-size:16px;letter-spacing:.16em}
+.menu-h span{font-family:var(--f-label);font-size:9.5px;letter-spacing:.24em;color:var(--ink-faint);margin-left:auto}
+.menu-h + ul{list-style:none;margin:0;padding:0}
+.menu-h + ul li{
+  display:flex;align-items:baseline;gap:10px;
+  padding-block:13px;border-bottom:1px solid var(--line);
+}
+.menu-h + ul .nm{font-size:13.5px}
+.menu-h + ul .nm small{display:block;color:var(--ink-faint);font-size:11.5px;letter-spacing:.02em}
+.menu-h + ul .dots{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-4px)}
+.menu-h + ul .pr{font-variant-numeric:tabular-nums;font-size:13.5px;color:var(--ink-soft);white-space:nowrap}
+
+/* ── 店舗情報 ──────────────────────── */
+.info-grid{display:grid;grid-template-columns:1fr minmax(240px,38%);gap:clamp(26px,4vw,52px);align-items:start}
+.dl{display:grid;grid-template-columns:5.5em 1fr;gap:0}
+.dl dt,.dl dd{padding-block:12px;border-bottom:1px solid var(--line);margin:0}
+.dl dt{font-family:var(--f-label);font-size:10.5px;letter-spacing:.18em;color:var(--ink-faint);padding-top:15px}
+.dl dd{font-size:13.5px;font-variant-numeric:tabular-nums}
+.dl dd small{color:var(--ink-faint);font-size:11.5px}
+.cta{
+  display:inline-flex;align-items:center;gap:9px;margin-top:22px;
+  font-family:var(--f-label);font-size:11.5px;letter-spacing:.16em;
+  text-decoration:none;color:var(--ground);background:var(--ink);
+  padding:12px 22px;border-radius:999px;transition:opacity .25s;
+}
+.cta:hover{opacity:.84}
+.cta + .cta{margin-left:10px;background:transparent;color:var(--ink);border:1px solid var(--line)}
+
+/* ── フッター ──────────────────────── */
+.ft{border-top:1px solid var(--line);padding-block:34px;color:var(--ink-faint);font-size:11.5px;letter-spacing:.04em}
+.ft-in{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+
+/* ── スマホ固定アクションバー（SPのみ） ───── */
+.spbar{display:none}
+.spbar a{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  text-decoration:none;color:var(--ground);
+  padding-block:10px;font-size:11.5px;letter-spacing:.06em;
+}
+.spbar a + a{border-left:1px solid color-mix(in srgb,var(--ground) 22%,transparent)}
+.spbar em{font-style:normal;font-family:var(--f-label);font-size:8.5px;letter-spacing:.2em;opacity:.62}
+.spbar strong{font-weight:500}
+
+@media (max-width:760px){
+  .hero{padding-top:0}
+  .hero-grid,.info-grid{grid-template-columns:1fr}
+  .hero-grid{display:flex;flex-direction:column;align-items:stretch}
+  .hero-lead{display:block}
+  .vtag{writing-mode:horizontal-tb;height:auto;white-space:normal;font-size:22px;letter-spacing:.1em;margin-block:26px 18px}
+  .hero-copy h1{font-size:23px;margin-bottom:14px}
+  .hero-copy{max-width:none}
+  .eyebrow{margin-bottom:12px}
+  .hero-meta{margin-top:20px}
+  /* SPでは写真をファーストビューの先頭へ */
+  .shot--hero{order:-1;aspect-ratio:4/5;max-width:none;margin-inline:calc(var(--pad) * -1);border-inline:0;border-top:0}
+  .nav{order:3;width:100%;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px}
+  .dirsw span{display:none}
+  .dl{grid-template-columns:4.6em 1fr}
+  .cta{width:100%;justify-content:center}
+  .cta + .cta{margin-left:0;margin-top:10px}
+  body{padding-bottom:78px}
+  .spbar{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    position:fixed;left:0;right:0;bottom:0;z-index:30;
+    background:var(--ink);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="flag">DEMO — これはデザインサンプルです。架空の店舗であり、実在の店舗・企業とは関係ありません。</div>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <div class="mark">麦と焙煎<small>MUGI TO BAISEN</small></div>
+    <nav class="nav">
+      <a href="#concept">こだわり</a>
+      <a href="#menu">メニュー</a>
+      <a href="#access">店舗情報</a>
+    </nav>
+    <div class="dirsw">
+      <span>DESIGN</span>
+      <div class="seg" role="group" aria-label="デザイン方向の切替">
+        <button type="button" id="btn-natural" aria-pressed="true">ナチュラル</button>
+        <button type="button" id="btn-modern" aria-pressed="false">都会的</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="hero-grid">
+      <div class="hero-lead">
+        <p class="vtag">朝八時、<em>窯</em>がひらく。<br>焼きたてと、<em>一杯</em>と。</p>
+        <div class="hero-copy">
+          <p class="eyebrow">BAKERY &amp; COFFEE / OSAKA</p>
+          <h1>粉と豆のことだけ、<br>まじめに考えています。</h1>
+          <p>自家製酵母の食パンと、浅煎りから深煎りまで週替わりのシングルオリジン。北堀江の路地で、焼き上がりの時間にあわせて豆を挽いています。</p>
+          <div class="hero-meta">
+            <span class="chip">営業 <strong>8:00–18:00</strong></span>
+            <span class="chip">定休 <strong>火・第3水</strong></span>
+            <span class="chip">四ツ橋駅 <strong>徒歩5分</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="shot shot--hero shot--photo">
+        <picture>
+          <source media="(max-width:760px)" srcset="img/hero-sp.jpg">
+          <img src="img/hero.jpg" alt="週替わりのコーヒー" width="1200" height="1600">
+        </picture>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--fill" id="concept">
+    <div class="wrap">
+      <div class="shead">
+        <h2>こだわり</h2>
+        <p>毎日食べるものだから、素材と工程は全部お伝えします。</p>
+      </div>
+      <div class="craft">
+        <article>
+          <div class="shot shot--sq shot--photo"><img src="img/bean.jpg" alt="焙煎したコーヒー豆" width="1100" height="1100" loading="lazy"></div>
+          <p class="no">BEAN</p>
+          <h3>豆は、週替わりで二種類</h3>
+          <p>浅煎りは香りの立つエチオピア系を中心に、深煎りは窯出しのパンに合わせた自家ブレンド。5kg釜で週2回、店舗奥で焙煎しています。挽きたてをお持ち帰りいただけます。</p>
+        </article>
+        <article>
+          <div class="shot shot--sq shot--photo"><img src="img/bread.jpg" alt="自家製酵母のパン" width="1100" height="1100" loading="lazy"></div>
+          <p class="no">BREAD</p>
+          <h3>自家製酵母で、低温長時間</h3>
+          <p>レーズンから起こした酵母を継いで8年。前日の夕方に仕込み、一晩かけてゆっくり発酵させます。粉は北海道産を基本に、食感にあわせて数種類を配合しています。</p>
+        </article>
+        <article>
+          <div class="shot shot--sq shot--photo"><img src="img/counter.jpg" alt="カウンター席のある店内" width="1100" height="1100" loading="lazy"></div>
+          <p class="no">SHOP</p>
+          <h3>10席の、静かなカウンター</h3>
+          <p>イートインは10席。焼き上がりは1日3回、8時・12時・15時。Wi-Fiと電源をご用意していますので、近隣でお仕事の方もどうぞ。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="menu">
+    <div class="wrap">
+      <div class="shead">
+        <h2>メニュー</h2>
+        <p>代表的なものだけ。季節のパンは店頭とInstagramでご案内しています。</p>
+      </div>
+      <div class="menus">
+        <div>
+          <div class="menu-h"><h3>コーヒー</h3><span>COFFEE</span></div>
+          <ul>
+            <li><span class="nm">本日の浅煎り<small>エチオピア／グジ</small></span><span class="dots"></span><span class="pr">¥550</span></li>
+            <li><span class="nm">深煎りブレンド「窯出し」<small>パンに合わせた自家配合</small></span><span class="dots"></span><span class="pr">¥520</span></li>
+            <li><span class="nm">カフェラテ</span><span class="dots"></span><span class="pr">¥600</span></li>
+            <li><span class="nm">水出しアイスコーヒー<small>18時間抽出</small></span><span class="dots"></span><span class="pr">¥580</span></li>
+            <li><span class="nm">コーヒー豆 100g<small>店頭で挽きます</small></span><span class="dots"></span><span class="pr">¥880〜</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="menu-h"><h3>ベーカリー</h3><span>BAKERY</span></div>
+          <ul>
+            <li><span class="nm">自家製酵母の角食<small>1斤／ハーフあり</small></span><span class="dots"></span><span class="pr">¥480</span></li>
+            <li><span class="nm">クロワッサン<small>発酵バター100%</small></span><span class="dots"></span><span class="pr">¥320</span></li>
+            <li><span class="nm">あんバターフランス</span><span class="dots"></span><span class="pr">¥420</span></li>
+            <li><span class="nm">大納言とくるみのカンパーニュ<small>ハーフサイズ</small></span><span class="dots"></span><span class="pr">¥560</span></li>
+            <li><span class="nm">本日のキッシュ</span><span class="dots"></span><span class="pr">¥480</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--fill" id="access">
+    <div class="wrap">
+      <div class="shead">
+        <h2>店舗情報・アクセス</h2>
+        <p>スマートフォンからご覧の方は、そのまま経路案内へ進めます。</p>
+      </div>
+      <div class="info-grid">
+        <div>
+          <dl class="dl">
+            <dt>ADDRESS</dt><dd>大阪市西区北堀江1-00-00 堀江○○ビル 1F<br><small>※サンプルのため架空の住所です</small></dd>
+            <dt>HOURS</dt><dd>8:00 – 18:00 <small>（L.O. 17:30）</small></dd>
+            <dt>CLOSED</dt><dd>火曜日・第3水曜日</dd>
+            <dt>ACCESS</dt><dd>Osaka Metro 四つ橋線 四ツ橋駅 6番出口 徒歩5分</dd>
+            <dt>SEATS</dt><dd>10席 <small>／ Wi-Fi・電源あり</small></dd>
+            <dt>TEL</dt><dd>06-0000-0000</dd>
+          </dl>
+          <a class="cta" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E5%B8%82%E8%A5%BF%E5%8C%BA%E5%8C%97%E5%A0%80%E6%B1%9F1%E4%B8%81%E7%9B%AE" target="_blank" rel="noopener">Googleマップで開く</a>
+          <a class="cta" href="#access">Instagram</a>
+        </div>
+        <div class="map">
+          <iframe
+            src="https://maps.google.com/maps?q=%E5%A4%A7%E9%98%AA%E5%B8%82%E8%A5%BF%E5%8C%BA%E5%8C%97%E5%A0%80%E6%B1%9F1%E4%B8%81%E7%9B%AE&z=16&output=embed"
+            title="店舗所在地の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <div class="wrap ft-in">
+    <span>麦と焙煎 MUGI TO BAISEN — 架空のサンプル店舗／掲載の住所・電話番号・価格はすべて架空のものです</span>
+    <span>デザインサンプル／実在の店舗ではありません　写真: Unsplash</span>
+  </div>
+</footer>
+
+<nav class="spbar" aria-label="店舗への導線">
+  <a href="#access"><em>MAP</em><strong>地図・経路</strong></a>
+  <a href="#access"><em>TEL</em><strong>電話する</strong></a>
+  <a href="#menu"><em>MENU</em><strong>メニュー</strong></a>
+</nav>
+
+
+
+<script>
+(function(){
+  var root=document.documentElement;
+  var bn=document.getElementById('btn-natural');
+  var bm=document.getElementById('btn-modern');
+  function set(dir){
+    if(dir==='modern'){root.setAttribute('data-dir','modern');}
+    else{root.removeAttribute('data-dir');}
+    bn.setAttribute('aria-pressed',String(dir!=='modern'));
+    bm.setAttribute('aria-pressed',String(dir==='modern'));
+    try{localStorage.setItem('mtb-dir',dir);}catch(e){}
+  }
+  bn.addEventListener('click',function(){set('natural');});
+  bm.addEventListener('click',function(){set('modern');});
+  try{var s=localStorage.getItem('mtb-dir');if(s==='modern')set('modern');}catch(e){}
+})();
+</script>
+</body>
+</html>
