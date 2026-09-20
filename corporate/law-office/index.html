@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>常磐法律事務所 — 企業法務・労務・事業承継</title>
+<meta name="description" content="制作サンプル。架空の法律事務所のコーポレートサイトです。">
+<meta name="robots" content="noindex">
+<style>
+:root{
+  --ink:#1c1b19; --ink-soft:#5a5650; --ink-faint:#8d877e;
+  --line:#e0dcd4; --line-soft:#efece6;
+  --bg:#fff; --surface:#f7f5f0; --surface-2:#efebe3;
+  --accent:#8a3a3a; --accent-d:#6e2d2d; --gold:#9c7b3c;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  --gothic:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic","Noto Sans JP",system-ui,sans-serif;
+  --wrap:1060px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--gothic);line-height:1.95;
+  -webkit-font-smoothing:antialiased;font-size:15px}
+svg{max-width:100%;display:block}
+a{color:inherit}
+.wrap{width:min(100% - 34px,var(--wrap));margin-inline:auto}
+.demo{background:var(--ink);color:#ddd8d0;font-size:12.5px;text-align:center;padding:9px 16px;line-height:1.6}
+
+/* ---- ヘッダー ---- */
+header.site{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:30}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-block:15px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.brand svg{width:30px;height:30px;flex:none}
+.brand b{font-family:var(--mincho);font-size:19px;font-weight:600;letter-spacing:.1em;line-height:1.3}
+.brand small{display:block;font-family:var(--gothic);font-size:10.5px;letter-spacing:.18em;color:var(--ink-faint);font-weight:400}
+.hnav{display:flex;align-items:center;gap:22px}
+.hnav a{font-size:13.5px;text-decoration:none;color:var(--ink-soft)}
+.hnav a:hover{color:var(--accent)}
+.tel{text-align:right;line-height:1.3}
+.tel b{font-family:var(--mincho);font-size:20px;letter-spacing:.04em}
+.tel small{display:block;font-size:10.5px;color:var(--ink-faint)}
+.hbtn,.hnav a.hbtn{background:var(--accent);color:#fff;text-decoration:none;font-size:13.5px;font-weight:700;
+  padding:11px 20px;border-radius:2px;white-space:nowrap}
+.hbtn:hover,.hnav a.hbtn:hover{background:var(--accent-d);color:#fff}
+
+/* ---- ヒーロー ---- */
+.hero{background:var(--surface);border-bottom:1px solid var(--line)}
+.hero-in{display:grid;grid-template-columns:1fr 360px;gap:clamp(26px,5vw,56px);align-items:center;
+  padding-block:clamp(44px,7vw,88px)}
+.hero h1{font-family:var(--mincho);font-weight:600;font-size:clamp(27px,4.4vw,42px);line-height:1.62;
+  margin:0 0 20px;letter-spacing:.04em}
+.hero p{color:var(--ink-soft);margin:0 0 26px;font-size:15px}
+.hero-art{background:#fff;border:1px solid var(--line);padding:22px}
+.rule{width:46px;height:2px;background:var(--accent);margin:0 0 22px}
+
+/* ---- 共通セクション ---- */
+section{padding-block:clamp(50px,7vw,86px)}
+section.tint{background:var(--surface)}
+.sec-head{margin-bottom:clamp(28px,4vw,44px)}
+.sec-head.c{text-align:center}
+.sec-head.c .rule{margin-inline:auto}
+.en{font-family:var(--gothic);font-size:11px;letter-spacing:.26em;color:var(--gold);font-weight:700;margin:0 0 9px}
+h2{font-family:var(--mincho);font-weight:600;font-size:clamp(21px,3vw,30px);line-height:1.55;margin:0;letter-spacing:.05em}
+.sec-head p{color:var(--ink-soft);margin:13px 0 0;font-size:14.5px}
+
+/* ---- 取扱分野 ---- */
+.fields{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.field{background:#fff;padding:clamp(22px,3vw,32px)}
+.field .no{font-family:var(--mincho);font-size:13px;color:var(--gold);letter-spacing:.14em}
+.field h3{font-family:var(--mincho);font-size:19px;font-weight:600;margin:6px 0 12px;letter-spacing:.04em}
+.field p{margin:0 0 14px;font-size:14px;color:var(--ink-soft)}
+.field ul{margin:0;padding-left:1.15em;font-size:13.5px;color:var(--ink-soft)}
+.field li{margin-bottom:3px}
+
+/* ---- 選ばれる理由 ---- */
+.reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,34px)}
+.reason{text-align:center}
+.reason .ico{width:66px;height:66px;margin:0 auto 16px}
+.reason h3{font-family:var(--mincho);font-size:17.5px;font-weight:600;margin:0 0 10px;letter-spacing:.03em}
+.reason p{margin:0;font-size:13.5px;color:var(--ink-soft);text-align:left}
+
+/* ---- 弁護士 ---- */
+.people{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,32px)}
+.person{background:#fff;border:1px solid var(--line);display:grid;grid-template-columns:132px 1fr}
+.person .ph{background:var(--surface-2);display:grid;place-items:center}
+.person .ph svg{width:86px;height:86px}
+.person .bd{padding:22px}
+.person .pos{font-size:11.5px;letter-spacing:.16em;color:var(--gold);font-weight:700}
+.person h3{font-family:var(--mincho);font-size:20px;font-weight:600;margin:5px 0 3px;letter-spacing:.06em}
+.person .kana{font-size:11.5px;color:var(--ink-faint);margin:0 0 12px}
+.person p{margin:0 0 10px;font-size:13.5px;color:var(--ink-soft)}
+.person dl{margin:0;font-size:12.5px;color:var(--ink-soft);display:grid;grid-template-columns:auto 1fr;gap:3px 12px}
+.person dt{color:var(--ink-faint)}
+.person dd{margin:0}
+
+/* ---- 流れ ---- */
+.flow{counter-reset:f;display:grid;gap:0;border-left:2px solid var(--line);margin-left:16px}
+.flow li{list-style:none;position:relative;padding:0 0 30px 30px}
+.flow li:last-child{padding-bottom:0}
+.flow li::before{counter-increment:f;content:counter(f);position:absolute;left:-17px;top:0;
+  width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;
+  font-size:13px;font-weight:700;font-family:var(--gothic)}
+.flow h3{font-family:var(--mincho);font-size:17px;font-weight:600;margin:3px 0 7px;letter-spacing:.03em}
+.flow p{margin:0;font-size:13.5px;color:var(--ink-soft)}
+
+/* ---- 費用 ---- */
+table.fee{width:100%;border-collapse:collapse;font-size:14px;background:#fff}
+table.fee th,table.fee td{border:1px solid var(--line);padding:14px 16px;text-align:left;vertical-align:top}
+table.fee thead th{background:var(--surface-2);font-weight:700;font-size:13.5px}
+table.fee td.num{text-align:right;white-space:nowrap;font-family:var(--mincho);font-size:15px}
+.feenote{font-size:12.5px;color:var(--ink-faint);margin:14px 0 0}
+
+/* ---- 解決事例 ---- */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.6vw,26px)}
+.case{background:#fff;border:1px solid var(--line);padding:22px}
+.case .tag{display:inline-block;border:1px solid var(--gold);color:var(--gold);font-size:11px;
+  padding:2px 10px;letter-spacing:.08em;margin-bottom:12px}
+.case h3{font-family:var(--mincho);font-size:16.5px;font-weight:600;margin:0 0 10px;line-height:1.6}
+.case p{margin:0;font-size:13.5px;color:var(--ink-soft)}
+
+/* ---- FAQ ---- */
+.faq{display:grid;gap:0;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line);background:#fff}
+.faq summary{cursor:pointer;list-style:none;padding:18px 48px 18px 16px;font-size:14.5px;font-weight:600;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:20px;top:50%;width:9px;height:9px;
+  border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);
+  transform:translateY(-70%) rotate(45deg);transition:transform .2s}
+.faq details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
+.faq .a{margin:0;padding:0 16px 18px;font-size:13.5px;color:var(--ink-soft)}
+
+/* ---- 問い合わせ ---- */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,46px);align-items:start}
+.cbox{background:#fff;border:1px solid var(--line);padding:clamp(20px,3vw,30px)}
+.cbox h3{font-family:var(--mincho);font-size:18px;font-weight:600;margin:0 0 14px;letter-spacing:.04em}
+.cbox .big{font-family:var(--mincho);font-size:31px;letter-spacing:.03em;margin:0}
+.cbox .sub{font-size:12.5px;color:var(--ink-faint);margin:2px 0 18px}
+.cbox dl{margin:0;font-size:13.5px;display:grid;grid-template-columns:auto 1fr;gap:7px 16px}
+.cbox dt{color:var(--ink-faint)}
+.cbox dd{margin:0}
+.field-row{margin-bottom:16px}
+.field-row label{display:block;font-size:13.5px;font-weight:600;margin-bottom:6px}
+.req{color:var(--accent);font-size:10.5px;margin-left:6px;font-weight:700;letter-spacing:.06em}
+.field-row input,.field-row select,.field-row textarea{width:100%;border:1px solid var(--line);border-radius:2px;
+  padding:12px 13px;font-size:16px;font-family:inherit;background:#fff;color:var(--ink)}
+.field-row textarea{min-height:104px;resize:vertical}
+.field-row input:focus,.field-row select:focus,.field-row textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.field-row.err input,.field-row.err select,.field-row.err textarea{border-color:var(--accent);background:#fcf6f5}
+.msg{display:none;color:var(--accent);font-size:12.5px;margin-top:5px}
+.field-row.err .msg{display:block}
+.agree{display:flex;gap:9px;align-items:flex-start;font-size:13px;margin:0 0 18px}
+.agree input{width:18px;height:18px;flex:none;margin-top:3px}
+.agree.err{color:var(--accent)}
+.submit{width:100%;border:0;background:var(--accent);color:#fff;font-family:inherit;font-weight:700;
+  font-size:16px;padding:16px;border-radius:2px;cursor:pointer;letter-spacing:.04em}
+.submit:hover{background:var(--accent-d)}
+.sent-msg{display:none;border:1px solid var(--line);background:var(--surface);padding:22px;text-align:center}
+.sent-msg b{font-family:var(--mincho);font-size:18px;display:block;margin-bottom:8px}
+form.sent .field-row,form.sent .agree,form.sent .submit{display:none}
+form.sent .sent-msg{display:block}
+
+/* ---- 会社概要 ---- */
+table.info{width:100%;border-collapse:collapse;font-size:14px}
+table.info th,table.info td{border-bottom:1px solid var(--line);padding:15px 8px;text-align:left;vertical-align:top}
+table.info th{width:180px;font-weight:600;color:var(--ink-soft);font-size:13.5px}
+
+footer{background:var(--ink);color:#bdb7ae;font-size:12.5px;padding:34px 0 44px;line-height:1.9}
+footer .wrap>p{margin:0 0 7px}
+
+.rv{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+@media (max-width:920px){
+  .hnav{display:none}
+  .hero-in{grid-template-columns:1fr}
+  .hero-art{order:-1}
+  .fields,.reasons,.people,.cases,.contact{grid-template-columns:1fr}
+  .person{grid-template-columns:104px 1fr}
+  .reason p{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<p class="demo">DEMO — これは制作サンプルです。架空の事務所であり、実在の法律事務所・弁護士とは関係ありません。フォームは送信されません。</p>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <rect x="1" y="1" width="38" height="38" fill="#fff" stroke="#1c1b19" stroke-width="1.5"/>
+        <path d="M20 9v22" stroke="#1c1b19" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M11 14h18" stroke="#1c1b19" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M11 14l-4 9h8z" fill="none" stroke="#8a3a3a" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M29 14l-4 9h8z" fill="none" stroke="#8a3a3a" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M15 31h10" stroke="#1c1b19" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <b>常磐法律事務所<small>TOKIWA LAW OFFICE</small></b>
+    </a>
+    <nav class="hnav">
+      <a href="#fields">取扱分野</a>
+      <a href="#people">弁護士</a>
+      <a href="#flow">ご相談の流れ</a>
+      <a href="#fee">費用</a>
+      <div class="tel"><b>03-0000-0000</b><small>平日 9:00〜18:00</small></div>
+      <a class="hbtn" href="#contact">相談を申し込む</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap hero-in">
+    <div>
+      <div class="rule"></div>
+      <h1>争う前に、<br>整えられることがある。</h1>
+      <p>契約書の一行、就業規則の一項。問題になってから動くより、先に整えておくほうが、結果として早く、安く済みます。企業のご相談を中心に、20年にわたり同じ場所で業務を行ってきました。</p>
+      <a class="hbtn" href="#contact" style="display:inline-block;padding:15px 30px;font-size:15px">初回相談を申し込む</a>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 320 240" fill="none" role="img" aria-hidden="true">
+        <rect width="320" height="240" fill="#f7f5f0"/>
+        <path d="M160 44v150" stroke="#1c1b19" stroke-width="3" stroke-linecap="round"/>
+        <path d="M76 66h168" stroke="#1c1b19" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="160" cy="40" r="7" fill="#8a3a3a"/>
+        <path d="M118 194h84" stroke="#1c1b19" stroke-width="3" stroke-linecap="round"/>
+        <path d="M76 66L54 122h44z" fill="#fff" stroke="#8a3a3a" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M244 66l-22 56h44z" fill="#fff" stroke="#8a3a3a" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M76 66l-6 8M244 66l6 8" stroke="#1c1b19" stroke-width="2" stroke-linecap="round"/>
+        <path d="M54 122a22 22 0 0 0 44 0" stroke="#9c7b3c" stroke-width="2" fill="none"/>
+        <path d="M222 122a22 22 0 0 0 44 0" stroke="#9c7b3c" stroke-width="2" fill="none"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<section id="fields">
+  <div class="wrap">
+    <div class="sec-head c">
+      <p class="en">PRACTICE AREAS</p>
+      <div class="rule"></div>
+      <h2>取扱分野</h2>
+      <p>企業のご相談を中心に扱っています。個人の方のご相談も、下記に関わるものはお受けしています。</p>
+    </div>
+    <div class="fields">
+      <article class="field rv">
+        <span class="no">01</span>
+        <h3>企業法務</h3>
+        <p>契約書の作成と審査、取引先との交渉、社内規程の整備。日常的にご相談いただける顧問契約もご用意しています。</p>
+        <ul><li>契約書の作成・レビュー</li><li>取引条件の交渉</li><li>コンプライアンス体制の整備</li></ul>
+      </article>
+      <article class="field rv">
+        <span class="no">02</span>
+        <h3>労務</h3>
+        <p>就業規則の見直し、残業代請求への対応、ハラスメントの調査と処分。問題が起きる前の整備からお受けします。</p>
+        <ul><li>就業規則・雇用契約書の整備</li><li>解雇・雇止めの相談</li><li>ハラスメント事案の調査</li></ul>
+      </article>
+      <article class="field rv">
+        <span class="no">03</span>
+        <h3>債権回収</h3>
+        <p>支払いが滞っている取引先への催告から、仮差押え、訴訟までを一貫して扱います。回収の見込みを先にお伝えします。</p>
+        <ul><li>内容証明の送付</li><li>仮差押え・強制執行</li><li>支払督促・訴訟</li></ul>
+      </article>
+      <article class="field rv">
+        <span class="no">04</span>
+        <h3>事業承継</h3>
+        <p>株式の集約、後継者への引き継ぎ、親族間の調整。税理士・公認会計士と連携して進めます。</p>
+        <ul><li>株式の整理・集約</li><li>承継計画の策定</li><li>遺言・信託の設計</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="tint">
+  <div class="wrap">
+    <div class="sec-head c">
+      <p class="en">OUR APPROACH</p>
+      <div class="rule"></div>
+      <h2>三つのお約束</h2>
+    </div>
+    <div class="reasons">
+      <div class="reason rv">
+        <div class="ico">
+          <svg viewBox="0 0 66 66" fill="none" aria-hidden="true">
+            <circle cx="33" cy="33" r="31" fill="#fff" stroke="#e0dcd4" stroke-width="1.5"/>
+            <path d="M33 16v17l11 7" stroke="#8a3a3a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="33" cy="33" r="21" stroke="#1c1b19" stroke-width="1.6"/>
+          </svg>
+        </div>
+        <h3>その日のうちに折り返す</h3>
+        <p>お問い合わせは、平日であれば当日中にご返信します。急ぎのご相談かどうかを、まず切り分けます。</p>
+      </div>
+      <div class="reason rv">
+        <div class="ico">
+          <svg viewBox="0 0 66 66" fill="none" aria-hidden="true">
+            <circle cx="33" cy="33" r="31" fill="#fff" stroke="#e0dcd4" stroke-width="1.5"/>
+            <rect x="20" y="18" width="26" height="32" fill="none" stroke="#1c1b19" stroke-width="1.8"/>
+            <path d="M25 27h16M25 34h16M25 41h10" stroke="#1c1b19" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="44" cy="44" r="9" fill="#fff" stroke="#8a3a3a" stroke-width="2.2"/>
+            <path d="M40 44l3 3 5-6" stroke="#8a3a3a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>費用を先に出す</h3>
+        <p>着手前に、想定される費用の幅と、増える場合の条件を書面でお渡しします。途中で膨らませません。</p>
+      </div>
+      <div class="reason rv">
+        <div class="ico">
+          <svg viewBox="0 0 66 66" fill="none" aria-hidden="true">
+            <circle cx="33" cy="33" r="31" fill="#fff" stroke="#e0dcd4" stroke-width="1.5"/>
+            <path d="M33 17l14 6v11c0 9-6 15-14 18-8-3-14-9-14-18V23z" fill="none" stroke="#1c1b19" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M27 34l4 4 9-10" stroke="#8a3a3a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>担当が変わらない</h3>
+        <p>ご相談から解決まで、同じ弁護士が担当します。経緯を一から説明し直していただくことはありません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="people">
+  <div class="wrap">
+    <div class="sec-head c">
+      <p class="en">ATTORNEYS</p>
+      <div class="rule"></div>
+      <h2>弁護士</h2>
+    </div>
+    <div class="people">
+      <article class="person rv">
+        <div class="ph">
+          <svg viewBox="0 0 86 86" fill="none" aria-hidden="true">
+            <circle cx="43" cy="31" r="16" fill="#cfc8bc"/>
+            <path d="M12 86c0-17 14-27 31-27s31 10 31 27z" fill="#cfc8bc"/>
+          </svg>
+        </div>
+        <div class="bd">
+          <span class="pos">代表弁護士</span>
+          <h3>常磐 誠一</h3>
+          <p class="kana">ときわ せいいち</p>
+          <p>企業法務と労務を中心に扱います。相談の場では、法的にどうかより先に、何を避けたいのかを伺うようにしています。</p>
+          <dl>
+            <dt>登録</dt><dd>第二東京弁護士会</dd>
+            <dt>取扱</dt><dd>企業法務 / 労務 / 事業承継</dd>
+          </dl>
+        </div>
+      </article>
+      <article class="person rv">
+        <div class="ph">
+          <svg viewBox="0 0 86 86" fill="none" aria-hidden="true">
+            <circle cx="43" cy="31" r="16" fill="#d8cfc2"/>
+            <path d="M12 86c0-17 14-27 31-27s31 10 31 27z" fill="#d8cfc2"/>
+          </svg>
+        </div>
+        <div class="bd">
+          <span class="pos">弁護士</span>
+          <h3>白井 佳乃</h3>
+          <p class="kana">しらい よしの</p>
+          <p>債権回収と紛争対応を担当します。回収できる見込みと、かかる費用を先に数字でお示しすることを心がけています。</p>
+          <dl>
+            <dt>登録</dt><dd>第二東京弁護士会</dd>
+            <dt>取扱</dt><dd>債権回収 / 契約紛争 / 労務</dd>
+          </dl>
+        </div>
+      </article>
+    </div>
+    <p class="feenote" style="text-align:center">※ 掲載している氏名・経歴はすべてサンプル用に作成した架空のものです。</p>
+  </div>
+</section>
+
+<section class="tint" id="flow">
+  <div class="wrap">
+    <div class="sec-head c">
+      <p class="en">FLOW</p>
+      <div class="rule"></div>
+      <h2>ご相談の流れ</h2>
+    </div>
+    <ol class="flow" style="max-width:660px;margin-inline:auto">
+      <li class="rv"><h3>お問い合わせ</h3><p>フォームまたはお電話でご連絡ください。平日であれば当日中に折り返します。</p></li>
+      <li class="rv"><h3>初回のご相談</h3><p>60分、11,000円（税込）です。顧問先の方は無料でお受けします。事実関係と、避けたいことを伺います。</p></li>
+      <li class="rv"><h3>方針と費用のご提示</h3><p>取りうる手段を並べ、それぞれの見込みと費用を書面でお渡しします。この時点でお断りいただいて構いません。</p></li>
+      <li class="rv"><h3>ご契約・着手</h3><p>委任契約を結び、着手します。進捗はその都度ご報告します。</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="fee">
+  <div class="wrap">
+    <div class="sec-head c">
+      <p class="en">FEES</p>
+      <div class="rule"></div>
+      <h2>費用の考え方</h2>
+      <p>着手前に、想定される費用の幅を書面でお渡しします。下記は目安です。</p>
+    </div>
+    <table class="fee">
+      <thead><tr><th>項目</th><th>内容</th><th style="text-align:right">費用（税込）</th></tr></thead>
+      <tbody>
+        <tr><th>初回相談</th><td>60分。顧問先の方は無料</td><td class="num">11,000円</td></tr>
+        <tr><th>顧問契約</th><td>月3時間まで。契約書の審査、日常の相談</td><td class="num">55,000円／月〜</td></tr>
+        <tr><th>契約書の作成</th><td>1通あたり。分量と類型により変動</td><td class="num">55,000円〜</td></tr>
+        <tr><th>就業規則の整備</th><td>現行規則の確認、改定案の作成、説明</td><td class="num">220,000円〜</td></tr>
+        <tr><th>債権回収</th><td>着手金。回収額に応じた報酬が別途</td><td class="num">110,000円〜</td></tr>
+      </tbody>
+    </table>
+    <p class="feenote">※ 実費（印紙代、郵券、交通費など）は別途申し受けます。<br>※ 記載の金額はサンプル用に作成した架空のものです。</p>
+  </div>
+</section>
+
+<section class="tint">
+  <div class="wrap">
+    <div class="sec-head c">
+      <p class="en">CASES</p>
+      <div class="rule"></div>
+      <h2>取り扱った事案</h2>
+      <p>サンプル用に作成した架空の事例です。</p>
+    </div>
+    <div class="cases">
+      <article class="case rv">
+        <span class="tag">労務</span>
+        <h3>残業代請求への対応と、就業規則の見直し</h3>
+        <p>退職者からの請求を受けた製造業のご相談。労働時間の記録を精査し、請求額の根拠を整理したうえで和解。あわせて固定残業代の規定を作り直しました。</p>
+      </article>
+      <article class="case rv">
+        <span class="tag">債権回収</span>
+        <h3>取引先の支払遅延に対する仮差押え</h3>
+        <p>卸売業のご相談。相手方の資産を調査し、預金の仮差押えを申し立て。着手から2か月で全額の回収に至りました。</p>
+      </article>
+      <article class="case rv">
+        <span class="tag">事業承継</span>
+        <h3>分散した株式の集約と、承継計画の策定</h3>
+        <p>創業50年の小売業のご相談。親族6名に分散していた株式を段階的に集約し、後継者への引き継ぎまでの工程を3年計画で設計しました。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head c">
+      <p class="en">FAQ</p>
+      <div class="rule"></div>
+      <h2>よくあるご質問</h2>
+    </div>
+    <div class="faq" style="max-width:720px;margin-inline:auto">
+      <details><summary>相談だけでも構いませんか。</summary><p class="a">構いません。方針と費用をお示しした時点でお断りいただいて差し支えありません。初回相談の費用のみ申し受けます。</p></details>
+      <details><summary>顧問契約をしていないと相談できませんか。</summary><p class="a">単発のご相談もお受けしています。継続してご相談が発生しそうな場合に、顧問契約をご案内しています。</p></details>
+      <details><summary>何を持っていけばよいですか。</summary><p class="a">契約書、やりとりの記録、請求書など、手元にあるものをお持ちください。揃っていなくても構いません。</p></details>
+      <details><summary>オンラインでの相談はできますか。</summary><p class="a">可能です。お申し込みの際にその旨をお書き添えください。</p></details>
+      <details><summary>遠方でも依頼できますか。</summary><p class="a">案件の内容によります。出張が必要な場合の日当と交通費を含めた費用を、事前にお示しします。</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="tint" id="contact">
+  <div class="wrap">
+    <div class="sec-head c">
+      <p class="en">CONTACT</p>
+      <div class="rule"></div>
+      <h2>ご相談の申し込み</h2>
+      <p>平日であれば当日中にご返信します。</p>
+    </div>
+    <div class="contact">
+      <div>
+        <div class="cbox" style="margin-bottom:20px">
+          <h3>お電話</h3>
+          <p class="big">03-0000-0000</p>
+          <p class="sub">平日 9:00〜18:00（土日祝を除く）</p>
+          <dl>
+            <dt>所在地</dt><dd>東京都千代田区常磐町1-2-3 常磐ビル5階</dd>
+            <dt>最寄</dt><dd>地下鉄常磐町駅 3番出口から徒歩4分</dd>
+          </dl>
+        </div>
+        <div class="cbox">
+          <h3>事務所概要</h3>
+          <table class="info">
+            <tr><th>名称</th><td>常磐法律事務所</td></tr>
+            <tr><th>開設</th><td>2006年4月</td></tr>
+            <tr><th>所属</th><td>第二東京弁護士会</td></tr>
+            <tr><th>弁護士</th><td>2名</td></tr>
+          </table>
+        </div>
+      </div>
+      <form class="cbox" id="cform" novalidate>
+        <h3>フォームから</h3>
+        <div class="field-row" id="f-name">
+          <label for="i-name">お名前<span class="req">必須</span></label>
+          <input id="i-name" type="text" autocomplete="name" placeholder="山田 太郎">
+          <p class="msg">お名前をご入力ください。</p>
+        </div>
+        <div class="field-row" id="f-company">
+          <label for="i-company">会社名・団体名（任意）</label>
+          <input id="i-company" type="text" autocomplete="organization" placeholder="株式会社◯◯">
+        </div>
+        <div class="field-row" id="f-mail">
+          <label for="i-mail">メールアドレス<span class="req">必須</span></label>
+          <input id="i-mail" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com">
+          <p class="msg">メールアドレスの形式をご確認ください。</p>
+        </div>
+        <div class="field-row" id="f-tel">
+          <label for="i-tel">電話番号<span class="req">必須</span></label>
+          <input id="i-tel" type="tel" autocomplete="tel" inputmode="numeric" placeholder="0312345678">
+          <p class="msg">ハイフンなしの半角数字でご入力ください。</p>
+        </div>
+        <div class="field-row" id="f-area">
+          <label for="i-area">ご相談の分野<span class="req">必須</span></label>
+          <select id="i-area">
+            <option value="">選択してください</option>
+            <option>企業法務</option><option>労務</option><option>債権回収</option>
+            <option>事業承継</option><option>その他</option>
+          </select>
+          <p class="msg">分野をお選びください。</p>
+        </div>
+        <div class="field-row" id="f-body">
+          <label for="i-body">ご相談の内容<span class="req">必須</span></label>
+          <textarea id="i-body" placeholder="差し支えのない範囲で結構です。"></textarea>
+          <p class="msg">ご相談の内容をご入力ください。</p>
+        </div>
+        <label class="agree" id="f-agree">
+          <input type="checkbox" id="i-agree">
+          <span>個人情報の取り扱いに同意します<span class="req">必須</span></span>
+        </label>
+        <button class="submit" type="submit">この内容で送信する</button>
+        <div class="sent-msg">
+          <b>送信されました</b>
+          <p style="margin:0;font-size:13.5px;color:var(--ink-soft)">これは制作サンプルです。実際には送信されていません。</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>※ 掲載している氏名・経歴・事例・費用・所在地は、すべてサンプル用に作成した架空のものです。</p>
+    <p>常磐法律事務所（架空）／ 制作サンプル</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var form = document.getElementById('cform');
+  var TEL = /^0\d{8,10}$/, MAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var v = function(id){ return document.getElementById(id).value.trim(); };
+    var bad = {
+      'f-name': v('i-name').length === 0,
+      'f-mail': !MAIL.test(v('i-mail')),
+      'f-tel' : !TEL.test(v('i-tel').replace(/[-\s]/g, '')),
+      'f-area': v('i-area') === '',
+      'f-body': v('i-body').length === 0
+    };
+    Object.keys(bad).forEach(function(k){ document.getElementById(k).classList.toggle('err', bad[k]); });
+    var agree = document.getElementById('i-agree').checked;
+    document.getElementById('f-agree').classList.toggle('err', !agree);
+    if(Object.keys(bad).some(function(k){ return bad[k]; }) || !agree){
+      var first = document.querySelector('.field-row.err input, .field-row.err select, .field-row.err textarea') || document.getElementById('i-agree');
+      if(first) first.focus();
+      return;
+    }
+    form.classList.add('sent');
+    form.scrollIntoView({block:'center'});
+  });
+
+  form.addEventListener('input', function(e){
+    var r = e.target.closest('.field-row');
+    if(r) r.classList.remove('err');
+  });
+  document.getElementById('i-agree').addEventListener('change', function(){
+    document.getElementById('f-agree').classList.toggle('err', !this.checked);
+  });
+
+  var rv = document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:.08});
+    rv.forEach(function(el){ io.observe(el); });
+  } else {
+    rv.forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>
