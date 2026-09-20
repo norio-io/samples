@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ひとひ — 1日1本の乳酸菌＋食物繊維</title>
+<meta name="description" content="制作サンプル。架空ブランド「ひとひ」の広告用ランディングページです。">
+<meta name="robots" content="noindex">
+<style>
+:root{
+  --ink:#1b2a25; --sub:#5d6b64; --line:#dfe6e1;
+  --green:#2b6350; --green-d:#1f4a3b; --mint:#eaf3ee; --cream:#faf8f3;
+  --rose:#c1566a; --amber:#f0c667; --white:#fff;
+  --f:"Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic",system-ui,sans-serif;
+  --wrap:1080px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--f);line-height:1.85;
+  -webkit-font-smoothing:antialiased;letter-spacing:.01em;padding-bottom:78px}
+img,svg{max-width:100%;display:block}
+.fig svg,.feat .fig svg,.step .fig svg{width:100%;height:100%}
+a{color:inherit}
+.wrap{width:min(100% - 36px,var(--wrap));margin-inline:auto}
+
+.demo{background:var(--green-d);color:#e9f1ec;font-size:12.5px;text-align:center;padding:9px 16px;line-height:1.6}
+
+/* ---------- FV ---------- */
+.fv{background:
+   radial-gradient(120% 90% at 85% 0%, #f3f8f4 0%, rgba(243,248,244,0) 60%),
+   linear-gradient(180deg,#fbfdfb 0%, var(--mint) 100%);
+  border-bottom:1px solid var(--line)}
+.brandbar{padding-top:18px}
+.logo{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:19px;letter-spacing:.08em;color:var(--green-d)}
+.logo svg{width:26px;height:26px}
+.fv-in{display:grid;grid-template-columns:1fr 330px;gap:clamp(22px,4vw,48px);align-items:center;
+  padding-block:clamp(28px,5vw,52px)}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--rose);color:#fff;
+  font-size:13.5px;font-weight:700;padding:8px 16px;border-radius:999px;letter-spacing:.04em}
+h1{font-size:clamp(29px,5.2vw,46px);line-height:1.34;margin:16px 0 12px;letter-spacing:.005em;font-weight:700}
+.h1-mark{background:linear-gradient(transparent 68%,var(--amber) 68%)}
+.price-hero{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.price-hero .was{color:var(--sub);font-size:15px;text-decoration:line-through}
+.price-hero .now{color:var(--rose);font-weight:700;font-size:clamp(38px,6.4vw,56px);line-height:1;letter-spacing:-.01em}
+.price-hero .yen{color:var(--rose);font-weight:700;font-size:19px}
+.price-note{color:var(--sub);font-size:13.5px;margin:0 0 18px}
+.lead{color:#31423a;font-size:clamp(15px,1.6vw,16.5px);margin:0 0 18px}
+.pills{list-style:none;display:flex;flex-wrap:wrap;gap:9px;padding:0;margin:0 0 22px}
+.pills li{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:13.5px;font-weight:500}
+.fv-art svg{width:100%;height:auto}
+.fv-art{background:#fff;border:1px solid var(--line);border-radius:26px;padding:18px;
+  box-shadow:0 26px 48px -30px rgba(27,42,37,.5)}
+
+/* ---------- CTA ---------- */
+.cta{display:inline-flex;flex-direction:column;align-items:center;gap:2px;
+  background:linear-gradient(180deg,#357a62,var(--green));color:#fff;text-decoration:none;
+  font-weight:700;font-size:clamp(16px,2vw,19px);padding:17px 34px;border-radius:999px;
+  box-shadow:0 12px 22px -12px rgba(43,99,80,.85);transition:transform .15s ease,box-shadow .15s ease}
+.cta small{font-weight:500;font-size:12.5px;opacity:.92}
+.cta:hover{transform:translateY(-2px);box-shadow:0 18px 26px -14px rgba(43,99,80,.9)}
+@media (prefers-reduced-motion:reduce){.cta{transition:none}.cta:hover{transform:none}}
+
+/* ---------- sections ---------- */
+section{padding-block:clamp(48px,7vw,80px)}
+.eyebrow{text-align:center;color:var(--green);font-size:12.5px;letter-spacing:.24em;font-weight:700;margin:0 0 10px}
+h2{text-align:center;font-size:clamp(22px,3.5vw,32px);line-height:1.45;margin:0 0 10px;font-weight:700}
+.sec-lead{text-align:center;color:var(--sub);font-size:14.5px;margin:0 auto 34px;max-width:640px}
+.tint{background:var(--cream)}
+.green{background:var(--green-d);color:#eaf3ec}
+.green h2,.green .eyebrow{color:#eaf3ec}
+
+/* 悩み */
+.bubbles{max-width:660px;margin-inline:auto;display:grid;gap:14px}
+.bub{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 20px;font-size:15px}
+.bub::after{content:"";position:absolute;bottom:-9px;width:16px;height:16px;background:#fff;
+  border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
+.bub:nth-child(odd)::after{left:34px}
+.bub:nth-child(even)::after{right:34px}
+.arrow{width:0;height:0;margin:26px auto 0;border-left:17px solid transparent;border-right:17px solid transparent;border-top:17px solid var(--green)}
+
+/* 特徴 */
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px 22px 26px;text-align:center}
+.feat .fig{background:var(--mint);border-radius:14px;margin:-4px 0 16px;aspect-ratio:4/3;overflow:hidden}
+.feat h3{font-size:17.5px;margin:0 0 8px;line-height:1.5}
+.feat p{font-size:14px;color:var(--sub);margin:0;text-align:left}
+.no{display:inline-block;background:var(--green);color:#fff;font-size:12px;font-weight:700;
+  letter-spacing:.1em;padding:4px 12px;border-radius:999px;margin-bottom:10px}
+
+/* 中身 */
+.inside{display:grid;grid-template-columns:400px 1fr;gap:clamp(24px,4vw,48px);align-items:center}
+.donut-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.donut-list li{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);
+  border-radius:12px;padding:12px 16px;font-size:14.5px}
+.dot{width:13px;height:13px;border-radius:4px;flex:none}
+.donut-list b{font-weight:700}
+.donut-list .amt{color:var(--sub);font-size:13px;margin-left:auto}
+
+/* ステップ */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+.step{text-align:center}
+.step .fig{background:#fff;border:1px solid var(--line);border-radius:18px;aspect-ratio:1/1;overflow:hidden;margin-bottom:14px}
+.step h3{font-size:16px;margin:0 0 6px}
+.step p{font-size:13.5px;color:var(--sub);margin:0}
+
+/* 声 */
+.voices{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.voice{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px}
+.voice .who{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.voice .av{width:46px;height:46px;border-radius:50%;background:var(--mint);flex:none;overflow:hidden}
+.voice .who b{display:block;font-size:14.5px}
+.voice .who span{display:block;font-size:12.5px;color:var(--sub)}
+.voice p{margin:0;font-size:14px}
+
+/* 料金 */
+.plans{display:flex;gap:10px;justify-content:center;margin:0 0 26px;flex-wrap:wrap}
+.plan{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px 22px;cursor:pointer;
+  font-size:14.5px;font-weight:600;transition:border-color .15s ease,background .15s ease}
+.plan[aria-pressed="true"]{border-color:var(--green);background:var(--mint);color:var(--green-d)}
+.plan small{display:block;font-weight:400;font-size:12px;color:var(--sub)}
+.plan[aria-pressed="true"] small{color:var(--green)}
+.pricebox{max-width:560px;margin:0 auto 26px;background:#fff;border:2px solid var(--rose);border-radius:20px;
+  padding:26px 24px;text-align:center;position:relative}
+.pricebox .tag{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:var(--rose);
+  color:#fff;font-size:13px;font-weight:700;padding:5px 18px;border-radius:999px;white-space:nowrap}
+.pricebox .was{color:var(--sub);font-size:14.5px;text-decoration:line-through;margin:6px 0 0}
+.pricebox .now{color:var(--rose);font-weight:700;font-size:clamp(40px,7vw,58px);line-height:1.1}
+.pricebox .now .yen{font-size:20px}
+.pricebox .per{color:var(--sub);font-size:13.5px;margin:2px 0 0}
+.pricebox .next{font-size:14px;margin:14px 0 0;color:#31423a}
+table.cmp{width:100%;max-width:680px;margin:0 auto;border-collapse:collapse;font-size:14.5px;background:#fff}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:13px 14px;text-align:center}
+table.cmp thead th{background:var(--mint);font-size:14px}
+table.cmp tbody th{text-align:left;font-weight:500;background:#fbfdfb}
+table.cmp .best{background:#fff8ea;font-weight:700}
+
+/* 安心 */
+.safe{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:840px;margin-inline:auto}
+.safe div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:20px;text-align:center}
+.safe b{display:block;font-size:16px;margin-bottom:6px}
+.safe p{margin:0;font-size:13.5px;opacity:.85}
+
+/* FAQ */
+.faq{max-width:720px;margin-inline:auto;display:grid;gap:10px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.faq summary{cursor:pointer;list-style:none;padding:17px 50px 17px 20px;font-weight:600;font-size:15px;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:22px;top:50%;width:10px;height:10px;
+  border-right:2px solid var(--green);border-bottom:2px solid var(--green);
+  transform:translateY(-70%) rotate(45deg);transition:transform .2s ease}
+.faq details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
+.faq .a{padding:0 20px 18px;font-size:14px;color:var(--sub);margin:0}
+
+/* フォーム */
+.form{max-width:560px;margin-inline:auto;background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(22px,3.5vw,32px)}
+.field{margin-bottom:17px}
+.field label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+.req{color:var(--rose);font-size:11.5px;margin-left:6px;font-weight:700}
+.field input,.field select{width:100%;border:1.5px solid var(--line);border-radius:11px;padding:13px 14px;
+  font-size:16px;font-family:inherit;background:#fff;color:var(--ink)}
+.field input:focus,.field select:focus{outline:2px solid var(--green);outline-offset:1px;border-color:transparent}
+.field.err input,.field.err select{border-color:var(--rose);background:#fdf4f5}
+.msg{display:none;color:var(--rose);font-size:12.5px;margin-top:5px}
+.field.err .msg{display:block}
+.agree{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;margin:4px 0 18px}
+.agree input{width:19px;height:19px;flex:none;margin-top:3px}
+.submit{width:100%;border:0;background:linear-gradient(180deg,#357a62,var(--green));color:#fff;
+  font-family:inherit;font-weight:700;font-size:17px;padding:17px;border-radius:999px;cursor:pointer}
+.done{display:none;text-align:center;padding:14px 0}
+.done b{display:block;font-size:19px;margin-bottom:8px}
+.form.sent .field,.form.sent .agree,.form.sent .submit{display:none}
+.form.sent .done{display:block}
+
+/* 追従 */
+.sticky{position:fixed;left:0;right:0;bottom:0;background:rgba(251,253,251,.95);
+  border-top:1px solid var(--line);padding:9px 14px;z-index:40;backdrop-filter:blur(8px)}
+.sticky a{display:block;width:min(100%,520px);margin-inline:auto;text-align:center;
+  background:linear-gradient(180deg,#357a62,var(--green));color:#fff;text-decoration:none;font-weight:700;
+  padding:14px;border-radius:999px;font-size:16px}
+
+footer{background:#16241f;color:#9fb3aa;font-size:12.5px;padding:34px 0 42px;line-height:1.9}
+footer .wrap>p{margin:0 0 8px}
+
+.rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+@media (max-width:860px){
+  .feats,.steps,.voices,.safe{grid-template-columns:1fr}
+  .inside{grid-template-columns:1fr}
+  .fv-in{grid-template-columns:1fr;gap:20px}
+  .fv-art{order:-1;max-width:330px;margin-inline:auto}
+  h1{text-align:center}
+  .badge,.price-hero,.price-note,.lead,.pills{justify-content:center;text-align:center}
+  .price-hero{justify-content:center}
+  .fv .cta{display:flex;width:100%}
+  .feat p{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<p class="demo">DEMO — これは制作サンプルです。架空のブランドであり、実在の商品・企業とは関係ありません。フォームは送信されません。</p>
+
+<header class="fv">
+  <div class="wrap brandbar">
+    <span class="logo">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <path d="M20 4c9 4 14 11 14 19a14 14 0 0 1-28 0c0-8 5-15 14-19z" fill="#2b6350"/>
+        <path d="M20 12v18" stroke="#eaf3ee" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M20 21c4-1 6-4 6-7M20 27c-4-1-6-4-6-7" stroke="#eaf3ee" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      ひとひ
+    </span>
+  </div>
+  <div class="wrap fv-in">
+    <div>
+      <span class="badge">初回限定 ／ 1日あたり49円</span>
+      <h1>毎日を、<span class="h1-mark">1本ぶん</span>だけ<br>整えていく。</h1>
+      <p class="lead">9種類の乳酸菌と食物繊維を、1日分ずつ個包装に。水なしで飲めるヨーグルト味のパウダーです。</p>
+      <div class="price-hero">
+        <span class="was">通常 3,980円</span>
+        <span class="now">1,480</span><span class="yen">円（税込）</span>
+      </div>
+      <p class="price-note">初回限定・30本入り1袋／回数の縛りはありません</p>
+      <ul class="pills">
+        <li>水なしで飲める</li>
+        <li>砂糖不使用</li>
+        <li>初回返金保証</li>
+      </ul>
+      <a class="cta" href="#form" data-cv="hero">定期便をはじめる<small>入力は1分・いつでも解約できます</small></a>
+    </div>
+    <div class="fv-art">
+      <svg viewBox="0 0 320 380" fill="none" role="img" aria-label="ひとひのスティック個包装と箱">
+        <ellipse cx="160" cy="336" rx="118" ry="16" fill="#dfe9e2"/>
+        <!-- 箱 -->
+        <path d="M74 336V186a10 10 0 0 1 10-10h92a10 10 0 0 1 10 10v150z" fill="#2b6350"/>
+        <path d="M176 336V176l40-26v160z" fill="#24523f"/>
+        <path d="M74 186a10 10 0 0 1 10-10h92l40-26H114z" fill="#357a62"/>
+        <rect x="92" y="212" width="66" height="9" rx="4.5" fill="#eaf3ee" opacity=".92"/>
+        <rect x="92" y="230" width="44" height="7" rx="3.5" fill="#eaf3ee" opacity=".6"/>
+        <text x="125" y="288" text-anchor="middle" font-size="26" font-weight="700" fill="#eaf3ee" opacity=".95" letter-spacing="2">ひとひ</text>
+        <!-- スティック3本 -->
+        <g>
+          <rect x="196" y="96" width="34" height="150" rx="7" fill="#fbfdfb" stroke="#cfdcd4" stroke-width="2" transform="rotate(9 213 171)"/>
+          <rect x="203" y="132" width="20" height="6" rx="3" fill="#2b6350" transform="rotate(9 213 135)" opacity=".85"/>
+          <rect x="203" y="146" width="14" height="5" rx="2.5" fill="#c1566a" transform="rotate(9 210 148)" opacity=".8"/>
+        </g>
+        <g>
+          <rect x="228" y="120" width="34" height="150" rx="7" fill="#fff" stroke="#cfdcd4" stroke-width="2" transform="rotate(-6 245 195)"/>
+          <rect x="235" y="156" width="20" height="6" rx="3" fill="#2b6350" transform="rotate(-6 245 159)" opacity=".85"/>
+          <rect x="235" y="170" width="14" height="5" rx="2.5" fill="#c1566a" transform="rotate(-6 242 172)" opacity=".8"/>
+        </g>
+        <g>
+          <rect x="44" y="118" width="34" height="150" rx="7" fill="#fff" stroke="#cfdcd4" stroke-width="2" transform="rotate(-14 61 193)"/>
+          <rect x="51" y="154" width="20" height="6" rx="3" fill="#2b6350" transform="rotate(-14 61 157)" opacity=".85"/>
+          <rect x="51" y="168" width="14" height="5" rx="2.5" fill="#c1566a" transform="rotate(-14 58 170)" opacity=".8"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section class="tint">
+  <div class="wrap">
+    <p class="eyebrow">PROBLEM</p>
+    <h2>続かない理由は、だいたい同じ。</h2>
+    <div class="bubbles">
+      <div class="bub rv">大きな粒が飲みづらくて、気づいたら棚の奥にあった</div>
+      <div class="bub rv">ヨーグルトを買い置きしても、食べきる前に賞味期限が来る</div>
+      <div class="bub rv">続けたいけれど、毎月3,000円を超えると考えてしまう</div>
+    </div>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">FEATURES</p>
+    <h2>ひとひが、<span class="h1-mark">1本</span>にした理由</h2>
+    <p class="sec-lead">続けられる形にすることを、いちばん優先しました。</p>
+    <div class="feats">
+      <article class="feat rv">
+        <div class="fig">
+          <svg viewBox="0 0 240 180" fill="none" role="img" aria-hidden="true">
+            <path d="M94 52h52l-7 86a13 13 0 0 1-13 12h-12a13 13 0 0 1-13-12z" fill="#fff" stroke="#b9cfc3" stroke-width="2.5"/>
+            <path d="M99 100h42l-4 38a13 13 0 0 1-13 12h-8a13 13 0 0 1-13-12z" fill="#dbeae2"/>
+            <circle cx="120" cy="100" r="46" fill="none" stroke="#c1566a" stroke-width="6"/>
+            <path d="M88 132L152 68" stroke="#c1566a" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="no">01</span>
+        <h3>水がなくても飲める</h3>
+        <p>口に入れるとすっと溶けるパウダーです。外出先でも、朝の支度の合間でも、そのまま飲めます。</p>
+      </article>
+      <article class="feat rv">
+        <div class="fig">
+          <svg viewBox="0 0 240 180" fill="none" role="img" aria-hidden="true">
+            <circle cx="120" cy="92" r="52" fill="#fff" stroke="#b9cfc3" stroke-width="2.5"/>
+            <circle cx="120" cy="92" r="30" fill="#eaf3ee"/>
+            <g fill="#2b6350">
+              <circle cx="120" cy="52" r="6"/><circle cx="148" cy="64" r="6"/><circle cx="160" cy="92" r="6"/>
+              <circle cx="148" cy="120" r="6"/><circle cx="120" cy="132" r="6"/><circle cx="92" cy="120" r="6"/>
+              <circle cx="80" cy="92" r="6"/><circle cx="92" cy="64" r="6"/>
+            </g>
+            <circle cx="120" cy="92" r="7" fill="#c1566a"/>
+          </svg>
+        </div>
+        <span class="no">02</span>
+        <h3>9種類の乳酸菌と食物繊維</h3>
+        <p>菌の種類を絞らず、食物繊維とあわせて配合しました。1本あたり乳酸菌1,000億個、食物繊維1.25gです。</p>
+      </article>
+      <article class="feat rv">
+        <div class="fig">
+          <svg viewBox="0 0 240 180" fill="none" role="img" aria-hidden="true">
+            <rect x="80" y="86" width="42" height="42" rx="6" fill="#fff" stroke="#b9cfc3" stroke-width="2.5"/>
+            <rect x="112" y="60" width="42" height="42" rx="6" fill="#fff" stroke="#b9cfc3" stroke-width="2.5"/>
+            <rect x="118" y="104" width="42" height="42" rx="6" fill="#fff" stroke="#b9cfc3" stroke-width="2.5"/>
+            <circle cx="120" cy="100" r="46" fill="none" stroke="#c1566a" stroke-width="6"/>
+            <path d="M88 132L152 68" stroke="#c1566a" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="no">03</span>
+        <h3>砂糖は入れていません</h3>
+        <p>甘さは希少糖でつけています。飲みやすさのために砂糖を足すことはしませんでした。ヨーグルト味です。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="tint">
+  <div class="wrap">
+    <p class="eyebrow">INSIDE</p>
+    <h2>1本に入っているもの</h2>
+    <p class="sec-lead">30本入り1袋、1か月分です。</p>
+    <div class="inside">
+      <div class="rv">
+        <svg viewBox="0 0 400 300" fill="none" role="img" aria-label="配合の内訳">
+          <circle cx="200" cy="150" r="104" fill="#fff" stroke="#dfe6e1" stroke-width="2"/>
+          <circle cx="200" cy="150" r="104" fill="none" stroke="#2b6350" stroke-width="42"
+                  stroke-dasharray="408 246" transform="rotate(-90 200 150)"/>
+          <circle cx="200" cy="150" r="104" fill="none" stroke="#f0c667" stroke-width="42"
+                  stroke-dasharray="137 517" transform="rotate(135 200 150)"/>
+          <circle cx="200" cy="150" r="104" fill="none" stroke="#7fae9b" stroke-width="42"
+                  stroke-dasharray="75 579" transform="rotate(211 200 150)"/>
+          <circle cx="200" cy="150" r="104" fill="none" stroke="#c1566a" stroke-width="42"
+                  stroke-dasharray="33 621" transform="rotate(252 200 150)"/>
+          <circle cx="200" cy="150" r="62" fill="#fff"/>
+          <text x="200" y="143" text-anchor="middle" font-family="sans-serif" font-size="29" font-weight="700" fill="#1b2a25">2.0</text>
+          <text x="200" y="168" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#5d6b64">g ／ 1本</text>
+        </svg>
+      </div>
+      <ul class="donut-list">
+        <li class="rv"><span class="dot" style="background:#2b6350"></span><b>食物繊維（イヌリン）</b><span class="amt">1.25g</span></li>
+        <li class="rv"><span class="dot" style="background:#f0c667"></span><b>希少糖・香料</b><span class="amt">0.42g</span></li>
+        <li class="rv"><span class="dot" style="background:#7fae9b"></span><b>乳酸菌9種</b><span class="amt">0.23g／1,000億個</span></li>
+        <li class="rv"><span class="dot" style="background:#c1566a"></span><b>ビフィズス菌</b><span class="amt">0.10g／100億個</span></li>
+      </ul>
+    </div>
+    <p style="text-align:center;font-size:12.5px;color:var(--sub);margin:24px 0 0">※ 記載の数値はサンプル用に作成した架空のものです。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">HOW TO</p>
+    <h2>飲み方は、3ステップ</h2>
+    <div class="steps">
+      <div class="step rv">
+        <div class="fig">
+          <svg viewBox="0 0 200 200" fill="none" role="img" aria-hidden="true">
+            <rect x="82" y="36" width="36" height="128" rx="8" fill="#eaf3ee" stroke="#b9cfc3" stroke-width="2.5"/>
+            <path d="M82 58h36" stroke="#b9cfc3" stroke-width="2.5" stroke-dasharray="5 4"/>
+            <path d="M126 48l20-14M126 62h24" stroke="#2b6350" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>1本切る</h3>
+        <p>ミシン目から手で開けられます。</p>
+      </div>
+      <div class="step rv">
+        <div class="fig">
+          <svg viewBox="0 0 200 200" fill="none" role="img" aria-hidden="true">
+            <g transform="rotate(38 100 84)">
+              <rect x="82" y="22" width="34" height="112" rx="7" fill="#eaf3ee" stroke="#b9cfc3" stroke-width="2.5"/>
+              <rect x="90" y="46" width="18" height="6" rx="3" fill="#2b6350"/>
+              <rect x="90" y="60" width="12" height="5" rx="2.5" fill="#c1566a"/>
+            </g>
+            <circle cx="104" cy="134" r="4.5" fill="#2b6350"/>
+            <circle cx="92" cy="152" r="4" fill="#7fae9b"/>
+            <circle cx="112" cy="158" r="3.5" fill="#c1566a"/>
+            <circle cx="100" cy="170" r="3" fill="#2b6350" opacity=".55"/>
+          </svg>
+        </div>
+        <h3>口に入れる</h3>
+        <p>水なしで、そのまま飲めます。</p>
+      </div>
+      <div class="step rv">
+        <div class="fig">
+          <svg viewBox="0 0 200 200" fill="none" role="img" aria-hidden="true">
+            <rect x="46" y="58" width="108" height="86" rx="12" fill="#eaf3ee" stroke="#b9cfc3" stroke-width="2.5"/>
+            <path d="M46 84h108" stroke="#b9cfc3" stroke-width="2.5"/>
+            <circle cx="74" cy="112" r="10" fill="#2b6350" opacity=".28"/>
+            <circle cx="100" cy="112" r="10" fill="#2b6350" opacity=".28"/>
+            <path d="M118 112l7 7 13-14" stroke="#c1566a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M72 48v14M128 48v14" stroke="#2b6350" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>毎日つづける</h3>
+        <p>時間帯は決まっていません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tint">
+  <div class="wrap">
+    <p class="eyebrow">VOICE</p>
+    <h2>続けている方の声</h2>
+    <p class="sec-lead">サンプル用に作成した架空のレビューです。</p>
+    <div class="voices">
+      <div class="voice rv">
+        <div class="who">
+          <div class="av"><svg viewBox="0 0 46 46"><circle cx="23" cy="18" r="8" fill="#7fae9b"/><path d="M8 46a15 15 0 0 1 30 0z" fill="#7fae9b"/></svg></div>
+          <div><b>M.K さん</b><span>34歳・会社員</span></div>
+        </div>
+        <p>粒のサプリが苦手で何度か挫折しました。これは鞄に1本入れておけるので、いまのところ切らさず続いています。</p>
+      </div>
+      <div class="voice rv">
+        <div class="who">
+          <div class="av"><svg viewBox="0 0 46 46"><circle cx="23" cy="18" r="8" fill="#c1566a"/><path d="M8 46a15 15 0 0 1 30 0z" fill="#c1566a"/></svg></div>
+          <div><b>S.T さん</b><span>41歳・自営業</span></div>
+        </div>
+        <p>味が思ったより素直でした。甘すぎないので、朝でも夜でも気になりません。子どもが欲しがるのが誤算です。</p>
+      </div>
+      <div class="voice rv">
+        <div class="who">
+          <div class="av"><svg viewBox="0 0 46 46"><circle cx="23" cy="18" r="8" fill="#f0c667"/><path d="M8 46a15 15 0 0 1 30 0z" fill="#f0c667"/></svg></div>
+          <div><b>Y.N さん</b><span>28歳・会社員</span></div>
+        </div>
+        <p>1か月分が1袋なので、残りの本数で今月どれくらい飲んだか分かります。数えなくていいのが気に入っています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="price">
+  <div class="wrap">
+    <p class="eyebrow">PRICE</p>
+    <h2>まとめるほど、1本が安くなる</h2>
+    <p class="sec-lead">お届けする袋数を選べます。あとから変更もできます。</p>
+
+    <div class="plans" role="group" aria-label="お届け袋数">
+      <button class="plan" type="button" data-plan="1" aria-pressed="true">1袋<small>30本・1か月分</small></button>
+      <button class="plan" type="button" data-plan="2" aria-pressed="false">2袋<small>60本・2か月分</small></button>
+      <button class="plan" type="button" data-plan="3" aria-pressed="false">3袋<small>90本・3か月分</small></button>
+    </div>
+
+    <div class="pricebox">
+      <span class="tag" id="p-tag">初回限定 63%OFF</span>
+      <p class="was" id="p-was">通常 3,980円</p>
+      <p class="now"><span id="p-now">1,480</span><span class="yen">円（税込）</span></p>
+      <p class="per" id="p-per">1本あたり 49円</p>
+      <p class="next" id="p-next">2回目以降は 3,582円（10%OFF）でお届けします。</p>
+    </div>
+
+    <table class="cmp">
+      <thead>
+        <tr><th></th><th>都度購入</th><th>定期便</th></tr>
+      </thead>
+      <tbody>
+        <tr><th>初回価格</th><td>3,980円</td><td class="best">1,480円</td></tr>
+        <tr><th>2回目以降</th><td>3,980円</td><td class="best">3,582円〜</td></tr>
+        <tr><th>送料</th><td>550円</td><td class="best">無料</td></tr>
+        <tr><th>回数の縛り</th><td>—</td><td class="best">なし</td></tr>
+        <tr><th>返金保証</th><td>なし</td><td class="best">初回のみ15日間</td></tr>
+      </tbody>
+    </table>
+
+    <p style="text-align:center;margin:30px 0 0"><a class="cta" href="#form" data-cv="price">この内容ではじめる<small>入力は1分・いつでも解約できます</small></a></p>
+  </div>
+</section>
+
+<section class="green">
+  <div class="wrap">
+    <p class="eyebrow">GUARANTEE</p>
+    <h2>はじめやすさも、続けやすさも</h2>
+    <div class="safe">
+      <div class="rv"><b>回数の縛りなし</b><p>初回のみで止めることもできます。次回発送の10日前までにお手続きください。</p></div>
+      <div class="rv"><b>初回返金保証</b><p>初めての方に限り、商品到着から15日以内であれば返金の対象です。</p></div>
+      <div class="rv"><b>解約はマイページ</b><p>電話での引き止めはありません。画面上の操作だけで完了します。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="tint">
+  <div class="wrap">
+    <p class="eyebrow">FAQ</p>
+    <h2>よくあるご質問</h2>
+    <div class="faq">
+      <details><summary>いつ飲めばいいですか？</summary><p class="a">時間帯の決まりはありません。続けやすい時間に、1日1本を目安にお召し上がりください。</p></details>
+      <details><summary>水なしで飲めるとありますが、水で飲んでもいいですか？</summary><p class="a">問題ありません。ヨーグルトや牛乳に混ぜていただくこともできます。</p></details>
+      <details><summary>解約はいつでもできますか？</summary><p class="a">回数の縛りはありません。次回お届け予定日の10日前までに、マイページからお手続きください。</p></details>
+      <details><summary>アレルギーが心配です。</summary><p class="a">原材料は商品ページに記載しています。通院中の方や妊娠中の方は、かかりつけの医師にご相談ください。</p></details>
+      <details><summary>子どもが飲んでも大丈夫ですか？</summary><p class="a">食品ですので年齢の制限はありませんが、小さなお子さまは保護者の方の目の届くところでお召し上がりください。</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="form">
+  <div class="wrap">
+    <p class="eyebrow">ORDER</p>
+    <h2>定期便のお申し込み</h2>
+    <p class="sec-lead">入力は1分ほどです。回数の縛りはありません。</p>
+    <form class="form" novalidate>
+      <div class="field" id="f-name">
+        <label for="i-name">お名前<span class="req">必須</span></label>
+        <input id="i-name" name="name" type="text" autocomplete="name" placeholder="山田 太郎">
+        <p class="msg">お名前をご入力ください。</p>
+      </div>
+      <div class="field" id="f-mail">
+        <label for="i-mail">メールアドレス<span class="req">必須</span></label>
+        <input id="i-mail" name="mail" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com">
+        <p class="msg">メールアドレスの形式をご確認ください。</p>
+      </div>
+      <div class="field" id="f-tel">
+        <label for="i-tel">電話番号<span class="req">必須</span></label>
+        <input id="i-tel" name="tel" type="tel" autocomplete="tel" inputmode="numeric" placeholder="09012345678">
+        <p class="msg">ハイフンなしの半角数字でご入力ください。</p>
+      </div>
+      <div class="field" id="f-plan">
+        <label for="i-plan">お届け袋数<span class="req">必須</span></label>
+        <select id="i-plan" name="plan">
+          <option value="1">1袋（30本・1か月分）／ 初回 1,480円</option>
+          <option value="2">2袋（60本・2か月分）／ 初回 2,680円</option>
+          <option value="3">3袋（90本・3か月分）／ 初回 3,780円</option>
+        </select>
+        <p class="msg">袋数をお選びください。</p>
+      </div>
+      <label class="agree" id="f-agree">
+        <input type="checkbox" id="i-agree">
+        <span>定期便の内容と解約の方法について同意します<span class="req">必須</span></span>
+      </label>
+      <button class="submit" type="submit" data-cv="submit">この内容で申し込む</button>
+      <div class="done">
+        <b>送信されました</b>
+        <p style="margin:0;font-size:14px;color:var(--sub)">これは制作サンプルです。実際には送信されていません。</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>※ 本品は食品です。特定の保健の目的が期待できる旨の表示をしたものではありません。</p>
+    <p>※ 掲載している価格・数値・レビューは、すべてサンプル用に作成した架空のものです。</p>
+    <p>ひとひ（架空ブランド）／ 制作サンプル</p>
+  </div>
+</footer>
+
+<div class="sticky"><a href="#form" data-cv="sticky">初回1,480円ではじめる</a></div>
+
+<script>
+(function(){
+  window.dataLayer = window.dataLayer || [];
+  function track(name, params){
+    try{ window.dataLayer.push(Object.assign({event:name}, params||{})); }catch(e){}
+  }
+
+  document.querySelectorAll('[data-cv]').forEach(function(el){
+    el.addEventListener('click', function(){ track('cv_click', {cv_position: el.dataset.cv}); });
+  });
+
+  /* ---- 料金プラン ---- */
+  var PLANS = {
+    '1': {bags:1, sticks:30, list:3980, first:1480, next:3582, off:63, nextOff:10},
+    '2': {bags:2, sticks:60, list:7960, first:2680, next:6764, off:66, nextOff:15},
+    '3': {bags:3, sticks:90, list:11940, first:3780, next:9552, off:68, nextOff:20}
+  };
+  var yen = function(n){ return n.toLocaleString('ja-JP'); };
+  var els = {
+    tag: document.getElementById('p-tag'),
+    was: document.getElementById('p-was'),
+    now: document.getElementById('p-now'),
+    per: document.getElementById('p-per'),
+    next: document.getElementById('p-next'),
+    sticky: document.querySelector('.sticky a'),
+    sel: document.getElementById('i-plan')
+  };
+  function paint(key){
+    var p = PLANS[key];
+    if(!p) return;
+    els.tag.textContent = '初回限定 ' + p.off + '%OFF';
+    els.was.textContent = '通常 ' + yen(p.list) + '円';
+    els.now.textContent = yen(p.first);
+    els.per.textContent = '1本あたり ' + Math.round(p.first / p.sticks) + '円';
+    els.next.textContent = '2回目以降は ' + yen(p.next) + '円（' + p.nextOff + '%OFF）でお届けします。';
+    els.sticky.textContent = '初回' + yen(p.first) + '円ではじめる';
+    if(els.sel) els.sel.value = key;
+  }
+  document.querySelectorAll('.plan').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.plan').forEach(function(b){ b.setAttribute('aria-pressed', String(b === btn)); });
+      paint(btn.dataset.plan);
+      track('plan_change', {plan_bags: Number(btn.dataset.plan)});
+    });
+  });
+  if(els.sel){
+    els.sel.addEventListener('change', function(){
+      document.querySelectorAll('.plan').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.plan === els.sel.value)); });
+      paint(els.sel.value);
+      track('plan_change', {plan_bags: Number(els.sel.value)});
+    });
+  }
+
+  /* ---- フォーム ---- */
+  var form = document.querySelector('.form');
+  var TEL = /^0\d{9,10}$/;
+  var MAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  function mark(id, bad){
+    var el = document.getElementById(id);
+    if(!el) return;
+    el.classList.toggle('err', bad);
+  }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('i-name').value.trim();
+    var mail = document.getElementById('i-mail').value.trim();
+    var tel  = document.getElementById('i-tel').value.trim().replace(/[-\s]/g,'');
+    var plan = document.getElementById('i-plan').value;
+    var agree= document.getElementById('i-agree').checked;
+    var bad = {
+      'f-name': name.length === 0,
+      'f-mail': !MAIL.test(mail),
+      'f-tel' : !TEL.test(tel),
+      'f-plan': !plan
+    };
+    Object.keys(bad).forEach(function(k){ mark(k, bad[k]); });
+    document.getElementById('f-agree').style.color = agree ? '' : '#c1566a';
+    var hasError = Object.keys(bad).some(function(k){ return bad[k]; }) || !agree;
+    if(hasError){
+      track('form_error');
+      var first = document.querySelector('.field.err input, .field.err select');
+      if(first) first.focus();
+      return;
+    }
+    track('cv_submit', {plan_bags: Number(plan)});
+    form.classList.add('sent');
+    form.scrollIntoView({block:'center'});
+  });
+  ['i-name','i-mail','i-tel'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.addEventListener('input', function(){ el.closest('.field').classList.remove('err'); });
+  });
+
+  /* ---- スクロール演出 ---- */
+  var rv = document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:.08});
+    rv.forEach(function(el){ io.observe(el); });
+  } else {
+    rv.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---- スクロール深度 ---- */
+  var hit = {};
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement;
+    var p = Math.round((h.scrollTop + window.innerHeight) / h.scrollHeight * 100);
+    [25,50,75,100].forEach(function(n){
+      if(p >= n && !hit[n]){ hit[n] = 1; track('scroll_depth', {percent:n}); }
+    });
+  }, {passive:true});
+
+  paint('1');
+})();
+</script>
+</body>
+</html>
