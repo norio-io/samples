@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>灯し器 — うつわのオンラインストア</title>
+<meta name="description" content="うつわのオンラインストアの制作サンプル。商品一覧・絞り込み・バリエーション選択・カートまで実装しています（架空の店舗です）">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#231f1c; --ink-soft:#5d554e; --ink-faint:#938a82;
+  --line:#e2dcd4; --line-soft:#efeae3;
+  --bg:#fbf9f6; --surface:#ffffff; --surface-2:#f3efe9;
+  --accent:#6b4f3a; --accent-soft:#8a6a4f; --sale:#a8452c; --ok:#3f6b4a;
+  --pad:clamp(18px,4.5vw,56px);
+  --f-body:"Noto Sans JP",system-ui,sans-serif;
+  --f-head:"Zen Old Mincho","Noto Sans JP",serif;
+  --f-label:"Jost","Noto Sans JP",sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);
+  font-size:15px;line-height:1.85;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1140px;margin-inline:auto;padding-inline:var(--pad)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.demo{background:var(--ink);color:#fff;font-size:11px;letter-spacing:.05em;text-align:center;padding:7px 14px}
+
+/* ヘッダー */
+.hd{position:sticky;top:0;z-index:50;background:rgba(251,249,246,.94);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft)}
+.hd-in{display:flex;align-items:center;gap:20px;min-height:66px}
+.brand{display:flex;flex-direction:column;text-decoration:none;margin-right:auto;background:none;border:0;padding:0;text-align:left}
+.brand b{font-family:var(--f-head);font-size:19px;font-weight:700;letter-spacing:.14em;line-height:1.3}
+.brand span{font-family:var(--f-label);font-size:9.5px;letter-spacing:.24em;color:var(--ink-faint)}
+.cartbtn{display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--line);
+  border-radius:999px;padding:8px 16px;font-size:13px;transition:border-color .2s,background .2s}
+.cartbtn:hover{border-color:var(--accent);background:var(--surface)}
+.badge{display:inline-grid;place-items:center;min-width:19px;height:19px;padding:0 5px;
+  border-radius:999px;background:var(--accent);color:#fff;font-size:11px;font-family:var(--f-label);line-height:1}
+.badge[hidden]{display:none}
+
+/* 共通 */
+.view[hidden]{display:none}
+.crumb{font-size:12px;color:var(--ink-faint);padding-top:22px}
+.crumb button{background:none;border:0;padding:0;text-decoration:underline;font-size:12px;color:var(--ink-faint)}
+h1.ttl{font-family:var(--f-head);font-size:clamp(23px,3.2vw,31px);font-weight:500;letter-spacing:.1em;margin:14px 0 6px}
+.lead{color:var(--ink-soft);font-size:14px;margin:0 0 26px;max-width:58ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:2px;
+  background:var(--accent);color:#fff;padding:14px 26px;font-size:14px;font-weight:500;
+  transition:background .2s;text-decoration:none}
+.btn:hover{background:#573f2e}
+.btn:disabled{background:var(--surface-2);color:var(--ink-faint);cursor:not-allowed}
+.btn--line{background:none;border:1px solid var(--line);color:var(--ink)}
+.btn--line:hover{background:var(--surface);border-color:var(--ink-faint)}
+
+/* 一覧 */
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.chip{background:none;border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:12.5px;
+  color:var(--ink-soft);transition:all .2s}
+.chip:hover{border-color:var(--ink-faint)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.sortwrap{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-faint)}
+select{font:inherit;font-size:13px;padding:7px 10px;border:1px solid var(--line);border-radius:2px;background:var(--surface)}
+.count{font-size:12.5px;color:var(--ink-faint);margin:0 0 20px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,30px);list-style:none;margin:0 0 60px;padding:0}
+.card{background:none;border:0;padding:0;width:100%;text-align:left;display:block}
+.thumb{position:relative;aspect-ratio:4/3;background:var(--surface-2);overflow:hidden;
+  display:grid;place-items:center;transition:background .3s}
+.card:hover .thumb{background:#ece6dd}
+.thumb svg{width:64%;height:64%;transition:transform .45s cubic-bezier(.2,.7,.3,1)}
+.card:hover .thumb svg{transform:scale(1.05)}
+.tag{position:absolute;top:10px;left:10px;font-family:var(--f-label);font-size:10px;letter-spacing:.14em;
+  background:var(--ink);color:#fff;padding:4px 9px}
+.tag--out{background:var(--ink-faint)}
+.card h3{font-family:var(--f-head);font-size:16px;font-weight:500;letter-spacing:.06em;margin:14px 0 2px}
+.card .sub{font-size:12px;color:var(--ink-faint);margin:0 0 6px}
+.price{font-family:var(--f-label);font-size:15px;letter-spacing:.03em}
+.price small{font-size:11px;color:var(--ink-faint);margin-left:3px}
+
+/* 詳細 */
+.detail{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,58px);align-items:start;margin-bottom:64px}
+.hero-img{aspect-ratio:1/1;background:var(--surface-2);display:grid;place-items:center}
+.hero-img svg{width:62%;height:62%}
+.detail h1{font-family:var(--f-head);font-size:clamp(21px,2.8vw,28px);font-weight:500;letter-spacing:.08em;margin:0 0 6px}
+.detail .sub{font-size:12.5px;color:var(--ink-faint);margin:0 0 18px}
+.detail .price{font-size:21px;display:block;margin-bottom:22px}
+.detail p.desc{color:var(--ink-soft);font-size:14px;margin:0 0 26px}
+.opt{margin-bottom:22px}
+.opt h4{font-size:12.5px;letter-spacing:.08em;color:var(--ink-soft);margin:0 0 9px;font-weight:500}
+.swatches{display:flex;flex-wrap:wrap;gap:8px}
+.sw{background:none;border:1px solid var(--line);border-radius:2px;padding:9px 15px;font-size:13px;transition:all .2s}
+.sw:hover{border-color:var(--ink-faint)}
+.sw[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.sw:disabled{color:var(--ink-faint);background:var(--surface-2);cursor:not-allowed;text-decoration:line-through}
+.stock{font-size:12.5px;margin:0 0 20px}
+.stock.ok{color:var(--ok)}
+.stock.low{color:var(--sale)}
+.stock.out{color:var(--ink-faint)}
+.qtyrow{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:2px;background:var(--surface)}
+.stepper button{background:none;border:0;width:38px;height:40px;font-size:16px;color:var(--ink-soft)}
+.stepper button:hover:not(:disabled){color:var(--ink)}
+.stepper button:disabled{color:#d3cdc5;cursor:not-allowed}
+.stepper span{min-width:34px;text-align:center;font-family:var(--f-label);font-size:15px}
+.spec{border-top:1px solid var(--line);margin-top:8px}
+.spec div{display:flex;gap:16px;padding:11px 0;border-bottom:1px solid var(--line-soft);font-size:13px}
+.spec dt{width:5.5em;flex:none;color:var(--ink-faint)}
+.spec dd{margin:0;color:var(--ink-soft)}
+
+/* カート */
+.cart{margin-bottom:64px}
+.empty{text-align:center;padding:70px 20px;border:1px solid var(--line);background:var(--surface)}
+.empty p{color:var(--ink-soft);margin:0 0 22px}
+.lines{list-style:none;margin:0 0 30px;padding:0;border-top:1px solid var(--line)}
+.line{display:grid;grid-template-columns:96px 1fr auto;gap:18px;align-items:center;
+  padding:18px 0;border-bottom:1px solid var(--line-soft)}
+.line .ph{aspect-ratio:1/1;background:var(--surface-2);display:grid;place-items:center}
+.line .ph svg{width:66%;height:66%}
+.line h4{font-family:var(--f-head);font-size:15px;font-weight:500;letter-spacing:.05em;margin:0 0 2px}
+.line .sub{font-size:12px;color:var(--ink-faint);margin:0 0 9px}
+.line .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.line .amt{font-family:var(--f-label);font-size:15px}
+.rm{background:none;border:0;padding:0;font-size:12px;color:var(--ink-faint);text-decoration:underline}
+.rm:hover{color:var(--sale)}
+.sum{margin-left:auto;max-width:380px;border:1px solid var(--line);background:var(--surface);padding:24px}
+.sum div{display:flex;justify-content:space-between;font-size:13.5px;padding:7px 0;color:var(--ink-soft)}
+.sum .total{border-top:1px solid var(--line);margin-top:10px;padding-top:14px;color:var(--ink);font-size:16px}
+.sum .total b{font-family:var(--f-label);font-size:20px;font-weight:500}
+.sum .note{display:block;font-size:12px;color:var(--ink-faint);padding:0;margin:4px 0 18px}
+.sum .btn{width:100%;margin-top:6px}
+.notice{margin:14px 0 0;font-size:12px;color:var(--ink-faint);text-align:center}
+
+/* トースト */
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);z-index:80;
+  background:var(--ink);color:#fff;font-size:13px;padding:12px 22px;border-radius:2px;
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+footer{border-top:1px solid var(--line);padding-block:30px;color:var(--ink-faint);font-size:12px}
+
+@media (max-width:860px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .detail{grid-template-columns:1fr}
+  .sum{max-width:none}
+}
+@media (max-width:560px){
+  .grid{grid-template-columns:1fr 1fr;gap:14px}
+  .card h3{font-size:14.5px}
+  .sortwrap{margin-left:0;width:100%}
+  .line{grid-template-columns:72px 1fr;row-gap:10px}
+  .line .right{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<p class="demo">DEMO — これは制作サンプルです。架空の店舗であり、実在の店舗・企業とは関係ありません。注文も決済も行われません。</p>
+
+<header class="hd">
+  <div class="wrap hd-in">
+    <button class="brand" id="home">
+      <b>灯し器</b>
+      <span>TOMOSHI UTSUWA</span>
+    </button>
+    <button class="cartbtn" id="tocart">
+      カート <span class="badge" id="badge" hidden>0</span>
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 一覧 -->
+  <section class="view" id="v-list">
+    <h1 class="ttl">うつわ一覧</h1>
+    <p class="lead">日々の食卓で使えるものだけを置いています。すべて手作業のため、色と形に個体差があります。</p>
+
+    <div class="filters">
+      <button class="chip" data-cat="all" aria-pressed="true">すべて</button>
+      <button class="chip" data-cat="bowl" aria-pressed="false">碗・鉢</button>
+      <button class="chip" data-cat="plate" aria-pressed="false">皿</button>
+      <button class="chip" data-cat="cup" aria-pressed="false">湯呑・カップ</button>
+      <div class="sortwrap">
+        <label for="sort">並び替え</label>
+        <select id="sort">
+          <option value="default">おすすめ順</option>
+          <option value="asc">価格の安い順</option>
+          <option value="desc">価格の高い順</option>
+        </select>
+      </div>
+    </div>
+    <p class="count" id="count"></p>
+    <ul class="grid" id="grid"></ul>
+  </section>
+
+  <!-- 詳細 -->
+  <section class="view" id="v-detail" hidden>
+    <p class="crumb"><button id="back">← 一覧に戻る</button></p>
+    <div class="detail" id="detail"></div>
+  </section>
+
+  <!-- カート -->
+  <section class="view" id="v-cart" hidden>
+    <p class="crumb"><button id="back2">← 買いものを続ける</button></p>
+    <h1 class="ttl">カート</h1>
+    <div class="cart" id="cart"></div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  制作サンプル／実在の店舗・企業とは関係ありません。
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ── 商品データ ───────────────────────────── */
+var COLORS = {
+  ame:{label:'飴釉', fill:'#8a5a30', rim:'#6d4423'},
+  hai:{label:'灰釉', fill:'#b8b3a3', rim:'#948e7e'},
+  kon:{label:'呉須', fill:'#3f5a78', rim:'#2e435a'},
+  shiro:{label:'粉引', fill:'#e8e2d6', rim:'#c5bdae'},
+  kuro:{label:'黒釉', fill:'#3a3531', rim:'#241f1c'}
+};
+
+var PRODUCTS = [
+  {id:'p1', name:'飯碗', sub:'φ12cm', cat:'bowl', shape:'bowl', price:3200,
+   desc:'毎日使うものなので、手に持ったときの重さを最優先にしました。高台を少し高くして、熱が手に伝わりにくくしています。',
+   spec:{'サイズ':'直径12cm × 高さ6.5cm','重さ':'約190g','素材':'磁器土','取扱い':'電子レンジ・食洗機可'},
+   variants:[{c:'ame',stock:8},{c:'hai',stock:3},{c:'kon',stock:0}]},
+  {id:'p2', name:'六寸鉢', sub:'φ18cm', cat:'bowl', shape:'bowl', price:4800,
+   desc:'煮物にも、サラダにも。縁を薄く立ち上げているので、汁気のあるものを盛っても見た目が締まります。',
+   spec:{'サイズ':'直径18cm × 高さ7cm','重さ':'約420g','素材':'陶器土','取扱い':'電子レンジ可・食洗機不可'},
+   variants:[{c:'shiro',stock:5},{c:'kuro',stock:2}]},
+  {id:'p3', name:'七寸皿', sub:'φ21cm', cat:'plate', shape:'plate', price:5400,
+   desc:'一人分の主菜がちょうど収まる大きさです。縁に釉だまりができるよう、あえて厚めに掛けています。',
+   spec:{'サイズ':'直径21cm × 高さ2.5cm','重さ':'約560g','素材':'陶器土','取扱い':'電子レンジ可・食洗機不可'},
+   variants:[{c:'ame',stock:6},{c:'hai',stock:4},{c:'shiro',stock:1}]},
+  {id:'p4', name:'豆皿', sub:'φ9cm', cat:'plate', shape:'plate', price:1600,
+   desc:'薬味や漬物を少しだけ。色ちがいで並べても散らからないよう、形はすべて同じにしています。',
+   spec:{'サイズ':'直径9cm × 高さ1.5cm','重さ':'約85g','素材':'磁器土','取扱い':'電子レンジ・食洗機可'},
+   variants:[{c:'kon',stock:14},{c:'shiro',stock:11},{c:'kuro',stock:9}]},
+  {id:'p5', name:'湯呑', sub:'180ml', cat:'cup', shape:'cup', price:2800,
+   desc:'煎茶にも番茶にも。口縁をわずかに外へ開かせて、最後のひと口まで飲みやすくしています。',
+   spec:{'容量':'180ml','サイズ':'直径7.5cm × 高さ8cm','重さ':'約160g','取扱い':'電子レンジ・食洗機可'},
+   variants:[{c:'ame',stock:7},{c:'kon',stock:2},{c:'kuro',stock:0}]},
+  {id:'p6', name:'マグカップ', sub:'280ml', cat:'cup', shape:'mug', price:3600,
+   desc:'持ち手は指がしっかり入る太さにしています。ふだんのコーヒーを想定した容量です。',
+   spec:{'容量':'280ml','サイズ':'直径8.5cm × 高さ9cm','重さ':'約280g','取扱い':'電子レンジ・食洗機可'},
+   variants:[{c:'hai',stock:9},{c:'shiro',stock:6},{c:'kuro',stock:4}]},
+  {id:'p7', name:'小鉢', sub:'φ11cm', cat:'bowl', shape:'bowl', price:2400,
+   desc:'副菜を一品。深さがあるので、和えものを盛っても水気がこぼれません。',
+   spec:{'サイズ':'直径11cm × 高さ5cm','重さ':'約200g','素材':'陶器土','取扱い':'電子レンジ可・食洗機不可'},
+   variants:[{c:'kon',stock:5},{c:'ame',stock:10},{c:'hai',stock:0}]},
+  {id:'p8', name:'長皿', sub:'24 × 12cm', cat:'plate', shape:'long', price:6200,
+   desc:'焼き魚や串ものに。細長いぶん割れやすいので、裏の高台を二本脚にして力を逃がしています。',
+   spec:{'サイズ':'24cm × 12cm × 高さ2cm','重さ':'約490g','素材':'陶器土','取扱い':'電子レンジ可・食洗機不可'},
+   variants:[{c:'kuro',stock:3},{c:'shiro',stock:2}]}
+];
+
+var CAT_LABEL = {bowl:'碗・鉢', plate:'皿', cup:'湯呑・カップ'};
+var SHIP = 800, FREE_OVER = 15000;
+
+/* ── うつわの絵（SVG） ─────────────────────── */
+function art(shape, colorKey){
+  var c = COLORS[colorKey] || COLORS.hai;
+  var f = c.fill, r = c.rim;
+  var s = '<svg viewBox="0 0 120 120" role="img" aria-hidden="true">';
+  if(shape === 'bowl'){
+    s += '<ellipse cx="60" cy="42" rx="42" ry="11" fill="'+r+'"/>'
+      +  '<path d="M18 42a42 42 0 0 0 84 0Z" fill="'+f+'"/>'
+      +  '<ellipse cx="60" cy="42" rx="34" ry="8.5" fill="'+shade(f,-14)+'"/>'
+      +  '<path d="M46 83h28v6a4 4 0 0 1-4 4H50a4 4 0 0 1-4-4Z" fill="'+r+'"/>';
+  } else if(shape === 'plate'){
+    s += '<ellipse cx="60" cy="62" rx="48" ry="17" fill="'+r+'"/>'
+      +  '<ellipse cx="60" cy="59" rx="48" ry="17" fill="'+f+'"/>'
+      +  '<ellipse cx="60" cy="59" rx="34" ry="11" fill="'+shade(f,-12)+'"/>';
+  } else if(shape === 'long'){
+    s += '<rect x="12" y="46" width="96" height="30" rx="6" fill="'+r+'"/>'
+      +  '<rect x="12" y="42" width="96" height="30" rx="6" fill="'+f+'"/>'
+      +  '<rect x="24" y="49" width="72" height="16" rx="4" fill="'+shade(f,-12)+'"/>';
+  } else if(shape === 'mug'){
+    s += '<path d="M86 52h9a12 12 0 0 1 0 24h-9" fill="none" stroke="'+f+'" stroke-width="7"/>'
+      +  '<rect x="28" y="34" width="58" height="56" rx="5" fill="'+f+'"/>'
+      +  '<ellipse cx="57" cy="34" rx="29" ry="7.5" fill="'+r+'"/>'
+      +  '<ellipse cx="57" cy="34" rx="22" ry="5" fill="'+shade(f,-16)+'"/>';
+  } else { /* cup */
+    s += '<path d="M34 36h52l-6 50a8 8 0 0 1-8 7H48a8 8 0 0 1-8-7Z" fill="'+f+'"/>'
+      +  '<ellipse cx="60" cy="36" rx="26" ry="7" fill="'+r+'"/>'
+      +  '<ellipse cx="60" cy="36" rx="19" ry="4.6" fill="'+shade(f,-16)+'"/>';
+  }
+  return s + '</svg>';
+}
+function shade(hex, amt){
+  var n = parseInt(hex.slice(1),16);
+  var ch = [n>>16, (n>>8)&255, n&255].map(function(v){
+    return Math.max(0, Math.min(255, v + amt));
+  });
+  return '#' + ch.map(function(v){return ('0'+v.toString(16)).slice(-2);}).join('');
+}
+function yen(n){ return '¥' + n.toLocaleString('ja-JP'); }
+
+/* ── カート状態（localStorage） ───────────── */
+var KEY = 'tomoshi-cart-v1';
+var cart = load();
+
+function load(){
+  try{
+    var raw = localStorage.getItem(KEY);
+    var v = raw ? JSON.parse(raw) : [];
+    return Array.isArray(v) ? v.filter(valid) : [];
+  }catch(e){ return []; }
+}
+function save(){
+  try{ localStorage.setItem(KEY, JSON.stringify(cart)); }catch(e){}
+}
+function valid(l){
+  if(!l || typeof l.id !== 'string') return false;
+  var p = find(l.id); if(!p) return false;
+  var v = p.variants.filter(function(x){return x.c === l.c;})[0];
+  return !!v && typeof l.qty === 'number' && l.qty > 0;
+}
+function find(id){ return PRODUCTS.filter(function(p){return p.id === id;})[0]; }
+function stockOf(p, c){
+  var v = p.variants.filter(function(x){return x.c === c;})[0];
+  return v ? v.stock : 0;
+}
+function totalStock(p){
+  return p.variants.reduce(function(a,v){return a + v.stock;}, 0);
+}
+function count(){ return cart.reduce(function(a,l){return a + l.qty;}, 0); }
+function subtotal(){
+  return cart.reduce(function(a,l){ return a + find(l.id).price * l.qty; }, 0);
+}
+function add(id, c, qty){
+  var line = cart.filter(function(l){return l.id === id && l.c === c;})[0];
+  var max = stockOf(find(id), c);
+  if(line){ line.qty = Math.min(max, line.qty + qty); }
+  else { cart.push({id:id, c:c, qty:Math.min(max, qty)}); }
+  save(); syncBadge();
+}
+
+/* ── 画面 ─────────────────────────────────── */
+var $ = function(s){ return document.querySelector(s); };
+var state = {cat:'all', sort:'default'};
+
+function show(name){
+  ['list','detail','cart'].forEach(function(n){
+    $('#v-'+n).hidden = (n !== name);
+  });
+  window.scrollTo(0,0);
+}
+
+/* URL と画面を対応させる（戻る・進む・URL共有が効くようにする） */
+function urlFor(view, id){
+  if(view === 'detail') return '?item=' + id;
+  if(view === 'cart') return '?view=cart';
+  return location.pathname;
+}
+function go(view, id, replace){
+  var url = urlFor(view, id);
+  try{
+    history[replace ? 'replaceState' : 'pushState']({v:view, id:id}, '', url);
+  }catch(e){}
+  paint(view, id);
+}
+function paint(view, id){
+  if(view === 'detail'){
+    if(!find(id)){ paint('list'); return; }
+    renderDetail(id); show('detail');
+  } else if(view === 'cart'){
+    renderCart(); show('cart');
+  } else {
+    show('list');
+  }
+  document.title = view === 'detail' && find(id)
+    ? find(id).name + ' — 灯し器'
+    : (view === 'cart' ? 'カート — 灯し器' : '灯し器 — うつわのオンラインストア');
+}
+function fromUrl(){
+  var q = new URLSearchParams(location.search);
+  var item = q.get('item');
+  if(item && find(item)) return {v:'detail', id:item};
+  if(q.get('view') === 'cart') return {v:'cart'};
+  return {v:'list'};
+}
+function syncBadge(){
+  var n = count(), b = $('#badge');
+  b.textContent = n; b.hidden = (n === 0);
+}
+function toast(msg){
+  var t = $('#toast');
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(function(){ t.classList.remove('on'); }, 2200);
+}
+
+/* 一覧 */
+function renderList(){
+  var items = PRODUCTS.filter(function(p){
+    return state.cat === 'all' || p.cat === state.cat;
+  });
+  if(state.sort === 'asc') items = items.slice().sort(function(a,b){return a.price-b.price;});
+  if(state.sort === 'desc') items = items.slice().sort(function(a,b){return b.price-a.price;});
+
+  $('#count').textContent = items.length + '件';
+  $('#grid').innerHTML = items.map(function(p){
+    var out = totalStock(p) === 0;
+    var first = p.variants.filter(function(v){return v.stock > 0;})[0] || p.variants[0];
+    return '<li><button class="card" data-id="'+p.id+'">'
+      + '<span class="thumb">' + art(p.shape, first.c)
+      + (out ? '<span class="tag tag--out">SOLD OUT</span>' : '')
+      + '</span>'
+      + '<h3>'+p.name+'</h3>'
+      + '<p class="sub">'+p.sub+' / '+CAT_LABEL[p.cat]+'</p>'
+      + '<span class="price">'+yen(p.price)+'<small>税込</small></span>'
+      + '</button></li>';
+  }).join('');
+}
+
+/* 詳細 */
+var sel = {id:null, c:null, qty:1};
+function renderDetail(id){
+  var p = find(id);
+  var avail = p.variants.filter(function(v){return v.stock > 0;});
+  sel.id = id;
+  sel.c = (avail[0] || p.variants[0]).c;
+  sel.qty = 1;
+  paintDetail();
+}
+function paintDetail(){
+  var p = find(sel.id);
+  var st = stockOf(p, sel.c);
+  var cls = st === 0 ? 'out' : (st <= 3 ? 'low' : 'ok');
+  var msg = st === 0 ? 'この色は在庫切れです'
+          : (st <= 3 ? '残り' + st + '点です' : '在庫あり');
+
+  var specRows = Object.keys(p.spec).map(function(k){
+    return '<div><dt>'+k+'</dt><dd>'+p.spec[k]+'</dd></div>';
+  }).join('');
+
+  $('#detail').innerHTML =
+    '<div class="hero-img">'+art(p.shape, sel.c)+'</div>'
+  + '<div>'
+  +   '<h1>'+p.name+'</h1>'
+  +   '<p class="sub">'+p.sub+' / '+CAT_LABEL[p.cat]+'</p>'
+  +   '<span class="price">'+yen(p.price)+'<small>税込</small></span>'
+  +   '<p class="desc">'+p.desc+'</p>'
+  +   '<div class="opt"><h4>釉薬</h4><div class="swatches">'
+  +     p.variants.map(function(v){
+          return '<button class="sw" data-c="'+v.c+'" aria-pressed="'+(v.c===sel.c)+'"'
+               + (v.stock===0 ? ' disabled' : '') + '>'+COLORS[v.c].label+'</button>';
+        }).join('')
+  +   '</div></div>'
+  +   '<p class="stock '+cls+'">'+msg+'</p>'
+  +   '<div class="qtyrow"><div class="stepper">'
+  +     '<button id="mi" aria-label="数量を減らす"'+(sel.qty<=1?' disabled':'')+'>−</button>'
+  +     '<span>'+sel.qty+'</span>'
+  +     '<button id="pl" aria-label="数量を増やす"'+(sel.qty>=st?' disabled':'')+'>＋</button>'
+  +   '</div>'
+  +   '<button class="btn" id="addbtn"'+(st===0?' disabled':'')+'>'
+  +     (st===0 ? '在庫切れ' : 'カートに入れる')+'</button></div>'
+  +   '<dl class="spec">'+specRows+'</dl>'
+  + '</div>';
+}
+
+/* カート */
+function renderCart(){
+  var box = $('#cart');
+  if(cart.length === 0){
+    box.innerHTML = '<div class="empty"><p>カートに商品がありません。</p>'
+      + '<button class="btn btn--line" id="goshop">うつわを見る</button></div>';
+    return;
+  }
+  var sub = subtotal();
+  var ship = sub >= FREE_OVER ? 0 : SHIP;
+
+  box.innerHTML = '<ul class="lines">'
+    + cart.map(function(l, i){
+        var p = find(l.id), st = stockOf(p, l.c);
+        return '<li class="line">'
+          + '<span class="ph">'+art(p.shape, l.c)+'</span>'
+          + '<div><h4>'+p.name+'</h4>'
+          +   '<p class="sub">'+COLORS[l.c].label+' / '+p.sub+'</p>'
+          +   '<div class="stepper">'
+          +     '<button data-act="minus" data-i="'+i+'" aria-label="数量を減らす">−</button>'
+          +     '<span>'+l.qty+'</span>'
+          +     '<button data-act="plus" data-i="'+i+'" aria-label="数量を増やす"'+(l.qty>=st?' disabled':'')+'>＋</button>'
+          +   '</div></div>'
+          + '<div class="right"><span class="amt">'+yen(p.price*l.qty)+'</span>'
+          +   '<button class="rm" data-act="rm" data-i="'+i+'">削除</button></div>'
+          + '</li>';
+      }).join('')
+    + '</ul>'
+    + '<div class="sum">'
+    +   '<div><span>小計</span><span>'+yen(sub)+'</span></div>'
+    +   '<div><span>送料</span><span>'+(ship===0 ? '無料' : yen(ship))+'</span></div>'
+    +   (ship === 0 ? '' : '<span class="note">あと'+yen(FREE_OVER-sub)+'で送料無料になります。</span>')
+    +   '<div class="total"><span>合計</span><b>'+yen(sub+ship)+'</b></div>'
+    +   '<button class="btn" id="checkout">レジに進む</button>'
+    +   '<p class="notice">このサンプルでは決済は行われません。</p>'
+    + '</div>';
+}
+
+/* ── イベント ─────────────────────────────── */
+$('#home').addEventListener('click', function(){ go('list'); });
+$('#tocart').addEventListener('click', function(){ go('cart'); });
+$('#back').addEventListener('click', function(){ go('list'); });
+$('#back2').addEventListener('click', function(){ go('list'); });
+
+$('#grid').addEventListener('click', function(e){
+  var b = e.target.closest('.card'); if(!b) return;
+  go('detail', b.dataset.id);
+});
+
+document.querySelectorAll('.chip').forEach(function(c){
+  c.addEventListener('click', function(){
+    state.cat = c.dataset.cat;
+    document.querySelectorAll('.chip').forEach(function(o){
+      o.setAttribute('aria-pressed', String(o === c));
+    });
+    renderList();
+  });
+});
+$('#sort').addEventListener('change', function(e){
+  state.sort = e.target.value; renderList();
+});
+
+$('#detail').addEventListener('click', function(e){
+  var t = e.target;
+  if(t.classList.contains('sw') && !t.disabled){
+    sel.c = t.dataset.c; sel.qty = 1; paintDetail(); return;
+  }
+  var p = find(sel.id), st = stockOf(p, sel.c);
+  if(t.id === 'mi'){ sel.qty = Math.max(1, sel.qty-1); paintDetail(); }
+  if(t.id === 'pl'){ sel.qty = Math.min(st, sel.qty+1); paintDetail(); }
+  if(t.id === 'addbtn'){
+    add(sel.id, sel.c, sel.qty);
+    toast(p.name + '（' + COLORS[sel.c].label + '）をカートに入れました');
+  }
+});
+
+$('#cart').addEventListener('click', function(e){
+  var t = e.target;
+  if(t.id === 'goshop'){ go('list'); return; }
+  if(t.id === 'checkout'){
+    toast('制作サンプルのため、ここから先には進みません'); return;
+  }
+  var act = t.dataset.act; if(!act) return;
+  var i = Number(t.dataset.i), l = cart[i]; if(!l) return;
+  if(act === 'plus'){ l.qty = Math.min(stockOf(find(l.id), l.c), l.qty+1); }
+  if(act === 'minus'){ l.qty -= 1; if(l.qty <= 0) cart.splice(i,1); }
+  if(act === 'rm'){ cart.splice(i,1); }
+  save(); syncBadge(); renderCart();
+});
+
+window.addEventListener('popstate', function(){
+  var s = fromUrl(); paint(s.v, s.id);
+});
+
+renderList();
+syncBadge();
+var start = fromUrl();
+go(start.v, start.id, true);
+})();
+</script>
+</body>
+</html>
