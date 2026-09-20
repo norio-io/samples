@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>スタジオ白日 — レンタル撮影スタジオ</title>
+<meta name="description" content="制作サンプル。架空のレンタル撮影スタジオの予約サイトです。">
+<meta name="robots" content="noindex">
+<style>
+:root{
+  --ink:#17191c; --gray:#6b7075; --faint:#9aa0a6; --line:#e3e5e8;
+  --bg:#fafafa; --white:#fff; --accent:#2563c9; --accent-d:#1c4ea3; --accent-l:#eaf1fd;
+  --ok:#2e7d5b; --warn:#c8892a; --ng:#c04a3f;
+  --f:"Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic",system-ui,sans-serif;
+  --wrap:1040px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--f);line-height:1.8;
+  -webkit-font-smoothing:antialiased}
+svg{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:inherit}
+.wrap{width:min(100% - 32px,var(--wrap));margin-inline:auto}
+.demo{background:var(--ink);color:#d7dade;font-size:12.5px;text-align:center;padding:9px 16px;line-height:1.6}
+
+header.site{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.94);
+  backdrop-filter:blur(8px);z-index:30}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;padding-block:13px;gap:16px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px;letter-spacing:.06em;cursor:pointer;
+  background:none;border:0;padding:0;color:inherit}
+.logo svg{width:24px;height:24px}
+.hdr-cta{background:var(--ink);color:#fff;border:0;border-radius:999px;padding:9px 20px;font-size:14px;
+  font-weight:700;cursor:pointer;white-space:nowrap}
+
+/* ---- ステップ ---- */
+.steps{display:flex;gap:6px;justify-content:center;margin:0 0 30px;flex-wrap:wrap}
+.steps li{list-style:none;display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--faint)}
+.steps li+li::before{content:"";width:18px;height:1px;background:var(--line)}
+.steps .n{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid var(--line);font-size:11.5px;font-weight:700}
+.steps li[aria-current="step"]{color:var(--ink);font-weight:700}
+.steps li[aria-current="step"] .n{background:var(--accent);border-color:var(--accent);color:#fff}
+.steps li.done{color:var(--gray)}
+.steps li.done .n{background:var(--accent-l);border-color:var(--accent-l);color:var(--accent-d)}
+
+main{padding-block:clamp(30px,5vw,54px) clamp(50px,7vw,86px);min-height:60vh}
+h1{font-size:clamp(26px,4.4vw,40px);line-height:1.35;margin:0 0 14px;font-weight:700;letter-spacing:.005em}
+h2{font-size:clamp(20px,2.8vw,26px);margin:0 0 8px;font-weight:700;line-height:1.5}
+.eyebrow{color:var(--accent);font-size:12px;letter-spacing:.2em;font-weight:700;margin:0 0 8px}
+.lead{color:var(--gray);font-size:15px;margin:0 0 26px}
+section.blk{padding-block:clamp(36px,5vw,58px);border-top:1px solid var(--line);scroll-margin-top:76px}
+section.blk:first-of-type{border-top:0}
+
+/* ---- ヒーロー ---- */
+.hero{display:grid;grid-template-columns:1fr 420px;gap:clamp(22px,4vw,44px);align-items:center}
+.hero-art{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:16px}
+.facts{list-style:none;padding:0;margin:0 0 24px;display:flex;flex-wrap:wrap;gap:8px}
+.facts li{border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:#fff;
+  border:0;border-radius:10px;padding:15px 30px;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--accent-d)}
+.btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn.ghost:hover{background:var(--bg)}
+.btn[disabled]{background:var(--line);color:var(--faint);cursor:not-allowed}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+
+/* ---- 部屋 ---- */
+.rooms{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.room{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
+.room .fig{background:var(--bg);aspect-ratio:16/10;border-bottom:1px solid var(--line)}
+.room .fig svg{width:100%;height:100%}
+.room .body{padding:20px}
+.room h3{margin:0 0 4px;font-size:17px}
+.room .rate{color:var(--accent-d);font-weight:700;font-size:15px;margin:0 0 10px}
+.room p{margin:0;font-size:13.5px;color:var(--gray)}
+
+/* ---- カレンダー ---- */
+.calwrap{border:1px solid var(--line);border-radius:16px;padding:clamp(14px,2.4vw,22px);max-width:560px;margin-inline:auto}
+.calhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.calhead b{font-size:17px}
+.navbtn{border:1px solid var(--line);background:#fff;border-radius:9px;width:38px;height:38px;cursor:pointer;
+  display:grid;place-items:center;font-size:15px;color:var(--ink)}
+.navbtn[disabled]{color:var(--line);cursor:not-allowed}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.cal .dow{text-align:center;font-size:11.5px;color:var(--faint);padding-bottom:5px}
+.cal .dow.sat{color:#4a76c4}.cal .dow.sun{color:#c04a3f}
+.day{aspect-ratio:1/1;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:2px;font-family:inherit;color:inherit}
+.day .d{font-size:14px;font-weight:600;line-height:1}
+.day .m{font-size:13px;line-height:1}
+.day.free .m{color:var(--ok)}
+.day.few .m{color:var(--warn)}
+.day.none .m{color:var(--faint)}
+.day:hover:not([disabled]){border-color:var(--accent);background:var(--accent-l)}
+.day[disabled]{background:var(--bg);color:var(--faint);cursor:not-allowed;border-color:transparent}
+.day.empty{border:0;background:none;cursor:default}
+.callegend{display:flex;gap:16px;justify-content:center;margin-top:14px;font-size:12.5px;color:var(--gray);flex-wrap:wrap}
+.callegend span b{font-weight:700;margin-right:3px}
+
+/* ---- 時間枠 ---- */
+.tabs{display:flex;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.tab{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:11px 18px;cursor:pointer;font-size:14.5px;
+  font-weight:600;color:inherit;text-align:left}
+.tab small{display:block;font-weight:400;font-size:12px;color:var(--gray)}
+.tab[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-l);color:var(--accent-d)}
+.tab[aria-pressed="true"] small{color:var(--accent-d)}
+.slotgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px}
+.slot{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:11px 6px;cursor:pointer;
+  font-size:14.5px;font-weight:600;text-align:center;color:inherit;line-height:1.4}
+.slot small{display:block;font-weight:400;font-size:11.5px;color:var(--gray)}
+.slot:hover:not([disabled]){border-color:var(--accent)}
+.slot[disabled]{background:var(--bg);color:var(--faint);cursor:not-allowed;border-color:transparent}
+.slot[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:#fff}
+.slot[aria-pressed="true"] small{color:#dbe6fa}
+.slot.inrange{border-color:var(--accent);background:var(--accent-l);color:var(--accent-d)}
+.slot.own[disabled]{background:var(--accent-l);color:var(--accent-d);border:1.5px dashed var(--accent)}
+.slot.own[disabled] small{color:var(--accent-d)}
+
+.hours{display:flex;gap:8px;align-items:center;margin:22px 0 0;flex-wrap:wrap}
+.hours span{font-size:14px;font-weight:600}
+.hourbtn{border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 16px;cursor:pointer;font-size:14px;font-weight:600;color:inherit}
+.hourbtn[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-l);color:var(--accent-d)}
+.hourbtn[disabled]{color:var(--faint);cursor:not-allowed;background:var(--bg);border-color:transparent}
+
+/* ---- サマリ ---- */
+.summary{border:1px solid var(--line);border-radius:14px;background:var(--bg);padding:18px 20px;margin:26px 0 0}
+.summary dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:14.5px}
+.summary dt{color:var(--gray)}
+.summary dd{margin:0;text-align:right;font-weight:600}
+.summary .total{border-top:1px solid var(--line);margin-top:14px;padding-top:14px;display:flex;
+  justify-content:space-between;align-items:baseline}
+.summary .total b{font-size:23px;color:var(--accent-d)}
+
+/* ---- フォーム ---- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,34px);align-items:start}
+.card{border:1px solid var(--line);border-radius:16px;padding:clamp(18px,2.6vw,26px)}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+.req{color:var(--ng);font-size:11px;margin-left:6px;font-weight:700}
+.field input,.field select,.field textarea{width:100%;border:1.5px solid var(--line);border-radius:9px;
+  padding:12px 13px;font-size:16px;font-family:inherit;background:#fff;color:var(--ink)}
+.field textarea{min-height:88px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.field.err input,.field.err select{border-color:var(--ng);background:#fdf5f4}
+.msg{display:none;color:var(--ng);font-size:12.5px;margin-top:5px}
+.field.err .msg{display:block}
+.opts{list-style:none;padding:0;margin:0}
+.opts li{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.opts li:last-child{border-bottom:0}
+.opts input{width:19px;height:19px;flex:none}
+.opts .p{margin-left:auto;color:var(--gray);font-size:13.5px}
+.agree{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;margin:6px 0 0}
+.agree input{width:19px;height:19px;flex:none;margin-top:3px}
+.agree.err{color:var(--ng)}
+
+/* ---- 完了 ---- */
+.done{max-width:560px;margin-inline:auto;text-align:center}
+.done .mark{width:74px;height:74px;margin:0 auto 20px}
+.code{display:inline-block;border:1px dashed var(--line);border-radius:10px;padding:12px 26px;margin:6px 0 22px;
+  font-size:21px;font-weight:700;letter-spacing:.12em}
+
+.note{font-size:12.5px;color:var(--faint);margin:26px 0 0;text-align:center}
+footer{border-top:1px solid var(--line);color:var(--gray);font-size:12.5px;padding:28px 0 40px;line-height:1.9}
+
+.faq{display:grid;gap:9px;max-width:680px;margin-inline:auto}
+.faq details{border:1px solid var(--line);border-radius:12px}
+.faq summary{cursor:pointer;list-style:none;padding:15px 46px 15px 18px;font-weight:600;font-size:14.5px;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:20px;top:50%;width:9px;height:9px;
+  border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:translateY(-70%) rotate(45deg);transition:transform .2s}
+.faq details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
+.faq .a{padding:0 18px 16px;margin:0;font-size:13.5px;color:var(--gray)}
+
+@media (max-width:880px){
+  .hero{grid-template-columns:1fr}
+  .hero-art{order:-1}
+  .rooms,.grid2{grid-template-columns:1fr}
+  .steps li span.t{display:none}
+  .steps li+li::before{width:12px}
+}
+</style>
+</head>
+<body>
+
+<p class="demo">DEMO — これは制作サンプルです。架空のスタジオであり、実在の施設とは関係ありません。予約は送信されません。</p>
+
+<header class="site">
+  <div class="wrap">
+    <button class="logo" type="button" data-go="home">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect x="2" y="8" width="28" height="18" rx="4" fill="#17191c"/>
+        <path d="M11 8l2.4-3.4A2 2 0 0 1 15 3.8h2a2 2 0 0 1 1.6.8L21 8z" fill="#17191c"/>
+        <circle cx="16" cy="17" r="6" fill="#fff"/><circle cx="16" cy="17" r="3" fill="#17191c"/>
+      </svg>
+      スタジオ白日
+    </button>
+    <button class="hdr-cta" type="button" data-go="home#cal">空き状況を見る</button>
+  </div>
+</header>
+
+<main class="wrap" id="main"></main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 6px">※ 掲載している料金・空き状況・アクセス情報は、すべてサンプル用に作成した架空のものです。</p>
+    <p style="margin:0">スタジオ白日（架空施設）／ 制作サンプル</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============ データ ============ */
+  var ROOMS = {
+    A: {name:'Aスタジオ', sub:'白ホリゾント / 45㎡', rate:4400, desc:'幅7m×奥行6mの白ホリゾント。天井高3.8m。物撮りから全身のポートレートまで。'},
+    B: {name:'Bスタジオ', sub:'ハウススタジオ / 38㎡', rate:3850, desc:'木床とアンティーク調の窓。自然光が入る南向き。料理や小物の撮影に。'}
+  };
+  var OPTIONS = [
+    {id:'light', name:'照明セット（ストロボ2灯・アンブレラ）', price:2200},
+    {id:'paper', name:'背景紙（1本・色指定可）', price:1100},
+    {id:'assist', name:'撮影アシスタント（1時間あたり）', price:3300}
+  ];
+  var OPEN_H = 9, CLOSE_H = 21, MAX_HOURS = 4;
+  var TOTAL_SLOTS = CLOSE_H - OPEN_H;
+
+  /* ============ ユーティリティ ============ */
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+  function ymd(d){ return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()); }
+  function parseYmd(s){
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || '');
+    if(!m) return null;
+    var d = new Date(+m[1], +m[2]-1, +m[3]);
+    return (d.getFullYear() === +m[1] && d.getMonth() === +m[2]-1 && d.getDate() === +m[3]) ? d : null;
+  }
+  function today(){ var t = new Date(); t.setHours(0,0,0,0); return t; }
+  function yen(n){ return n.toLocaleString('ja-JP'); }
+  function jpDate(d){
+    var w = ['日','月','火','水','木','金','土'][d.getDay()];
+    return (d.getMonth()+1) + '月' + d.getDate() + '日（' + w + '）';
+  }
+  /* 決まった日付・部屋・時刻から、毎回同じ空き状況を作る */
+  function hash(s){
+    var h = 2166136261;
+    for(var i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = (h * 16777619) >>> 0; }
+    return h;
+  }
+  function dayFull(dateStr){ return hash('full' + dateStr) % 11 === 0; }
+
+  /* このタブで取った予約。サーバーがないので sessionStorage に持つ */
+  var MINE_KEY = 'hakujitsu-booked-v1';
+  var mine = {};
+  try{
+    var rawMine = sessionStorage.getItem(MINE_KEY);
+    if(rawMine) mine = JSON.parse(rawMine) || {};
+  }catch(e){}
+  function slotKey(dateStr, room, hour){ return dateStr + '|' + room + '|' + hour; }
+  function isMine(dateStr, room, hour){ return mine[slotKey(dateStr, room, hour)] === true; }
+  function markMine(dateStr, room, hour, hours){
+    for(var i = 0; i < hours; i++){ mine[slotKey(dateStr, room, hour + i)] = true; }
+    try{ sessionStorage.setItem(MINE_KEY, JSON.stringify(mine)); }catch(e){}
+  }
+
+  function isBooked(dateStr, room, hour){
+    var d = parseYmd(dateStr);
+    if(!d) return true;
+    if(d < today()) return true;
+    if(isMine(dateStr, room, hour)) return true;
+    if(dayFull(dateStr)) return true;
+    var w = d.getDay();
+    var rate = (w === 0 || w === 6) ? 70 : 30;   /* 土日は埋まりやすい */
+    return (hash(dateStr + room + hour) % 100) < rate;
+  }
+  function freeCount(dateStr){
+    var n = 0;
+    Object.keys(ROOMS).forEach(function(r){
+      for(var h = OPEN_H; h < CLOSE_H; h++){ if(!isBooked(dateStr, r, h)) n++; }
+    });
+    return n;
+  }
+
+  /* ============ 状態 ============ */
+  var DRAFT_KEY = 'hakujitsu-draft-v1';
+  var draft = {name:'', tel:'', mail:'', use:'', opts:[], note:'', agree:false};
+  try{
+    var raw = sessionStorage.getItem(DRAFT_KEY);
+    if(raw){ draft = Object.assign(draft, JSON.parse(raw)); }
+  }catch(e){}
+  function saveDraft(){ try{ sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft)); }catch(e){} }
+
+  function fromUrl(){
+    var q = new URLSearchParams(location.search);
+    var v = q.get('v') || 'home';
+    var s = {
+      v: v,
+      m: q.get('m') || '',
+      d: q.get('d') || '',
+      r: ROOMS[q.get('r')] ? q.get('r') : 'A',
+      h: q.get('h') ? parseInt(q.get('h'), 10) : null,
+      n: q.get('n') ? Math.min(MAX_HOURS, Math.max(1, parseInt(q.get('n'), 10))) : 1,
+      code: q.get('c') || ''
+    };
+    if(['home','slots','form','confirm','done'].indexOf(s.v) < 0) s.v = 'home';
+    if(s.v !== 'home' && !parseYmd(s.d)) s.v = 'home';
+    if((s.v === 'form' || s.v === 'confirm' || s.v === 'done') && s.h === null) s.v = 'slots';
+    return s;
+  }
+  function toUrl(s){
+    var q = new URLSearchParams();
+    if(s.v !== 'home') q.set('v', s.v);
+    if(s.v === 'home' && s.m) q.set('m', s.m);
+    if(s.d) q.set('d', s.d);
+    if(s.v !== 'home'){ q.set('r', s.r); }
+    if(s.h !== null && s.v !== 'home' && s.v !== 'slots') { q.set('h', s.h); q.set('n', s.n); }
+    if(s.v === 'slots' && s.h !== null){ q.set('h', s.h); q.set('n', s.n); }
+    if(s.code) q.set('c', s.code);
+    var qs = q.toString();
+    return location.pathname + (qs ? '?' + qs : '');
+  }
+  var state = fromUrl();
+
+  function go(patch, replace){
+    state = Object.assign({}, state, patch);
+    var url = toUrl(state);
+    try{ history[replace ? 'replaceState' : 'pushState'](state, '', url); }catch(e){}
+    render();
+    window.scrollTo({top:0, behavior:'auto'});
+  }
+
+  /* ============ 計測 ============ */
+  window.dataLayer = window.dataLayer || [];
+  function track(name, params){
+    try{ window.dataLayer.push(Object.assign({event:name}, params||{})); }catch(e){}
+  }
+
+  /* ============ 料金 ============ */
+  function optPrice(id, hours){
+    var o = OPTIONS.filter(function(x){ return x.id === id; })[0];
+    if(!o) return 0;
+    return o.id === 'assist' ? o.price * hours : o.price;
+  }
+  function calc(s){
+    var base = ROOMS[s.r].rate * s.n;
+    var opts = draft.opts.reduce(function(sum, id){ return sum + optPrice(id, s.n); }, 0);
+    return {base:base, opts:opts, total:base + opts};
+  }
+
+  /* ============ 描画 ============ */
+  var main = document.getElementById('main');
+  function el(html){ var t = document.createElement('div'); t.innerHTML = html.trim(); return t; }
+
+  function stepsHtml(cur){
+    var labels = ['日時を選ぶ','情報を入力','内容の確認','完了'];
+    return '<ol class="steps">' + labels.map(function(l, i){
+      var n = i + 1, cls = n < cur ? ' class="done"' : '', aria = n === cur ? ' aria-current="step"' : '';
+      return '<li' + cls + aria + '><span class="n">' + n + '</span><span class="t">' + l + '</span></li>';
+    }).join('') + '</ol>';
+  }
+
+  function roomSvg(kind){
+    if(kind === 'A'){
+      return '<svg viewBox="0 0 320 200" fill="none" role="img" aria-hidden="true">' +
+        '<rect width="320" height="200" fill="#f4f5f6"/>' +
+        '<path d="M40 150h240V60c0-14-12-22-30-22H70c-18 0-30 8-30 22z" fill="#fff"/>' +
+        '<path d="M40 150h240" stroke="#e3e5e8" stroke-width="2"/>' +
+        '<path d="M40 60c26-10 214-10 240 0" stroke="#e3e5e8" stroke-width="2"/>' +
+        '<rect x="96" y="96" width="46" height="54" rx="3" fill="#dfe3e8"/>' +
+        '<rect x="152" y="112" width="34" height="38" rx="3" fill="#eceff2"/>' +
+        '<path d="M232 150V84M214 84h36M232 84l-10-22h20z" stroke="#17191c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
+        '<path d="M72 150V92M58 92h28M72 92l-8-18h16z" stroke="#9aa0a6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
+        '</svg>';
+    }
+    return '<svg viewBox="0 0 320 200" fill="none" role="img" aria-hidden="true">' +
+      '<rect width="320" height="200" fill="#f4f5f6"/>' +
+      '<rect x="30" y="36" width="260" height="114" fill="#fff"/>' +
+      '<rect x="30" y="150" width="260" height="14" fill="#e5dbcc"/>' +
+      '<path d="M30 156h260M30 160h260" stroke="#d6c8b4" stroke-width="1.5"/>' +
+      '<rect x="188" y="52" width="82" height="82" rx="3" fill="#eaf1fd" stroke="#c9d6ea" stroke-width="2"/>' +
+      '<path d="M229 52v82M188 93h82" stroke="#c9d6ea" stroke-width="2"/>' +
+      '<rect x="56" y="104" width="86" height="46" rx="4" fill="#dfe3e8"/>' +
+      '<rect x="66" y="88" width="24" height="16" rx="2" fill="#eceff2"/>' +
+      '<circle cx="118" cy="84" r="11" fill="#e5dbcc"/>' +
+      '<path d="M118 73v-9" stroke="#9aa0a6" stroke-width="2.5" stroke-linecap="round"/>' +
+      '</svg>';
+  }
+
+  /* ---------- home ---------- */
+  function viewHome(){
+    var base = state.m && /^\d{4}-\d{2}$/.test(state.m) ? state.m : null;
+    var t = today();
+    var cur = base ? new Date(+base.slice(0,4), +base.slice(5,7)-1, 1) : new Date(t.getFullYear(), t.getMonth(), 1);
+    var minM = new Date(t.getFullYear(), t.getMonth(), 1);
+    var maxM = new Date(t.getFullYear(), t.getMonth()+2, 1);
+    if(cur < minM) cur = minM;
+    if(cur > maxM) cur = maxM;
+
+    var html = '';
+    html += '<section class="blk hero">' +
+      '<div>' +
+        '<p class="eyebrow">RENTAL PHOTO STUDIO</p>' +
+        '<h1>白ホリと自然光、<br>2つの部屋を1時間から。</h1>' +
+        '<p class="lead">機材の持ち込みも、手ぶらでの利用もできます。予約は1時間単位、当日の空きもそのまま押さえられます。</p>' +
+        '<ul class="facts">' +
+          '<li>9:00〜21:00</li><li>1時間 3,850円〜</li><li>最短3時間前まで予約可</li><li>駅から徒歩6分</li>' +
+        '</ul>' +
+        '<div class="btnrow"><button class="btn" type="button" data-go="home#cal">空き状況を見る</button></div>' +
+      '</div>' +
+      '<div class="hero-art">' + roomSvg('A') + '</div>' +
+    '</section>';
+
+    html += '<section class="blk"><h2>2つの部屋</h2><p class="lead">どちらも同じフロアにあります。</p><div class="rooms">' +
+      Object.keys(ROOMS).map(function(k){
+        var r = ROOMS[k];
+        return '<article class="room"><div class="fig">' + roomSvg(k) + '</div><div class="body">' +
+          '<h3>' + r.name + '</h3>' +
+          '<p class="rate">1時間 ' + yen(r.rate) + '円（税込）<span style="color:var(--gray);font-weight:400;font-size:13px"> ／ ' + r.sub + '</span></p>' +
+          '<p>' + r.desc + '</p></div></article>';
+      }).join('') + '</div></section>';
+
+    html += '<section class="blk" id="cal"><h2>空き状況</h2>' +
+      '<p class="lead" style="text-align:center">ご利用になる日を選んでください。</p>' +
+      '<div class="calwrap">' + calHtml(cur, minM, maxM) + '</div>' +
+      '<p class="note">表示は2つの部屋を合わせた空き枠数です。日を選ぶと、部屋ごとの時間枠が出ます。</p></section>';
+
+    html += '<section class="blk"><h2>よくあるご質問</h2><div class="faq">' +
+      '<details><summary>延長はできますか？</summary><p class="a">次の予約が入っていなければ、当日に30分単位で延長できます。料金は退出時の精算です。</p></details>' +
+      '<details><summary>機材の持ち込みは自由ですか？</summary><p class="a">自由です。三脚、スタンド、発電機以外の電源機器はそのままお持ち込みいただけます。</p></details>' +
+      '<details><summary>キャンセル料はかかりますか？</summary><p class="a">3日前までは無料です。前々日50%、前日80%、当日100%を申し受けます。</p></details>' +
+      '<details><summary>何人まで入れますか？</summary><p class="a">Aスタジオは10名、Bスタジオは6名までを目安にしてください。人数による追加料金はありません。</p></details>' +
+      '</div></section>';
+
+    return html;
+  }
+
+  function calHtml(cur, minM, maxM){
+    var y = cur.getFullYear(), m = cur.getMonth();
+    var first = new Date(y, m, 1), lastDay = new Date(y, m+1, 0).getDate();
+    var lead = first.getDay();
+    var t = today();
+    var dows = ['日','月','火','水','木','金','土'];
+
+    var h = '<div class="calhead">' +
+      '<button class="navbtn" type="button" data-cal="' + ymd(new Date(y, m-1, 1)).slice(0,7) + '"' +
+        (new Date(y, m-1, 1) < minM ? ' disabled' : '') + ' aria-label="前の月">‹</button>' +
+      '<b>' + y + '年' + (m+1) + '月</b>' +
+      '<button class="navbtn" type="button" data-cal="' + ymd(new Date(y, m+1, 1)).slice(0,7) + '"' +
+        (new Date(y, m+1, 1) > maxM ? ' disabled' : '') + ' aria-label="次の月">›</button>' +
+    '</div><div class="cal">';
+
+    dows.forEach(function(d, i){
+      h += '<div class="dow' + (i===0?' sun':(i===6?' sat':'')) + '">' + d + '</div>';
+    });
+    for(var i=0;i<lead;i++) h += '<div class="day empty"></div>';
+    for(var d=1; d<=lastDay; d++){
+      var date = new Date(y, m, d), ds = ymd(date);
+      if(date < t){
+        h += '<button class="day" type="button" disabled><span class="d">' + d + '</span><span class="m">–</span></button>';
+        continue;
+      }
+      var n = freeCount(ds), cls, mark;
+      if(n === 0){ cls = 'none'; mark = '×'; }
+      else if(n <= TOTAL_SLOTS * 2 * 0.42){ cls = 'few'; mark = '△'; }
+      else { cls = 'free'; mark = '○'; }
+      h += '<button class="day ' + cls + '" type="button" data-day="' + ds + '"' + (n === 0 ? ' disabled' : '') + '>' +
+        '<span class="d">' + d + '</span><span class="m">' + mark + '</span></button>';
+    }
+    h += '</div><div class="callegend">' +
+      '<span><b style="color:var(--ok)">○</b>空きあり</span>' +
+      '<span><b style="color:var(--warn)">△</b>残りわずか</span>' +
+      '<span><b style="color:var(--faint)">×</b>満室</span></div>';
+    return h;
+  }
+
+  /* ---------- slots ---------- */
+  function viewSlots(){
+    var d = parseYmd(state.d);
+    var h = stepsHtml(1);
+    h += '<section class="blk" style="padding-top:0">' +
+      '<p class="eyebrow">STEP 1</p><h2>' + jpDate(d) + ' の空き時間</h2>' +
+      '<p class="lead">部屋を選び、開始時刻と利用時間を指定してください。</p>' +
+      '<div class="tabs">' + Object.keys(ROOMS).map(function(k){
+        var r = ROOMS[k];
+        return '<button class="tab" type="button" data-room="' + k + '" aria-pressed="' + (state.r === k) + '">' +
+          r.name + '<small>1時間 ' + yen(r.rate) + '円 ／ ' + r.sub + '</small></button>';
+      }).join('') + '</div>';
+
+    h += '<div class="slotgrid">';
+    for(var hour = OPEN_H; hour < CLOSE_H; hour++){
+      var booked = isBooked(state.d, state.r, hour);
+      var sel = state.h === hour;
+      var inr = state.h !== null && hour > state.h && hour < state.h + state.n;
+      var ownSlot = isMine(state.d, state.r, hour);
+      h += '<button class="slot' + (inr ? ' inrange' : '') + (ownSlot ? ' own' : '') + '" type="button" data-slot="' + hour + '"' +
+        (booked ? ' disabled' : '') + ' aria-pressed="' + sel + '">' +
+        pad(hour) + ':00<small>' + (ownSlot ? 'ご予約分' : (booked ? '予約済' : '空き')) + '</small></button>';
+    }
+    h += '</div>';
+
+    h += '<div class="hours"><span>利用時間</span>';
+    for(var n=1; n<=MAX_HOURS; n++){
+      var can = state.h !== null && canTake(state.h, n);
+      h += '<button class="hourbtn" type="button" data-hours="' + n + '" aria-pressed="' + (state.h !== null && state.n === n) + '"' +
+        (state.h !== null && can ? '' : ' disabled') + '>' + n + '時間</button>';
+    }
+    h += '</div>';
+
+    if(state.h !== null){
+      var c = calc(state);
+      h += '<div class="summary" style="max-width:460px">' +
+        '<dl><dt>部屋</dt><dd>' + ROOMS[state.r].name + '</dd>' +
+        '<dt>日時</dt><dd>' + jpDate(d) + ' ' + pad(state.h) + ':00〜' + pad(state.h + state.n) + ':00</dd>' +
+        '<dt>利用時間</dt><dd>' + state.n + '時間</dd></dl>' +
+        '<div class="total"><span>部屋料金</span><b>' + yen(c.base) + '円</b></div></div>';
+    }
+
+    h += '<div class="btnrow">' +
+      '<button class="btn ghost" type="button" data-go="home#cal">日付を選び直す</button>' +
+      '<button class="btn" type="button" data-next="form"' + (state.h === null ? ' disabled' : '') + '>情報の入力へ</button>' +
+      '</div></section>';
+    return h;
+  }
+  function canTake(start, n){
+    if(start + n > CLOSE_H) return false;
+    for(var i=0;i<n;i++){ if(isBooked(state.d, state.r, start + i)) return false; }
+    return true;
+  }
+
+  /* ---------- form ---------- */
+  function viewForm(){
+    var d = parseYmd(state.d), c = calc(state);
+    var h = stepsHtml(2);
+    h += '<section class="blk" style="padding-top:0"><p class="eyebrow">STEP 2</p><h2>ご利用者の情報</h2>' +
+      '<p class="lead">当日ご来店される方の情報をご入力ください。</p><div class="grid2">';
+
+    h += '<form class="card" id="bookform" novalidate>' +
+      fld('name','お名前','text','山田 太郎','お名前をご入力ください。','name') +
+      fld('tel','電話番号','tel','09012345678','ハイフンなしの半角数字でご入力ください。','tel') +
+      fld('mail','メールアドレス','email','you@example.com','メールアドレスの形式をご確認ください。','email') +
+      '<div class="field" id="f-use"><label for="i-use">ご利用の目的<span class="req">必須</span></label>' +
+      '<select id="i-use" name="use">' +
+        ['','商品・物撮り','ポートレート','料理・小物','動画撮影','その他'].map(function(o){
+          return '<option value="' + o + '"' + (draft.use === o ? ' selected' : '') + '>' + (o || '選択してください') + '</option>';
+        }).join('') +
+      '</select><p class="msg">ご利用の目的をお選びください。</p></div>' +
+      '<div class="field"><label for="i-note">ご要望（任意）</label>' +
+      '<textarea id="i-note" name="note" placeholder="搬入がある、背景紙の色の希望、など">' + esc(draft.note) + '</textarea></div>' +
+      '<label class="agree" id="f-agree"><input type="checkbox" id="i-agree"' + (draft.agree ? ' checked' : '') + '>' +
+      '<span>キャンセル規定に同意します<span class="req">必須</span></span></label>' +
+      '</form>';
+
+    h += '<div>' +
+      '<div class="card"><h3 style="margin:0 0 12px;font-size:16px">オプション</h3><ul class="opts">' +
+        OPTIONS.map(function(o){
+          return '<li><input type="checkbox" id="o-' + o.id + '" data-opt="' + o.id + '"' +
+            (draft.opts.indexOf(o.id) >= 0 ? ' checked' : '') + '>' +
+            '<label for="o-' + o.id + '" style="flex:1;cursor:pointer">' + o.name + '</label>' +
+            '<span class="p">' + yen(o.price) + '円' + (o.id === 'assist' ? '／時' : '') + '</span></li>';
+        }).join('') +
+      '</ul></div>' + summaryHtml(d, c) + '</div>';
+
+    h += '</div><div class="btnrow">' +
+      '<button class="btn ghost" type="button" data-next="slots">日時を選び直す</button>' +
+      '<button class="btn" type="button" data-submit="1">内容の確認へ</button></div></section>';
+    return h;
+  }
+  function fld(id, label, type, ph, msg, ac){
+    return '<div class="field" id="f-' + id + '"><label for="i-' + id + '">' + label + '<span class="req">必須</span></label>' +
+      '<input id="i-' + id + '" name="' + id + '" type="' + type + '" autocomplete="' + ac + '" placeholder="' + ph + '" value="' + esc(draft[id === 'mail' ? 'mail' : id]) + '">' +
+      '<p class="msg">' + msg + '</p></div>';
+  }
+  function esc(s){ return String(s || '').replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function summaryHtml(d, c){
+    var lines = '<dl>' +
+      '<dt>部屋</dt><dd>' + ROOMS[state.r].name + '</dd>' +
+      '<dt>日時</dt><dd>' + jpDate(d) + '<br>' + pad(state.h) + ':00〜' + pad(state.h + state.n) + ':00</dd>' +
+      '<dt>部屋料金</dt><dd>' + yen(c.base) + '円</dd>';
+    draft.opts.forEach(function(id){
+      var o = OPTIONS.filter(function(x){ return x.id === id; })[0];
+      if(o) lines += '<dt>' + o.name.replace(/（.*/, '') + '</dt><dd>' + yen(optPrice(id, state.n)) + '円</dd>';
+    });
+    lines += '</dl>';
+    return '<div class="summary" id="sum">' + lines +
+      '<div class="total"><span>合計（税込）</span><b>' + yen(c.total) + '円</b></div></div>';
+  }
+
+  /* ---------- confirm ---------- */
+  function viewConfirm(){
+    var d = parseYmd(state.d), c = calc(state);
+    var h = stepsHtml(3);
+    h += '<section class="blk" style="padding-top:0"><p class="eyebrow">STEP 3</p><h2>この内容で予約します</h2>' +
+      '<p class="lead">内容をご確認のうえ、確定してください。</p>' +
+      '<div class="card" style="max-width:560px;margin-inline:auto"><dl style="margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 20px;font-size:14.5px">' +
+      row('部屋', ROOMS[state.r].name + '（' + ROOMS[state.r].sub + '）') +
+      row('日時', jpDate(d) + ' ' + pad(state.h) + ':00〜' + pad(state.h + state.n) + ':00') +
+      row('お名前', esc(draft.name)) +
+      row('電話番号', esc(draft.tel)) +
+      row('メール', esc(draft.mail)) +
+      row('ご利用の目的', esc(draft.use)) +
+      row('オプション', draft.opts.length ? draft.opts.map(function(id){
+        var o = OPTIONS.filter(function(x){ return x.id === id; })[0];
+        return o ? o.name.replace(/（.*/, '') : '';
+      }).join('、') : 'なし') +
+      (draft.note ? row('ご要望', esc(draft.note)) : '') +
+      '</dl><div class="total" style="border-top:1px solid var(--line);margin-top:16px;padding-top:16px;display:flex;justify-content:space-between;align-items:baseline">' +
+      '<span>合計（税込）</span><b style="font-size:23px;color:var(--accent-d)">' + yen(c.total) + '円</b></div></div>' +
+      '<div class="btnrow" style="justify-content:center">' +
+      '<button class="btn ghost" type="button" data-next="form">内容を修正する</button>' +
+      '<button class="btn" type="button" data-confirm="1">予約を確定する</button></div>' +
+      '<p class="note">これは制作サンプルです。確定しても予約は送信されません。</p></section>';
+    return h;
+  }
+  function row(k, v){ return '<dt style="color:var(--gray)">' + k + '</dt><dd style="margin:0;font-weight:600">' + v + '</dd>'; }
+
+  /* ---------- done ---------- */
+  function viewDone(){
+    var d = parseYmd(state.d);
+    return '<section class="blk" style="padding-top:0">' + stepsHtml(4) +
+      '<div class="done">' +
+      '<svg class="mark" viewBox="0 0 74 74" fill="none" aria-hidden="true">' +
+      '<circle cx="37" cy="37" r="35" fill="#eaf1fd"/><path d="M24 38l9 9 18-20" stroke="#2563c9" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '<h2>予約を承りました</h2>' +
+      '<p class="lead">確認のメールをお送りしました。当日は受付でこの予約番号をお伝えください。</p>' +
+      '<span class="code">' + esc(state.code) + '</span>' +
+      '<div class="summary" style="text-align:left"><dl>' +
+      '<dt>部屋</dt><dd>' + ROOMS[state.r].name + '</dd>' +
+      '<dt>日時</dt><dd>' + jpDate(d) + ' ' + pad(state.h) + ':00〜' + pad(state.h + state.n) + ':00</dd>' +
+      '<dt>お名前</dt><dd>' + esc(draft.name) + ' 様</dd></dl></div>' +
+      '<p class="note" style="margin-top:24px">この予約分は、空き状況の画面で「ご予約分」として埋まった状態になります。</p>' +
+      '<div class="btnrow" style="justify-content:center"><button class="btn ghost" type="button" data-go="home">空き状況に戻る</button></div>' +
+      '</div></section>';
+  }
+
+  /* ============ 検証 ============ */
+  var TEL = /^0\d{9,10}$/, MAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  function readForm(){
+    var g = function(id){ var e = document.getElementById(id); return e ? e.value.trim() : ''; };
+    draft.name = g('i-name');
+    draft.tel  = g('i-tel').replace(/[-\s]/g, '');
+    draft.mail = g('i-mail');
+    draft.use  = g('i-use');
+    draft.note = g('i-note');
+    var a = document.getElementById('i-agree');
+    draft.agree = !!(a && a.checked);
+    saveDraft();
+  }
+  function validate(){
+    var bad = {
+      'f-name': draft.name.length === 0,
+      'f-tel' : !TEL.test(draft.tel),
+      'f-mail': !MAIL.test(draft.mail),
+      'f-use' : draft.use === ''
+    };
+    Object.keys(bad).forEach(function(k){
+      var e = document.getElementById(k);
+      if(e) e.classList.toggle('err', bad[k]);
+    });
+    var ag = document.getElementById('f-agree');
+    if(ag) ag.classList.toggle('err', !draft.agree);
+    return !Object.keys(bad).some(function(k){ return bad[k]; }) && draft.agree;
+  }
+
+  /* ============ 描画の入口 ============ */
+  function render(){
+    var html;
+    if(state.v === 'slots') html = viewSlots();
+    else if(state.v === 'form') html = viewForm();
+    else if(state.v === 'confirm') html = viewConfirm();
+    else if(state.v === 'done') html = viewDone();
+    else html = viewHome();
+    main.innerHTML = html;
+    document.title = ({
+      home:'スタジオ白日 — レンタル撮影スタジオ',
+      slots:'空き時間を選ぶ — スタジオ白日',
+      form:'ご利用者の情報 — スタジオ白日',
+      confirm:'内容の確認 — スタジオ白日',
+      done:'予約を承りました — スタジオ白日'
+    })[state.v];
+    if(lastView !== state.v){
+      lastView = state.v;
+      track('step_view', {step: state.v});
+    }
+  }
+  var lastView = null;
+
+  /* ============ イベント ============ */
+  document.addEventListener('click', function(ev){
+    var t = ev.target.closest('button');
+    if(!t) return;
+
+    if(t.dataset.go){
+      var dest = t.dataset.go;
+      track('cv_click', {cv_position: dest});
+      if(dest.indexOf('#') > 0){
+        if(state.v !== 'home'){ go({v:'home', h:null, code:''}); }
+        var anchor = document.getElementById(dest.split('#')[1]);
+        if(anchor) anchor.scrollIntoView({behavior:'smooth', block:'start'});
+      } else {
+        go({v:'home', h:null, code:''});
+      }
+      return;
+    }
+    if(t.dataset.cal){ go({m: t.dataset.cal}, true); var c2 = document.getElementById('cal'); if(c2) c2.scrollIntoView({block:'start'}); return; }
+    if(t.dataset.day){ track('date_select', {date: t.dataset.day}); go({v:'slots', d: t.dataset.day, h:null, n:1}); return; }
+    if(t.dataset.room){ go({r: t.dataset.room, h:null, n:1}, true); return; }
+    if(t.dataset.slot){
+      var hh = parseInt(t.dataset.slot, 10);
+      var nn = state.n;
+      while(nn > 1 && !canTakeFor(hh, nn)) nn--;
+      track('slot_select', {hour: hh, hours: nn, room: state.r});
+      go({h: hh, n: nn}, true);
+      return;
+    }
+    if(t.dataset.hours){ go({n: parseInt(t.dataset.hours, 10)}, true); return; }
+    if(t.dataset.next){
+      if(t.dataset.next === 'form' && state.v === 'slots'){ track('cv_click', {cv_position:'to_form'}); go({v:'form'}); }
+      else if(t.dataset.next === 'slots'){ readForm(); go({v:'slots'}); }
+      else if(t.dataset.next === 'form'){ go({v:'form'}); }
+      return;
+    }
+    if(t.dataset.submit){
+      readForm();
+      if(!validate()){
+        track('form_error');
+        var first = document.querySelector('.field.err input, .field.err select') || document.getElementById('i-agree');
+        if(first) first.focus();
+        return;
+      }
+      track('cv_click', {cv_position:'to_confirm'});
+      go({v:'confirm'});
+      return;
+    }
+    if(t.dataset.confirm){
+      var code = 'HK-' + state.d.replace(/-/g,'').slice(2) + '-' + String(hash(state.d + state.r + state.h + draft.tel) % 10000).padStart(4,'0');
+      track('cv_submit', {room: state.r, date: state.d, hour: state.h, hours: state.n, total: calc(state).total});
+      markMine(state.d, state.r, state.h, state.n);
+      go({v:'done', code: code});
+      return;
+    }
+  });
+
+  function canTakeFor(start, n){
+    if(start + n > CLOSE_H) return false;
+    for(var i=0;i<n;i++){ if(isBooked(state.d, state.r, start + i)) return false; }
+    return true;
+  }
+
+  document.addEventListener('change', function(ev){
+    var t = ev.target;
+    if(t.dataset && t.dataset.opt){
+      var id = t.dataset.opt, i = draft.opts.indexOf(id);
+      if(t.checked && i < 0) draft.opts.push(id);
+      if(!t.checked && i >= 0) draft.opts.splice(i, 1);
+      saveDraft();
+      track('option_change', {option: id, checked: t.checked});
+      var d = parseYmd(state.d), sum = document.getElementById('sum');
+      if(sum) sum.outerHTML = summaryHtml(d, calc(state));
+      return;
+    }
+    if(t.id === 'i-agree'){ draft.agree = t.checked; saveDraft();
+      var ag = document.getElementById('f-agree'); if(ag) ag.classList.toggle('err', !t.checked); }
+  });
+
+  document.addEventListener('input', function(ev){
+    var f = ev.target.closest('.field');
+    if(f) f.classList.remove('err');
+  });
+
+  window.addEventListener('popstate', function(){
+    state = fromUrl();
+    render();
+  });
+
+  render();
+  try{ history.replaceState(state, '', toUrl(state)); }catch(e){}
+})();
+</script>
+</body>
+</html>

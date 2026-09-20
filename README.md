@@ -8,6 +8,7 @@ https://norio-io.github.io/samples/
 
 | 制作種別 | ブランド | ソース | 公開URL |
 |---|---|---|---|
+| 予約サイト | スタジオ白日（レンタル撮影スタジオ） | [`booking/photo-studio/`](booking/photo-studio/) | https://norio-io.github.io/samples/booking/photo-studio/ |
 | ランディングページ | ひとひ（健康食品の定期購入） | [`lp/supplement/`](lp/supplement/) | https://norio-io.github.io/samples/lp/supplement/ |
 | ランディングページ | ドッグサロン こもれび | [`lp/pet-salon/`](lp/pet-salon/) | https://norio-io.github.io/samples/lp/pet-salon/ |
 | ECサイト | 灯し器（うつわ） | [`ec/tableware/`](ec/tableware/) | https://norio-io.github.io/samples/ec/tableware/ |
@@ -20,8 +21,8 @@ https://norio-io.github.io/samples/
 
 `<制作種別>/<業種の抽象名>/` の2階層にしています。
 
-- 第1階層は制作種別（`lp` / `ec` / `corporate` / `store`）
-- 第2階層は業種を表す抽象名（`supplement` / `pet-salon` / `tableware` / `manufacturing` / `cafe-bakery`）
+- 第1階層は制作種別（`booking` / `lp` / `ec` / `corporate` / `store`）
+- 第2階層は業種を表す抽象名（`photo-studio` / `supplement` / `pet-salon` / `tableware` / `manufacturing` / `cafe-bakery`）
 
 ブランド名は使いません。`komorebi` のような固有名だけでは、何のサイトか分からないためです。同じ制作種別でサンプルが増えても、第2階層が増えるだけで済みます。
 
@@ -31,7 +32,7 @@ https://norio-io.github.io/samples/
 
 旧URLへの参照が不要になった時点で削除します。
 
-`lp/` `ec/` `corporate/` `store/` の各ディレクトリ直下にも index.html があり、こちらは一覧の該当カードへ飛ばしています（404回避）。
+`booking/` `lp/` `ec/` `corporate/` `store/` の各ディレクトリ直下にも index.html があり、こちらは一覧の該当カードへ飛ばしています（404回避）。
 
 ## 共通の方針
 
