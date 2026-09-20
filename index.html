@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>制作サンプル | norio-io</title>
+<meta name="description" content="制作サンプル集">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Jost:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#12141a; --surface:#181b23; --line:#282c37;
+  --ink:#e8eaf0; --ink-soft:#a0a5b4; --ink-faint:#6d7383;
+  --accent:#7fb2d4;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  --f-label:"Jost","Zen Kaku Gothic New",system-ui,sans-serif;
+  --pad:clamp(20px,5vw,56px);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f-body);
+  font-size:15px;line-height:1.9;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:880px;margin-inline:auto;padding-inline:var(--pad)}
+
+header{border-bottom:1px solid var(--line);padding-block:clamp(40px,7vw,72px) clamp(28px,5vw,44px)}
+.eyebrow{font-family:var(--f-label);font-size:10px;letter-spacing:.32em;color:var(--accent);margin:0 0 14px}
+h1{margin:0;font-size:clamp(22px,3.2vw,30px);font-weight:500;letter-spacing:.06em}
+header p{margin:14px 0 0;color:var(--ink-soft);font-size:14px;max-width:56ch}
+
+main{padding-block:clamp(32px,5vw,56px) clamp(48px,8vw,96px)}
+.list{display:grid;gap:18px;margin:0;padding:0;list-style:none}
+.card{display:block;text-decoration:none;background:var(--surface);
+  border:1px solid var(--line);border-radius:10px;padding:22px 24px;
+  transition:border-color .25s,transform .25s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card h2{margin:0 0 8px;font-size:17px;font-weight:500;letter-spacing:.04em}
+.card p{margin:0;color:var(--ink-soft);font-size:13.5px}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.tag{font-family:var(--f-label);font-size:10.5px;letter-spacing:.1em;
+  border:1px solid var(--line);border-radius:999px;padding:4px 11px;color:var(--ink-faint)}
+
+footer{border-top:1px solid var(--line);padding-block:26px;
+  color:var(--ink-faint);font-size:11.5px;letter-spacing:.04em}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <p class="eyebrow">WORK SAMPLES</p>
+  <h1>制作サンプル</h1>
+  <p>制作したサンプルをまとめています。いずれも架空の題材で、実在の企業・団体とは関係ありません。</p>
+</header>
+
+<main class="wrap">
+  <ul class="list">
+    <li>
+      <a class="card" href="./cafe/">
+        <h2>カフェ＆ベーカリーのWebサイト</h2>
+        <p>店舗サイトの制作サンプル。デザイン方向を2案切り替えられる実装と、スマートフォンからの来店導線を意識した画面設計。</p>
+        <div class="tags">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">RESPONSIVE</span>
+        </div>
+      </a>
+    </li>
+  </ul>
+</main>
+
+<footer class="wrap">
+  掲載しているサンプルはすべて架空の題材です。実在の企業・団体とは関係ありません。
+</footer>
+
+</body>
+</html>
