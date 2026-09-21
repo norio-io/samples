@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>石堂組 — 土木・建築・維持管理</title>
+<meta name="description" content="制作サンプル。架空の総合建設会社のコーポレートサイトです。">
+<meta name="robots" content="noindex">
+<style>
+:root{
+  --ink:#16181a; --ink-2:#2c3136; --gray:#5f6469; --faint:#9aa1a7;
+  --line:#dcdfe2; --line-2:#eceef0;
+  --bg:#fff; --surface:#f2f4f5; --deep:#16181a;
+  --y:#e0a91f; --y-d:#b9871a;
+  --f:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic","Noto Sans JP",system-ui,sans-serif;
+  --num:"Helvetica Neue",Arial,"Hiragino Sans",sans-serif;
+  --wrap:1080px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.9;
+  -webkit-font-smoothing:antialiased;font-size:15px}
+svg{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:inherit;color:inherit}
+.wrap{width:min(100% - 34px,var(--wrap));margin-inline:auto}
+.demo{background:var(--deep);color:#c9ced3;font-size:12.5px;text-align:center;padding:9px 16px;line-height:1.6}
+
+/* ---- ヘッダー ---- */
+header.site{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.brand svg{width:34px;height:34px;flex:none}
+.brand b{font-size:21px;font-weight:700;letter-spacing:.14em;line-height:1.25}
+.brand small{display:block;font-size:10px;letter-spacing:.2em;color:var(--faint);font-weight:400}
+.hnav{display:flex;align-items:center;gap:24px}
+.hnav>a{font-size:13.5px;text-decoration:none;color:var(--gray)}
+.hnav>a:hover{color:var(--ink)}
+.hbtn,.hnav a.hbtn{background:var(--ink);color:#fff;text-decoration:none;font-size:13.5px;font-weight:700;
+  padding:12px 22px;white-space:nowrap}
+.hbtn:hover,.hnav a.hbtn:hover{background:var(--ink-2);color:#fff}
+
+/* ---- ヒーロー ---- */
+.hero{background:var(--deep);color:#fff;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;opacity:.13;
+  background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);
+  background-size:44px 44px}
+.hero-in{position:relative;display:grid;grid-template-columns:1fr 380px;gap:clamp(24px,4vw,50px);
+  align-items:center;padding-block:clamp(48px,7vw,92px)}
+.hero h1{font-size:clamp(28px,4.8vw,46px);line-height:1.42;margin:0 0 18px;font-weight:700;letter-spacing:.02em}
+.hero h1 em{font-style:normal;color:var(--y)}
+.hero p{color:#c3c9ce;margin:0 0 28px;font-size:15px;max-width:34em}
+.ybar{width:54px;height:4px;background:var(--y);margin:0 0 22px}
+.hero .btn{background:var(--y);color:var(--ink)}
+.hero .btn:hover{background:var(--y-d)}
+.hero-art{border:1px solid rgba(255,255,255,.22);padding:14px;background:rgba(255,255,255,.04)}
+
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;text-decoration:none;
+  border:0;padding:16px 30px;font-size:15.5px;font-weight:700;cursor:pointer}
+.btn:hover{background:var(--ink-2)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.ghost:hover{background:var(--surface)}
+.btn .ar{color:var(--y)}
+
+section{padding-block:clamp(52px,7vw,90px)}
+section.tint{background:var(--surface)}
+section.dark{background:var(--deep);color:#fff}
+.sec-h{margin-bottom:clamp(26px,4vw,42px)}
+.sec-h.c{text-align:center}
+.sec-h.c .ybar{margin-inline:auto}
+.en{font-size:11px;letter-spacing:.26em;color:var(--y-d);font-weight:700;margin:0 0 10px}
+.dark .en{color:var(--y)}
+h2{font-size:clamp(22px,3.2vw,32px);margin:0;font-weight:700;letter-spacing:.03em;line-height:1.5}
+.sec-h p{color:var(--gray);margin:14px 0 0;font-size:14.5px}
+.dark .sec-h p{color:#c3c9ce}
+
+/* ---- 事業内容 ---- */
+.biz{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.biz article{background:#fff;padding:clamp(20px,2.6vw,28px)}
+.biz .n{font-family:var(--num);font-size:12px;letter-spacing:.14em;color:var(--y-d);font-weight:700}
+.biz h3{font-size:18px;margin:8px 0 12px;font-weight:700;letter-spacing:.04em}
+.biz p{margin:0;font-size:13.5px;color:var(--gray)}
+
+/* ---- 施工実績 ---- */
+.filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:0 0 26px}
+.filters button{border:1.5px solid var(--line);background:#fff;padding:10px 20px;font-size:14px;font-weight:600;cursor:pointer}
+.filters button:hover{border-color:var(--ink)}
+.filters button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.works{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,24px)}
+.work{border:1px solid var(--line);background:#fff}
+.work .fig{background:var(--surface);aspect-ratio:4/3;border-bottom:1px solid var(--line);position:relative}
+.work .fig svg{width:100%;height:100%}
+.work .cat{position:absolute;top:0;left:0;background:var(--y);color:var(--ink);font-size:11.5px;font-weight:700;
+  padding:5px 12px;letter-spacing:.06em}
+.work .bd{padding:18px 20px 20px}
+.work h3{font-size:16px;margin:0 0 8px;font-weight:700;line-height:1.6}
+.work dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 14px;font-size:12.5px;color:var(--gray)}
+.work dt{color:var(--faint)}
+.work dd{margin:0}
+.empty{text-align:center;color:var(--gray);padding:40px 0;font-size:14.5px}
+
+/* ---- 数字 ---- */
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,3vw,34px)}
+.num{text-align:center}
+.num .v{font-family:var(--num);font-size:clamp(38px,5.6vw,56px);font-weight:700;line-height:1;color:var(--y);letter-spacing:-.02em}
+.num .v small{font-size:17px;font-weight:700;margin-left:3px}
+.num .k{font-size:13px;color:#c3c9ce;margin-top:10px}
+
+/* ---- 取り組み ---- */
+.efforts{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.6vw,28px)}
+.effort{background:#fff;border:1px solid var(--line);padding:clamp(20px,2.6vw,26px)}
+.effort .ico{width:56px;height:56px;margin-bottom:16px}
+.effort h3{font-size:17px;margin:0 0 10px;font-weight:700}
+.effort p{margin:0;font-size:13.5px;color:var(--gray)}
+
+/* ---- 会社概要 ---- */
+table.info{width:100%;border-collapse:collapse;font-size:14.5px;max-width:760px;margin-inline:auto}
+table.info th,table.info td{border-bottom:1px solid var(--line);padding:16px 10px;text-align:left;vertical-align:top}
+table.info th{width:180px;font-weight:700;color:var(--gray);font-size:13.5px}
+
+/* ---- 採用 ---- */
+.recruit{background:var(--deep);color:#fff;display:grid;grid-template-columns:1fr auto;gap:26px;
+  align-items:center;padding:clamp(26px,4vw,42px)}
+.recruit h3{font-size:clamp(20px,2.6vw,26px);margin:0 0 10px;font-weight:700}
+.recruit p{margin:0;color:#c3c9ce;font-size:14px}
+
+/* ---- フォーム ---- */
+.form{max-width:620px;margin-inline:auto}
+.frow{margin-bottom:18px}
+.frow label{display:block;font-size:14px;font-weight:700;margin-bottom:7px}
+.req{background:var(--y);color:var(--ink);font-size:10.5px;padding:2px 7px;margin-left:8px;font-weight:700;letter-spacing:.06em}
+.frow input,.frow select,.frow textarea{width:100%;border:1.5px solid var(--line);padding:13px 14px;
+  font-size:16px;font-family:inherit;background:#fff;color:var(--ink)}
+.frow textarea{min-height:110px;resize:vertical}
+.frow input:focus,.frow select:focus,.frow textarea:focus{outline:2px solid var(--ink);outline-offset:1px;border-color:transparent}
+.frow.err input,.frow.err select,.frow.err textarea{border-color:#c0392b;background:#fdf6f5}
+.msg{display:none;color:#c0392b;font-size:12.5px;margin-top:6px}
+.frow.err .msg{display:block}
+.agree{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;margin:4px 0 20px}
+.agree input{width:19px;height:19px;flex:none;margin-top:3px}
+.agree.err{color:#c0392b}
+.submit{width:100%;border:0;background:var(--ink);color:#fff;font-family:inherit;font-weight:700;
+  font-size:16.5px;padding:18px;cursor:pointer;letter-spacing:.04em}
+.submit:hover{background:var(--ink-2)}
+.sent{display:none;border:2px solid var(--y);padding:26px;text-align:center}
+.sent b{display:block;font-size:19px;margin-bottom:9px}
+form.done .frow,form.done .agree,form.done .submit{display:none}
+form.done .sent{display:block}
+
+footer{background:var(--deep);color:#8e959b;font-size:12.5px;padding:32px 0 44px;line-height:1.9}
+footer .wrap>p{margin:0 0 7px}
+
+.rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+@media (max-width:960px){
+  .biz{grid-template-columns:1fr 1fr}
+  .works{grid-template-columns:1fr 1fr}
+  .nums{grid-template-columns:1fr 1fr;gap:28px}
+}
+@media (max-width:720px){
+  .hnav>a{display:none}
+  .hero-in{grid-template-columns:1fr}
+  .hero-art{order:-1}
+  .biz,.works,.efforts{grid-template-columns:1fr}
+  .recruit{grid-template-columns:1fr}
+  table.info th{width:120px}
+}
+</style>
+</head>
+<body>
+
+<p class="demo">DEMO — これは制作サンプルです。架空の会社であり、実在の企業・施工実績とは関係ありません。フォームは送信されません。</p>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <path d="M4 34h32" stroke="#16181a" stroke-width="2.4" stroke-linecap="square"/>
+        <path d="M8 34V16l12-9 12 9v18" stroke="#16181a" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M14 34V23h12v11" stroke="#e0a91f" stroke-width="2.4" stroke-linejoin="round"/>
+      </svg>
+      <b>石堂組<small>ISHIDO GUMI</small></b>
+    </a>
+    <nav class="hnav">
+      <a href="#biz">事業内容</a>
+      <a href="#works">施工実績</a>
+      <a href="#effort">安全と品質</a>
+      <a href="#about">会社概要</a>
+      <a class="hbtn" href="#contact">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap hero-in">
+    <div>
+      <div class="ybar"></div>
+      <h1>図面の一本から、<br><em>五十年先</em>の暮らしまで。</h1>
+      <p>橋も、学校も、住まいも。この土地で1974年から、つくることと、直すことの両方をやってきました。</p>
+      <a class="btn" href="#works">施工実績を見る <span class="ar">→</span></a>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 340 240" fill="none" role="img" aria-hidden="true">
+        <g opacity=".28" stroke="#fff" stroke-width=".6">
+          <path d="M0 40h340M0 80h340M0 120h340M0 160h340M0 200h340"/>
+          <path d="M40 0v240M80 0v240M120 0v240M160 0v240M200 0v240M240 0v240M280 0v240M300 0v240"/>
+        </g>
+        <path d="M40 196h260" stroke="#e0a91f" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M70 196V96l60-34 60 34v100" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M190 196V126h70v70" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M92 196v-44h32v44M148 152h26v20h-26z" stroke="#fff" stroke-width="1.6"/>
+        <path d="M206 146h18v16h-18zM236 146h14v16h-14zM206 172h18v14h-18z" stroke="#fff" stroke-width="1.6"/>
+        <path d="M70 96l60-34 60 34" stroke="#e0a91f" stroke-width="2"/>
+        <g stroke="#e0a91f" stroke-width="1.2">
+          <path d="M40 214h260M40 210v8M300 210v8"/>
+        </g>
+        <text x="170" y="230" text-anchor="middle" font-family="Helvetica,Arial" font-size="11" fill="#e0a91f" letter-spacing="2">26,000</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<section id="biz">
+  <div class="wrap">
+    <div class="sec-h c">
+      <p class="en">BUSINESS</p>
+      <div class="ybar"></div>
+      <h2>事業内容</h2>
+      <p>公共工事から住宅の改修まで、規模を問わずお受けしています。</p>
+    </div>
+    <div class="biz">
+      <article class="rv"><span class="n">01</span><h3>土木</h3><p>道路、橋梁、河川、上下水道。発注者は自治体が中心です。設計変更にも現場で対応します。</p></article>
+      <article class="rv"><span class="n">02</span><h3>建築</h3><p>学校、福祉施設、工場、集合住宅。設計事務所との協働、設計施工の一括請負いずれも。</p></article>
+      <article class="rv"><span class="n">03</span><h3>リノベーション</h3><p>住宅の改修、耐震補強、店舗の内装。1室からお受けします。住みながらの工事も可能です。</p></article>
+      <article class="rv"><span class="n">04</span><h3>維持管理</h3><p>点検、補修、除雪。つくったものを長く使えるようにするところまでが仕事だと考えています。</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="tint" id="works">
+  <div class="wrap">
+    <div class="sec-h c">
+      <p class="en">WORKS</p>
+      <div class="ybar"></div>
+      <h2>施工実績</h2>
+      <p>サンプル用に作成した架空の実績です。</p>
+    </div>
+    <div class="filters" role="group" aria-label="種別で絞り込む">
+      <button type="button" data-cat="all" aria-pressed="true">すべて</button>
+      <button type="button" data-cat="土木" aria-pressed="false">土木</button>
+      <button type="button" data-cat="建築" aria-pressed="false">建築</button>
+      <button type="button" data-cat="リノベーション" aria-pressed="false">リノベーション</button>
+      <button type="button" data-cat="維持管理" aria-pressed="false">維持管理</button>
+    </div>
+    <div class="works" id="worklist"></div>
+    <p class="empty" id="empty" hidden>該当する実績がありません。</p>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap">
+    <div class="sec-h c">
+      <p class="en">FIGURES</p>
+      <div class="ybar"></div>
+      <h2>数字で見る石堂組</h2>
+    </div>
+    <div class="nums">
+      <div class="num rv"><p class="v">52<small>年</small></p><p class="k">創業から</p></div>
+      <div class="num rv"><p class="v">186<small>件</small></p><p class="k">年間の施工件数</p></div>
+      <div class="num rv"><p class="v">14<small>名</small></p><p class="k">1級施工管理技士</p></div>
+      <div class="num rv"><p class="v">2,847<small>日</small></p><p class="k">無災害の連続記録</p></div>
+    </div>
+    <p style="text-align:center;font-size:12.5px;color:#8e959b;margin:30px 0 0">※ 記載の数値はサンプル用に作成した架空のものです。</p>
+  </div>
+</section>
+
+<section id="effort">
+  <div class="wrap">
+    <div class="sec-h c">
+      <p class="en">SAFETY &amp; QUALITY</p>
+      <div class="ybar"></div>
+      <h2>安全と品質の取り組み</h2>
+    </div>
+    <div class="efforts">
+      <div class="effort rv">
+        <div class="ico">
+          <svg viewBox="0 0 56 56" fill="none" aria-hidden="true">
+            <path d="M28 8c11 0 19 8 19 19v6H9v-6C9 16 17 8 28 8z" fill="none" stroke="#16181a" stroke-width="2.4" stroke-linejoin="round"/>
+            <path d="M6 33h44" stroke="#e0a91f" stroke-width="3" stroke-linecap="round"/>
+            <path d="M28 8v25" stroke="#16181a" stroke-width="2"/>
+            <path d="M18 41h20M22 48h12" stroke="#16181a" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>毎朝の危険予知活動</h3>
+        <p>その日の作業ごとに、何が起きうるかを全員で挙げてから現場に入ります。形だけにならないよう、記録は現場監督ではなく作業者が書きます。</p>
+      </div>
+      <div class="effort rv">
+        <div class="ico">
+          <svg viewBox="0 0 56 56" fill="none" aria-hidden="true">
+            <rect x="11" y="7" width="34" height="42" fill="none" stroke="#16181a" stroke-width="2.4"/>
+            <path d="M18 18h20M18 26h20M18 34h12" stroke="#16181a" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="40" cy="40" r="11" fill="#fff" stroke="#e0a91f" stroke-width="3"/>
+            <path d="M35 40l4 4 6-7" stroke="#e0a91f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>工程ごとの写真記録</h3>
+        <p>隠れてしまう部分は、必ず施工中の写真を残します。完成後に見えないところほど、あとから確認できる状態にしておきます。</p>
+      </div>
+      <div class="effort rv">
+        <div class="ico">
+          <svg viewBox="0 0 56 56" fill="none" aria-hidden="true">
+            <path d="M28 6l18 8v14c0 12-8 19-18 22-10-3-18-10-18-22V14z" fill="none" stroke="#16181a" stroke-width="2.4" stroke-linejoin="round"/>
+            <path d="M28 20v10M28 36v1.5" stroke="#e0a91f" stroke-width="3.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>下請けを含めた教育</h3>
+        <p>協力会社も同じ研修を受けてから現場に入ります。日雇いの応援でも、当社の安全基準を説明してからでないと作業させません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tint" id="about">
+  <div class="wrap">
+    <div class="sec-h c">
+      <p class="en">COMPANY</p>
+      <div class="ybar"></div>
+      <h2>会社概要</h2>
+    </div>
+    <table class="info">
+      <tr><th>商号</th><td>石堂組株式会社</td></tr>
+      <tr><th>創業</th><td>1974年4月</td></tr>
+      <tr><th>所在地</th><td>◯◯県◯◯市石堂町2-14</td></tr>
+      <tr><th>代表者</th><td>代表取締役 石堂 隆一</td></tr>
+      <tr><th>資本金</th><td>4,800万円</td></tr>
+      <tr><th>従業員数</th><td>68名（うち1級施工管理技士 14名）</td></tr>
+      <tr><th>建設業許可</th><td>◯◯県知事許可（特-6）第00000号<br>土木一式／建築一式／とび・土工／舗装／水道施設</td></tr>
+      <tr><th>加入団体</th><td>◯◯県建設業協会、◯◯市建設安全協議会</td></tr>
+    </table>
+    <p style="text-align:center;font-size:12.5px;color:var(--faint);margin:22px 0 0">※ 記載の情報はサンプル用に作成した架空のものです。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="recruit rv">
+      <div>
+        <h3>現場で働く人を探しています</h3>
+        <p>未経験からの入社が半数です。資格の取得費用は会社が負担します。</p>
+      </div>
+      <a class="btn" href="#contact" style="background:var(--y);color:var(--ink)">採用について <span class="ar" style="color:var(--ink)">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="tint" id="contact">
+  <div class="wrap">
+    <div class="sec-h c">
+      <p class="en">CONTACT</p>
+      <div class="ybar"></div>
+      <h2>お問い合わせ</h2>
+      <p>工事のご相談、採用のご質問、どちらもこちらから。お電話は 000-000-0000（平日 8:00〜17:00）。</p>
+    </div>
+    <form class="form" id="cform" novalidate>
+      <div class="frow" id="f-name">
+        <label for="i-name">お名前<span class="req">必須</span></label>
+        <input id="i-name" type="text" autocomplete="name" placeholder="山田 太郎">
+        <p class="msg">お名前をご入力ください。</p>
+      </div>
+      <div class="frow" id="f-org">
+        <label for="i-org">会社名・団体名（任意）</label>
+        <input id="i-org" type="text" autocomplete="organization" placeholder="◯◯建設株式会社">
+      </div>
+      <div class="frow" id="f-tel">
+        <label for="i-tel">電話番号<span class="req">必須</span></label>
+        <input id="i-tel" type="tel" autocomplete="tel" inputmode="numeric" placeholder="0000000000">
+        <p class="msg">ハイフンなしの半角数字でご入力ください。</p>
+      </div>
+      <div class="frow" id="f-mail">
+        <label for="i-mail">メールアドレス<span class="req">必須</span></label>
+        <input id="i-mail" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com">
+        <p class="msg">メールアドレスの形式をご確認ください。</p>
+      </div>
+      <div class="frow" id="f-kind">
+        <label for="i-kind">ご用件<span class="req">必須</span></label>
+        <select id="i-kind">
+          <option value="">選択してください</option>
+          <option>工事のご相談・お見積り</option>
+          <option>維持管理・点検のご依頼</option>
+          <option>採用について</option>
+          <option>協力会社のご登録</option>
+          <option>その他</option>
+        </select>
+        <p class="msg">ご用件をお選びください。</p>
+      </div>
+      <div class="frow" id="f-body">
+        <label for="i-body">内容<span class="req">必須</span></label>
+        <textarea id="i-body" placeholder="工事の場所、規模、ご希望の時期など、分かる範囲で結構です。"></textarea>
+        <p class="msg">内容をご入力ください。</p>
+      </div>
+      <label class="agree" id="f-agree">
+        <input type="checkbox" id="i-agree">
+        <span>個人情報の取り扱いに同意します<span class="req">必須</span></span>
+      </label>
+      <button class="submit" type="submit">この内容で送信する</button>
+      <div class="sent">
+        <b>送信されました</b>
+        <p style="margin:0;font-size:13.5px;color:var(--gray)">これは制作サンプルです。実際には送信されていません。</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>※ 掲載している社名・所在地・実績・数値・許可番号は、すべてサンプル用に作成した架空のものです。</p>
+    <p>石堂組株式会社（架空）／ 制作サンプル</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var WORKS = [
+    {cat:'土木', t:'県道◯◯線 橋梁架替工事', y:'2025', term:'14か月', who:'◯◯県', kind:'bridge'},
+    {cat:'建築', t:'◯◯市立第三小学校 校舎改築', y:'2024', term:'19か月', who:'◯◯市', kind:'school'},
+    {cat:'リノベーション', t:'築42年戸建ての耐震改修', y:'2025', term:'3か月', who:'個人', kind:'house'},
+    {cat:'土木', t:'◯◯川 護岸補修工事', y:'2024', term:'7か月', who:'◯◯県', kind:'river'},
+    {cat:'建築', t:'精密部品工場 増築工事', y:'2023', term:'11か月', who:'民間', kind:'factory'},
+    {cat:'維持管理', t:'市道◯◯号線 舗装補修・除雪業務', y:'2025', term:'通年', who:'◯◯市', kind:'road'},
+    {cat:'リノベーション', t:'商店街の空き店舗を飲食店へ', y:'2024', term:'2か月', who:'民間', kind:'shop'},
+    {cat:'建築', t:'特別養護老人ホーム 新築', y:'2023', term:'16か月', who:'社会福祉法人', kind:'care'},
+    {cat:'維持管理', t:'橋梁点検業務（12橋）', y:'2025', term:'5か月', who:'◯◯県', kind:'inspect'}
+  ];
+
+  var G = {
+    grid: '<g opacity=".5" stroke="#c7cdd2" stroke-width=".7"><path d="M0 30h320M0 60h320M0 90h320M0 120h320M0 150h320M0 180h320M0 210h320"/><path d="M30 0v240M60 0v240M90 0v240M120 0v240M150 0v240M180 0v240M210 0v240M240 0v240M270 0v240M300 0v240"/></g>',
+    bridge: '<path d="M14 168h292" stroke="#16181a" stroke-width="3"/><path d="M14 152h292v16H14z" fill="#fff" stroke="#16181a" stroke-width="2"/><path d="M46 168v46M160 168v46M274 168v46" stroke="#16181a" stroke-width="2.5"/><path d="M14 152q146-96 292 0" fill="none" stroke="#e0a91f" stroke-width="2.5"/><path d="M60 152v-28M100 152v-46M160 152v-56M220 152v-46M260 152v-28" stroke="#16181a" stroke-width="1.4"/><path d="M14 214h292" stroke="#c7cdd2" stroke-width="2" stroke-dasharray="6 5"/>',
+    school: '<path d="M30 200h260" stroke="#16181a" stroke-width="3"/><path d="M50 200V86h220v114z" fill="#fff" stroke="#16181a" stroke-width="2"/><path d="M50 116h220M50 148h220" stroke="#16181a" stroke-width="1.4"/><g fill="none" stroke="#16181a" stroke-width="1.4"><path d="M68 94h26v16H68zM110 94h26v16h-26zM152 94h26v16h-26zM194 94h26v16h-26zM236 94h20v16h-20zM68 124h26v18H68zM110 124h26v18h-26zM194 124h26v18h-26zM236 124h20v18h-20z"/></g><path d="M148 124h34v18h-34z" fill="#e0a91f"/><path d="M142 200v-44h36v44z" fill="none" stroke="#e0a91f" stroke-width="2.5"/><path d="M50 86l110-28 110 28" fill="none" stroke="#16181a" stroke-width="2" stroke-linejoin="round"/>',
+    house: '<path d="M40 194h240" stroke="#16181a" stroke-width="3"/><path d="M70 194V112l90-50 90 50v82z" fill="#fff" stroke="#16181a" stroke-width="2" stroke-linejoin="round"/><path d="M70 112l90-50 90 50" fill="none" stroke="#e0a91f" stroke-width="2.5" stroke-linejoin="round"/><g stroke="#16181a" stroke-width="1.4" fill="none"><path d="M96 134h34v28H96zM190 134h34v28h-34zM142 156h36v38h-36z"/></g><g stroke="#e0a91f" stroke-width="2"><path d="M70 152h180M84 112v82M236 112v82"/></g>',
+    river: '<path d="M0 150q80-22 160 0t160 0" fill="none" stroke="#7fa8cc" stroke-width="2"/><path d="M0 172q80-22 160 0t160 0" fill="none" stroke="#7fa8cc" stroke-width="2"/><path d="M0 194q80-22 160 0t160 0" fill="none" stroke="#7fa8cc" stroke-width="2"/><path d="M0 122h320" stroke="#16181a" stroke-width="2.5"/><g fill="none" stroke="#16181a" stroke-width="1.6"><path d="M18 122l14-26h22l14 26zM86 122l14-26h22l14 26zM154 122l14-26h22l14 26zM222 122l14-26h22l14 26z"/></g><path d="M0 96h320" stroke="#e0a91f" stroke-width="2.5"/><path d="M0 74h320" stroke="#c7cdd2" stroke-width="1.6" stroke-dasharray="6 5"/>',
+    factory: '<path d="M20 200h280" stroke="#16181a" stroke-width="3"/><path d="M40 200v-70l40 26v-26l40 26v-26l40 26V96h100v104z" fill="#fff" stroke="#16181a" stroke-width="2" stroke-linejoin="round"/><path d="M260 96V54h18v42" fill="none" stroke="#16181a" stroke-width="2"/><g fill="none" stroke="#16181a" stroke-width="1.4"><path d="M212 122h26v22h-26zM252 122h26v22h-26zM212 158h26v22h-26z"/></g><path d="M252 158h26v42h-26z" fill="#e0a91f"/><path d="M40 168h140" stroke="#e0a91f" stroke-width="2.5"/>',
+    road: '<path d="M0 60h320M0 212h320" stroke="#16181a" stroke-width="2.5"/><path d="M0 136h320" stroke="#e0a91f" stroke-width="3" stroke-dasharray="30 22"/><path d="M0 98h320M0 174h320" stroke="#c7cdd2" stroke-width="1.6" stroke-dasharray="6 6"/><g fill="none" stroke="#16181a" stroke-width="1.6"><path d="M24 40V24h16v16zM104 40V24h16v16zM184 40V24h16v16zM264 40V24h16v16z"/></g><path d="M32 24v-8M112 24v-8M192 24v-8M272 24v-8" stroke="#16181a" stroke-width="1.6"/>',
+    shop: '<path d="M30 200h260" stroke="#16181a" stroke-width="3"/><path d="M56 200V90h208v110z" fill="#fff" stroke="#16181a" stroke-width="2"/><path d="M56 122h208" stroke="#e0a91f" stroke-width="3"/><path d="M56 90h208l-14-26H70z" fill="none" stroke="#16181a" stroke-width="2" stroke-linejoin="round"/><g fill="none" stroke="#16181a" stroke-width="1.4"><path d="M76 142h54v58H76zM146 142h48v34h-48zM210 142h36v58h-36z"/></g><path d="M146 186h48v14h-48z" fill="#e0a91f"/>',
+    care: '<path d="M26 200h268" stroke="#16181a" stroke-width="3"/><path d="M46 200V104h100v96zM162 200v-66h112v66z" fill="#fff" stroke="#16181a" stroke-width="2"/><path d="M46 104l50-28 50 28" fill="none" stroke="#e0a91f" stroke-width="2.5" stroke-linejoin="round"/><g fill="none" stroke="#16181a" stroke-width="1.4"><path d="M62 124h24v20H62zM106 124h24v20h-24zM62 158h24v20H62zM178 152h24v20h-24zM222 152h24v20h-24z"/></g><path d="M106 158h24v42h-24z" fill="#e0a91f"/><path d="M162 134h112" stroke="#e0a91f" stroke-width="2.5"/>',
+    inspect: '<path d="M0 150h320" stroke="#16181a" stroke-width="3"/><path d="M0 134h320v16H0z" fill="#fff" stroke="#16181a" stroke-width="2"/><path d="M40 150v54M160 150v54M280 150v54" stroke="#16181a" stroke-width="2.5"/><circle cx="196" cy="94" r="34" fill="#fff" stroke="#e0a91f" stroke-width="3"/><path d="M220 118l26 26" stroke="#e0a91f" stroke-width="4" stroke-linecap="round"/><path d="M178 94h36M196 76v36" stroke="#16181a" stroke-width="1.8"/><path d="M0 204h320" stroke="#c7cdd2" stroke-width="1.6" stroke-dasharray="6 5"/>'
+  };
+
+  function svgFor(kind){
+    return '<svg viewBox="0 0 320 240" fill="none" role="img" aria-hidden="true">' + G.grid + (G[kind] || '') + '</svg>';
+  }
+
+  var list = document.getElementById('worklist');
+  var empty = document.getElementById('empty');
+  var current = 'all';
+
+  function paint(cat){
+    var items = WORKS.filter(function(w){ return cat === 'all' || w.cat === cat; });
+    list.innerHTML = items.map(function(w){
+      return '<article class="work">' +
+        '<div class="fig"><span class="cat">' + w.cat + '</span>' + svgFor(w.kind) + '</div>' +
+        '<div class="bd"><h3>' + w.t + '</h3>' +
+        '<dl><dt>竣工</dt><dd>' + w.y + '年</dd>' +
+        '<dt>工期</dt><dd>' + w.term + '</dd>' +
+        '<dt>発注</dt><dd>' + w.who + '</dd></dl></div></article>';
+    }).join('');
+    empty.hidden = items.length > 0;
+  }
+
+  document.querySelectorAll('.filters button').forEach(function(b){
+    b.addEventListener('click', function(){
+      current = b.dataset.cat;
+      document.querySelectorAll('.filters button').forEach(function(x){
+        x.setAttribute('aria-pressed', String(x === b));
+      });
+      paint(current);
+    });
+  });
+  paint('all');
+
+  /* ---- フォーム ---- */
+  var form = document.getElementById('cform');
+  var TEL = /^0\d{8,10}$/, MAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var v = function(id){ return document.getElementById(id).value.trim(); };
+    var bad = {
+      'f-name': v('i-name').length === 0,
+      'f-tel' : !TEL.test(v('i-tel').replace(/[-\s]/g, '')),
+      'f-mail': !MAIL.test(v('i-mail')),
+      'f-kind': v('i-kind') === '',
+      'f-body': v('i-body').length === 0
+    };
+    Object.keys(bad).forEach(function(k){ document.getElementById(k).classList.toggle('err', bad[k]); });
+    var agree = document.getElementById('i-agree').checked;
+    document.getElementById('f-agree').classList.toggle('err', !agree);
+    if(Object.keys(bad).some(function(k){ return bad[k]; }) || !agree){
+      var first = document.querySelector('.frow.err input, .frow.err select, .frow.err textarea') || document.getElementById('i-agree');
+      if(first) first.focus();
+      return;
+    }
+    form.classList.add('done');
+    form.scrollIntoView({block:'center'});
+  });
+  form.addEventListener('input', function(e){
+    var r = e.target.closest('.frow');
+    if(r) r.classList.remove('err');
+  });
+  document.getElementById('i-agree').addEventListener('change', function(){
+    document.getElementById('f-agree').classList.toggle('err', !this.checked);
+  });
+
+  /* ---- スクロール演出 ---- */
+  var rv = document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:.08});
+    rv.forEach(function(el){ io.observe(el); });
+  } else {
+    rv.forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>

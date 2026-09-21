@@ -14,6 +14,7 @@ https://norio-io.github.io/samples/
 | ECサイト | 灯し器（うつわ） | [`ec/tableware/`](ec/tableware/) | https://norio-io.github.io/samples/ec/tableware/ |
 | コーポレートサイト | 常磐法律事務所 | [`corporate/law-office/`](corporate/law-office/) | https://norio-io.github.io/samples/corporate/law-office/ |
 | コーポレートサイト | 三崎精密工業 | [`corporate/manufacturing/`](corporate/manufacturing/) | https://norio-io.github.io/samples/corporate/manufacturing/ |
+| コーポレートサイト | 石堂組（総合建設） | [`corporate/construction/`](corporate/construction/) | https://norio-io.github.io/samples/corporate/construction/ |
 | 店舗サイト | 麦と焙煎（カフェ＆ベーカリー） | [`store/cafe-bakery/`](store/cafe-bakery/) | https://norio-io.github.io/samples/store/cafe-bakery/ |
 
 各サンプルのディレクトリに README.md があり、題材の由来、画面構成、実装したことを書いています。
