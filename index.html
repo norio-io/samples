@@ -28,13 +28,21 @@ header{border-bottom:1px solid var(--line);padding-block:clamp(40px,7vw,72px) cl
 h1{margin:0;font-size:clamp(22px,3.2vw,30px);font-weight:500;letter-spacing:.06em}
 header p{margin:14px 0 0;color:var(--ink-soft);font-size:14px;max-width:56ch}
 
-main{padding-block:clamp(32px,5vw,56px) clamp(48px,8vw,96px)}
-.list{display:grid;gap:18px;margin:0;padding:0;list-style:none}
+main{padding-block:clamp(28px,4vw,44px) clamp(48px,8vw,96px)}
+
+.group{scroll-margin-top:24px;padding-block:clamp(22px,3.5vw,34px) 0}
+.group + .group{border-top:1px solid var(--line);margin-top:clamp(30px,5vw,48px)}
+.group-h{display:flex;align-items:baseline;gap:12px;margin:0 0 clamp(16px,2.5vw,22px)}
+.group-h h2{margin:0;font-size:15px;font-weight:500;letter-spacing:.12em}
+.group-h .count{font-family:var(--f-label);font-size:11px;letter-spacing:.14em;color:var(--ink-faint)}
+.group-h .rule{flex:1;height:1px;background:var(--line)}
+
+.list{display:grid;gap:16px;margin:0;padding:0;list-style:none}
 .card{display:block;text-decoration:none;background:var(--surface);
   border:1px solid var(--line);border-radius:10px;padding:22px 24px;
   transition:border-color .25s,transform .25s}
 .card:hover{border-color:var(--accent);transform:translateY(-2px)}
-.card h2{margin:0 0 8px;font-size:17px;font-weight:500;letter-spacing:.04em}
+.card h3{margin:0 0 8px;font-size:17px;font-weight:500;letter-spacing:.04em}
 .card p{margin:0;color:var(--ink-soft);font-size:13.5px}
 .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
 .tag{font-family:var(--f-label);font-size:10.5px;letter-spacing:.1em;
@@ -42,6 +50,8 @@ main{padding-block:clamp(32px,5vw,56px) clamp(48px,8vw,96px)}
 
 footer{border-top:1px solid var(--line);padding-block:26px;
   color:var(--ink-faint);font-size:11.5px;letter-spacing:.04em}
+
+@media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -49,120 +59,169 @@ footer{border-top:1px solid var(--line);padding-block:26px;
 <header class="wrap">
   <p class="eyebrow">WORK SAMPLES</p>
   <h1>制作サンプル</h1>
-  <p>制作したサンプルをまとめています。いずれも架空の題材で、実在の企業・団体とは関係ありません。</p>
+  <p>制作したサンプルを制作種別ごとにまとめています。いずれも架空の題材で、実在の企業・団体とは関係ありません。</p>
 </header>
 
 <main class="wrap">
-  <ul class="list">
-    <li>
-      <a class="card" id="booking" href="./booking/photo-studio/">
-        <h2>レンタル撮影スタジオの予約サイト</h2>
-        <p>空き状況のカレンダーから、時間枠の選択、入力、確認、完了までの予約フローを1ファイルで実装。画面の状態をURLに持たせ、ブラウザの戻るとURLの直接指定に対応しています。</p>
-        <div class="tags">
-          <span class="tag">HTML5</span>
-          <span class="tag">CSS3</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">SPA</span>
-          <span class="tag">HISTORY API</span>
-          <span class="tag">FORM VALIDATION</span>
-          <span class="tag">RESPONSIVE</span>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a class="card" id="lp" href="./lp/supplement/">
-        <h2>健康食品の定期購入ランディングページ</h2>
-        <p>広告流入を想定した縦1枚の構成。袋数で価格が切り替わる料金セクション、開閉するFAQ、入力チェック付きの申込フォームを実装しています。写真素材を使わず、商品パッケージから図解まで作図しました。</p>
-        <div class="tags">
-          <span class="tag">HTML5</span>
-          <span class="tag">CSS3</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">SVG</span>
-          <span class="tag">FORM VALIDATION</span>
-          <span class="tag">RESPONSIVE</span>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a class="card" id="lp-petsalon" href="./lp/pet-salon/">
-        <h2>トリミングサロンの広告用ランディングページ</h2>
-        <p>広告からの流入を想定した縦1枚の構成。入力チェック付きの申込フォームと、コンバージョン計測を差し込める作りにしています。</p>
-        <div class="tags">
-          <span class="tag">HTML5</span>
-          <span class="tag">CSS3</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">FORM VALIDATION</span>
-          <span class="tag">RESPONSIVE</span>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a class="card" id="ec" href="./ec/tableware/">
-        <h2>うつわのオンラインストア</h2>
-        <p>ECサイトの制作サンプル。絞り込み、バリエーション選択と在庫表示、カート（数量変更・送料計算・再訪時の保持）まで実装しています。</p>
-        <div class="tags">
-          <span class="tag">HTML5</span>
-          <span class="tag">CSS3</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">HISTORY API</span>
-          <span class="tag">RESPONSIVE</span>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a class="card" id="corporate" href="./corporate/law-office/">
-        <h2>法律事務所のコーポレートサイト</h2>
-        <p>士業のコーポレートサイトの制作サンプル。外部フォントを使わず本文を明朝で組み、取扱分野・費用・相談の流れを表組みと罫線で構成しています。入力チェック付きの問い合わせフォーム付き。</p>
-        <div class="tags">
-          <span class="tag">HTML5</span>
-          <span class="tag">CSS3</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">SVG</span>
-          <span class="tag">FORM VALIDATION</span>
-          <span class="tag">RESPONSIVE</span>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a class="card" id="corporate-mfg" href="./corporate/manufacturing/">
-        <h2>精密加工メーカーのコーポレートサイト</h2>
-        <p>中小企業の会社サイトの制作サンプル。写真を使わず、図版と余白で構成しています。</p>
-        <div class="tags">
-          <span class="tag">HTML5</span>
-          <span class="tag">CSS3</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">SVG</span>
-          <span class="tag">RESPONSIVE</span>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a class="card" id="corporate-const" href="./corporate/construction/">
-        <h2>建設会社のコーポレートサイト</h2>
-        <p>総合建設会社の会社サイトの制作サンプル。施工実績を土木／建築／リノベーション／維持管理で絞り込める一覧と、入力チェック付きの問い合わせフォーム。実績の図版はすべてSVGで作図しています。</p>
-        <div class="tags">
-          <span class="tag">HTML5</span>
-          <span class="tag">CSS3</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">SVG</span>
-          <span class="tag">FORM VALIDATION</span>
-          <span class="tag">RESPONSIVE</span>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a class="card" id="store" href="./store/cafe-bakery/">
-        <h2>カフェ＆ベーカリーのWebサイト</h2>
-        <p>店舗サイトの制作サンプル。デザイン方向を2案切り替えられる実装と、スマートフォンからの来店導線を意識した画面設計。</p>
-        <div class="tags">
-          <span class="tag">HTML5</span>
-          <span class="tag">CSS3</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">RESPONSIVE</span>
-        </div>
-      </a>
-    </li>
-  </ul>
+
+  <section class="group" id="corporate">
+    <div class="group-h">
+      <h2>コーポレートサイト</h2>
+      <span class="count">3</span>
+      <span class="rule"></span>
+    </div>
+    <ul class="list">
+      <li>
+        <a class="card" href="./corporate/construction/">
+          <h3>建設会社のコーポレートサイト</h3>
+          <p>総合建設会社の会社サイトの制作サンプル。施工実績を土木／建築／リノベーション／維持管理で絞り込める一覧と、入力チェック付きの問い合わせフォーム。実績の図版はすべてSVGで作図しています。</p>
+          <div class="tags">
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">SVG</span>
+            <span class="tag">FORM VALIDATION</span>
+            <span class="tag">RESPONSIVE</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="./corporate/law-office/">
+          <h3>法律事務所のコーポレートサイト</h3>
+          <p>士業のコーポレートサイトの制作サンプル。外部フォントを使わず本文を明朝で組み、取扱分野・費用・相談の流れを表組みと罫線で構成しています。入力チェック付きの問い合わせフォーム付き。</p>
+          <div class="tags">
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">SVG</span>
+            <span class="tag">FORM VALIDATION</span>
+            <span class="tag">RESPONSIVE</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="./corporate/manufacturing/">
+          <h3>精密加工メーカーのコーポレートサイト</h3>
+          <p>中小企業の会社サイトの制作サンプル。写真を使わず、図版と余白で構成しています。</p>
+          <div class="tags">
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">SVG</span>
+            <span class="tag">RESPONSIVE</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="group" id="lp">
+    <div class="group-h">
+      <h2>ランディングページ</h2>
+      <span class="count">2</span>
+      <span class="rule"></span>
+    </div>
+    <ul class="list">
+      <li>
+        <a class="card" href="./lp/supplement/">
+          <h3>健康食品の定期購入ランディングページ</h3>
+          <p>広告流入を想定した縦1枚の構成。袋数で価格が切り替わる料金セクション、開閉するFAQ、入力チェック付きの申込フォームを実装しています。写真素材を使わず、商品パッケージから図解まで作図しました。</p>
+          <div class="tags">
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">SVG</span>
+            <span class="tag">FORM VALIDATION</span>
+            <span class="tag">RESPONSIVE</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="./lp/pet-salon/">
+          <h3>トリミングサロンの広告用ランディングページ</h3>
+          <p>広告からの流入を想定した縦1枚の構成。入力チェック付きの申込フォームと、コンバージョン計測を差し込める作りにしています。</p>
+          <div class="tags">
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">FORM VALIDATION</span>
+            <span class="tag">RESPONSIVE</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="group" id="booking">
+    <div class="group-h">
+      <h2>予約サイト</h2>
+      <span class="count">1</span>
+      <span class="rule"></span>
+    </div>
+    <ul class="list">
+      <li>
+        <a class="card" href="./booking/photo-studio/">
+          <h3>レンタル撮影スタジオの予約サイト</h3>
+          <p>空き状況のカレンダーから、時間枠の選択、入力、確認、完了までの予約フローを1ファイルで実装。画面の状態をURLに持たせ、ブラウザの戻るとURLの直接指定に対応しています。</p>
+          <div class="tags">
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">SPA</span>
+            <span class="tag">HISTORY API</span>
+            <span class="tag">FORM VALIDATION</span>
+            <span class="tag">RESPONSIVE</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="group" id="ec">
+    <div class="group-h">
+      <h2>ECサイト</h2>
+      <span class="count">1</span>
+      <span class="rule"></span>
+    </div>
+    <ul class="list">
+      <li>
+        <a class="card" href="./ec/tableware/">
+          <h3>うつわのオンラインストア</h3>
+          <p>ECサイトの制作サンプル。絞り込み、バリエーション選択と在庫表示、カート（数量変更・送料計算・再訪時の保持）まで実装しています。</p>
+          <div class="tags">
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">HISTORY API</span>
+            <span class="tag">RESPONSIVE</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="group" id="store">
+    <div class="group-h">
+      <h2>店舗サイト</h2>
+      <span class="count">1</span>
+      <span class="rule"></span>
+    </div>
+    <ul class="list">
+      <li>
+        <a class="card" href="./store/cafe-bakery/">
+          <h3>カフェ＆ベーカリーのWebサイト</h3>
+          <p>店舗サイトの制作サンプル。デザイン方向を2案切り替えられる実装と、スマートフォンからの来店導線を意識した画面設計。</p>
+          <div class="tags">
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">RESPONSIVE</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </section>
+
 </main>
 
 <footer class="wrap">

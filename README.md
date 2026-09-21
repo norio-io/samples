@@ -6,6 +6,8 @@ https://norio-io.github.io/samples/
 
 ## サンプル一覧
 
+一覧ページは制作種別ごとのセクションに分かれています。セクションのidが `corporate` `lp` `booking` `ec` `store` で、カテゴリのリダイレクト先になっています。
+
 | 制作種別 | ブランド | ソース | 公開URL |
 |---|---|---|---|
 | 予約サイト | スタジオ白日（レンタル撮影スタジオ） | [`booking/photo-studio/`](booking/photo-studio/) | https://norio-io.github.io/samples/booking/photo-studio/ |
@@ -34,7 +36,7 @@ https://norio-io.github.io/samples/
 
 旧URLへの参照が不要になった時点で削除します。
 
-`booking/` `lp/` `ec/` `corporate/` `store/` の各ディレクトリ直下にも index.html があり、こちらは一覧の該当カードへ飛ばしています（404回避）。
+`booking/` `lp/` `ec/` `corporate/` `store/` の各ディレクトリ直下にも index.html があり、こちらは一覧の該当セクションへ飛ばしています（404回避）。
 
 ## 共通の方針
 
