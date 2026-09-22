@@ -21,6 +21,14 @@ https://norio-io.github.io/samples/
 
 各サンプルのディレクトリに README.md があり、題材の由来、画面構成、実装したことを書いています。
 
+## 別リポジトリのサンプル
+
+React + TypeScript で制作したサンプルは、ビルド工程を持つため別のリポジトリにあります。一覧ページからは、該当する制作種別の区分へカードとして並べています。
+
+| 制作種別 | 題材 | リポジトリ | 公開URL |
+|---|---|---|---|
+| 予約サイト | レンタル撮影スタジオの予約管理画面 | [`norio-io/samples-react`](https://github.com/norio-io/samples-react) | https://norio-io.github.io/samples-react/booking/photo-studio-admin/ |
+
 ## ディレクトリの命名
 
 `<制作種別>/<業種の抽象名>/` の2階層にしています。
