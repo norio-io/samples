@@ -14,6 +14,7 @@ https://norio-io.github.io/samples/
 | ランディングページ | ひとひ（健康食品の定期購入） | [`lp/supplement/`](lp/supplement/) | https://norio-io.github.io/samples/lp/supplement/ |
 | ランディングページ | ドッグサロン こもれび | [`lp/pet-salon/`](lp/pet-salon/) | https://norio-io.github.io/samples/lp/pet-salon/ |
 | ECサイト | 灯し器（うつわ） | [`ec/tableware/`](ec/tableware/) | https://norio-io.github.io/samples/ec/tableware/ |
+| コーポレートサイト | みずき歯科クリニック | [`corporate/dental-clinic/`](corporate/dental-clinic/) | https://norio-io.github.io/samples/corporate/dental-clinic/ |
 | コーポレートサイト | 常磐法律事務所 | [`corporate/law-office/`](corporate/law-office/) | https://norio-io.github.io/samples/corporate/law-office/ |
 | コーポレートサイト | 三崎精密工業 | [`corporate/manufacturing/`](corporate/manufacturing/) | https://norio-io.github.io/samples/corporate/manufacturing/ |
 | コーポレートサイト | 石堂組（総合建設） | [`corporate/construction/`](corporate/construction/) | https://norio-io.github.io/samples/corporate/construction/ |
@@ -38,6 +39,17 @@ React + TypeScript で制作したサンプルは、ビルド工程を持つた�
 
 ブランド名は使いません。`komorebi` のような固有名だけでは、何のサイトか分からないためです。同じ制作種別でサンプルが増えても、第2階層が増えるだけで済みます。
 
+複数ページ構成のサンプルは、第2階層の下にページごとのディレクトリを置きます。URLに `.html` を出さないためです。
+
+```
+corporate/dental-clinic/
+├── index.html
+├── about/index.html
+├── news/index.html
+├── news/<日付>/index.html
+└── css/style.css
+```
+
 ## 旧URLのリダイレクト
 
 `cafe/` `corp/` `shop/` は、この構成にする前のパスです。外部に共有済みのURLのため、静的なリダイレクトページを残しています。`location.replace()` でクエリとハッシュを引き継ぐため、`shop/?item=p3` のような深いリンクも新パスに届きます。metaリフレッシュはJavaScript無効時のフォールバックです。
@@ -49,7 +61,7 @@ React + TypeScript で制作したサンプルは、ビルド工程を持つた�
 ## 共通の方針
 
 - 外部ライブラリ、外部フォント、ビルド工程なし。HTML / CSS / JavaScript のみ
-- 1サンプル1ファイル（画像がある場合のみ `img/` を持つ）
+- 原則1サンプル1ファイル（画像がある場合のみ `img/` を持つ）。複数ページ構成のサンプルはこの限りではなく、ページごとにディレクトリを掘り、スタイルは `css/style.css` にまとめる
 - すべてレスポンシブ対応。スマートフォン幅で横スクロールが出ないことを確認済み
 - ページ冒頭に架空である旨の帯を出す。実在の企業・店舗とは関係ない
 - 数値、レビュー、実績はすべて架空。その旨をページ内に明記する
