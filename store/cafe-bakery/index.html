@@ -24,7 +24,7 @@ img{max-width:100%}
   --surface-2:#E3DFD4;
   --ink:#201E1A;         /* 窯墨 */
   --ink-soft:#5B564D;
-  --ink-faint:#8D877A;
+  --ink-faint:#6F6A5F;
   --line:#D2CDC1;
   --accent:#6B3B21;      /* 焼き色 */
   --accent-2:#8C9AA3;    /* 粉青 */
@@ -47,7 +47,7 @@ img{max-width:100%}
   --surface-2:#25251F;
   --ink:#EDEBE4;
   --ink-soft:#A8A59B;
-  --ink-faint:#757269;
+  --ink-faint:#868278;
   --line:#33332C;
   --accent:#A6BBC6;      /* 粉青 */
   --accent-2:#C08A5E;    /* 焼き色 */
@@ -233,7 +233,9 @@ section{scroll-margin-top:96px}
 .spbar strong{font-weight:500}
 
 @media (max-width:760px){
-  .hero{padding-top:0}
+  /* 写真を画面幅いっぱいに出すため、左右の余白は写真以外の要素に付ける */
+  .hero{padding-top:0;padding-inline:0}
+  .hero-lead{padding-inline:var(--pad)}
   .hero-grid,.info-grid{grid-template-columns:1fr}
   .hero-grid{display:flex;flex-direction:column;align-items:stretch}
   .hero-lead{display:block}
@@ -243,7 +245,7 @@ section{scroll-margin-top:96px}
   .eyebrow{margin-bottom:12px}
   .hero-meta{margin-top:20px}
   /* SPでは写真をファーストビューの先頭へ */
-  .shot--hero{order:-1;aspect-ratio:4/5;max-width:none;margin-inline:calc(var(--pad) * -1);border-inline:0;border-top:0}
+  .shot--hero{order:-1;aspect-ratio:4/5;max-width:none;border-inline:0;border-top:0}
   .nav{order:3;width:100%;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px}
   .dirsw span{display:none}
   .dl{grid-template-columns:4.6em 1fr}
