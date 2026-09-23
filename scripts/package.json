@@ -1,0 +1,15 @@
+{
+  "name": "samples-scripts",
+  "private": true,
+  "type": "module",
+  "description": "制作サンプルの表示検証。サンプル本体はこの依存を用いない",
+  "scripts": {
+    "check": "node check.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

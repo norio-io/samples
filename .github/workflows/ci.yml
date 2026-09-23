@@ -1,0 +1,30 @@
+name: CI
+
+# CLAUDE.md の「検証」節に定めた表示検証を実行する。
+# 全プルリクエストで起動させる（paths 指定をしない）。Ruleset の必須ステータスチェックに
+# 登録したとき、対象外のプルリクエストでチェックが Expected のまま残らないようにするため。
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  display-check:
+    name: display-check
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: scripts
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: scripts/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run check
