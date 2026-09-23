@@ -146,8 +146,11 @@ h3 { font-size: 17px; letter-spacing: .03em; margin: 0 0 10px; }
 .hours { table-layout: fixed; }
 .hours th, .hours td { border: 1px solid var(--line); padding: 10px 4px; text-align: center; }
 .hours thead td { border: 0; }
-.hours thead th { background: var(--surface-2); font-weight: 700; width: 9.6%; font-size: 13.5px; }
-.hours thead td, .hours tbody th { width: 32.8%; }
+.hours thead th { background: var(--surface-2); font-weight: 700; font-size: 13.5px; }
+/* 行見出しの列は、時刻（例: 14:30–19:00）を1行で収める幅を em で指定する。
+   割合で決めると、トップの右欄のように表が狭いとき時刻が列からあふれる。
+   曜日の7列は幅を指定せず、残りを均等に分ける。 */
+.hours thead td, .hours tbody th { width: 9em; }
 /* 時刻は折り返して2行に置く。行見出しの幅で表が広がらないようにするため。 */
 .hours tbody th { background: var(--surface); text-align: left; padding-inline: 10px; font-weight: 700; font-size: 13.5px; line-height: 1.5; }
 .hours tbody th small { display: block; font-weight: 400; font-size: 12.5px; color: var(--ink-soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
