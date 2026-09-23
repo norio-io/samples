@@ -80,6 +80,19 @@ WCAG 2.1 達成基準 1.4.3 の 4.5:1 を満たすこと。`getComputedStyle` �
 - 必須ステータスチェックは、Ruleset がジョブ名で参照する。CI を追加した時点で、そのジョブ名を Ruleset の必須ステータスチェックに登録する。ジョブ名を変更する場合は Ruleset 側の更新が必須であり、一致しない場合はプルリクエストがマージ不能となる。
 - 変更されたファイルに応じて起動するジョブ（`paths` 指定のあるワークフロー）は、必須ステータスチェックに追加しない。対象外のプルリクエストではジョブが起動せず、チェックが Expected のまま残ってマージ不能となるため。
 
+### 表示検証（`display-check`）
+
+- 「検証」節のはみ出し、コントラスト、リンクに加え、ページ読み込み時のコンソールエラーを検査する。`.github/workflows/ci.yml` の `display-check` ジョブが全プルリクエストと `main` への push で実行する。
+- 検証用の道具は `scripts/` に置き、依存は `scripts/package.json` で管理する。サンプル本体はこの依存を用いない。
+- 検査対象は `<制作種別>/<業種>/` 配下の `index.html` とする。一覧（リポジトリ直下）と、第1階層のみのリダイレクト（`cafe/` `corp/` `shop/`、`booking/` など）は対象外。
+- ローカルでは次の1コマンドで実行する。作業環境では Playwright 同梱版の Chromium が無いため、`CHROMIUM_PATH` で既存の Chromium を指定する。`PAGES` に正規表現を渡すと対象ページを絞れる。
+
+```sh
+npm --prefix scripts ci && CHROMIUM_PATH=/opt/pw-browsers/chromium npm --prefix scripts run check
+```
+
+- 違反はページ、幅、フォントサイズ、セレクタ、計測値を出力し、終了コード 1 で終わる。画像背景上の文字など判定できないものは「注意」として出し、失敗にはしない。
+
 ## 依存関係の更新
 
 - 本リポジトリはパッケージを持たない。Renovate は GitHub Actions のバージョン更新のみを起票する。設定は `renovate.json` に置き、`renovate-config` ジョブ（`.github/workflows/renovate-config.yml`）で検証する。
