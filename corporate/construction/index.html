@@ -8,10 +8,10 @@
 <meta name="robots" content="noindex">
 <style>
 :root{
-  --ink:#16181a; --ink-2:#2c3136; --gray:#5f6469; --faint:#9aa1a7;
+  --ink:#16181a; --ink-2:#2c3136; --gray:#5f6469; --faint:#687178;
   --line:#dcdfe2; --line-2:#eceef0;
   --bg:#fff; --surface:#f2f4f5; --deep:#16181a;
-  --y:#e0a91f; --y-d:#b9871a;
+  --y:#e0a91f; --y-d:#b9871a; --y-t:#8f6814;
   --f:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic","Noto Sans JP",system-ui,sans-serif;
   --num:"Helvetica Neue",Arial,"Hiragino Sans",sans-serif;
   --wrap:1080px;
@@ -53,6 +53,7 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .hero p{color:#c3c9ce;margin:0 0 28px;font-size:15px;max-width:34em}
 .ybar{width:54px;height:4px;background:var(--y);margin:0 0 22px}
 .hero .btn{background:var(--y);color:var(--ink)}
+.hero .btn .ar{color:inherit}
 .hero .btn:hover{background:var(--y-d)}
 .hero-art{border:1px solid rgba(255,255,255,.22);padding:14px;background:rgba(255,255,255,.04)}
 
@@ -69,7 +70,7 @@ section.dark{background:var(--deep);color:#fff}
 .sec-h{margin-bottom:clamp(26px,4vw,42px)}
 .sec-h.c{text-align:center}
 .sec-h.c .ybar{margin-inline:auto}
-.en{font-size:11px;letter-spacing:.26em;color:var(--y-d);font-weight:700;margin:0 0 10px}
+.en{font-size:11px;letter-spacing:.26em;color:var(--y-t);font-weight:700;margin:0 0 10px}
 .dark .en{color:var(--y)}
 h2{font-size:clamp(22px,3.2vw,32px);margin:0;font-weight:700;letter-spacing:.03em;line-height:1.5}
 .sec-h p{color:var(--gray);margin:14px 0 0;font-size:14.5px}
@@ -78,7 +79,7 @@ h2{font-size:clamp(22px,3.2vw,32px);margin:0;font-weight:700;letter-spacing:.03e
 /* ---- 事業内容 ---- */
 .biz{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
 .biz article{background:#fff;padding:clamp(20px,2.6vw,28px)}
-.biz .n{font-family:var(--num);font-size:12px;letter-spacing:.14em;color:var(--y-d);font-weight:700}
+.biz .n{font-family:var(--num);font-size:12px;letter-spacing:.14em;color:var(--y-t);font-weight:700}
 .biz h3{font-size:18px;margin:8px 0 12px;font-weight:700;letter-spacing:.04em}
 .biz p{margin:0;font-size:13.5px;color:var(--gray)}
 
