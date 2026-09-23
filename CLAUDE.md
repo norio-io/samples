@@ -84,7 +84,7 @@ WCAG 2.1 達成基準 1.4.3 の 4.5:1 を満たすこと。`getComputedStyle` �
 
 - 「検証」節のはみ出し、コントラスト、リンクに加え、ページ読み込み時のコンソールエラーを検査する。`.github/workflows/ci.yml` の `display-check` ジョブが全プルリクエストと `main` への push で実行する。
 - 検証用の道具は `scripts/` に置き、依存は `scripts/package.json` で管理する。サンプル本体はこの依存を用いない。
-- 検査対象は `<制作種別>/<業種>/` 配下の `index.html` とする。一覧（リポジトリ直下）と、第1階層のみのリダイレクト（`cafe/` `corp/` `shop/`、`booking/` など）は対象外。
+- 検査対象は、リポジトリ直下の一覧ページと、`<制作種別>/<業種>/` 配下の `index.html` とする。第1階層のみのリダイレクト（`cafe/` `corp/` `shop/`、`booking/` など）は対象外。
 - ローカルでは次の1コマンドで実行する。作業環境では Playwright 同梱版の Chromium が無いため、`CHROMIUM_PATH` で既存の Chromium を指定する。`PAGES` に正規表現を渡すと対象ページを絞れる。
 
 ```sh

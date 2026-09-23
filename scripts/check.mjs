@@ -1,7 +1,7 @@
 // 制作サンプルの表示検証。CLAUDE.md の「検証」節の手順を自動化する。
 //
 // リポジトリ直下をローカルの HTTP サーバで /samples/ 配下に配信し（GitHub Pages と同じパス）、
-// 各サンプルの全ページについて、はみ出し・コントラスト・リンク・コンソールエラーを検査する。
+// 一覧ページと各サンプルの全ページについて、はみ出し・コントラスト・リンク・コンソールエラーを検査する。
 // 違反が1件でもあれば終了コード 1 で終わる。
 //
 // 使い方: npm --prefix scripts ci && npm --prefix scripts run check
@@ -62,8 +62,9 @@ function notFound (res) {
 
 // ---- 検査対象 -----------------------------------------------------------
 
-// <制作種別>/<業種>/ 以下の index.html。リポジトリ直下（一覧）と、第1階層のみのディレクトリ
-// （cafe/ corp/ shop/ などの旧URL、booking/ などの制作種別直下）はリダイレクトのため対象外
+// リポジトリ直下の一覧ページと、<制作種別>/<業種>/ 以下の index.html。第1階層のみのディレクトリ
+// （cafe/ corp/ shop/ などの旧URL、booking/ などの制作種別直下）はリダイレクトのため対象外。
+// 一覧ページのパスは空文字列（/samples/）で表す
 async function listPages () {
   const pages = []
   async function walk (dir) {
@@ -73,7 +74,8 @@ async function listPages () {
       if (ent.isDirectory()) await walk(p)
       else if (ent.name === 'index.html') {
         const rel = relative(ROOT, dir).split(sep).join('/')
-        if (rel.split('/').length >= 2) pages.push(rel + '/')
+        if (rel === '') pages.push('')
+        else if (rel.split('/').length >= 2) pages.push(rel + '/')
       }
     }
   }
@@ -338,7 +340,7 @@ const group = list => {
 const print = grouped => {
   let current
   for (const v of grouped.values()) {
-    if (v.page !== current) console.log(`\n■ ${current = v.page}`)
+    if (v.page !== current) console.log(`\n■ ${(current = v.page) || '（一覧ページ）'}`)
     const text = v.text ? `「${v.text}」 ` : ''
     console.log(`  [${v.check}] ${v.kind} ${v.selector} ${text}${v.value}  @ ${v.at.join(', ')}`)
   }
