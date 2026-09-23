@@ -50,6 +50,9 @@ main{padding-block:clamp(28px,4vw,44px) clamp(48px,8vw,96px)}
 
 footer{border-top:1px solid var(--line);padding-block:26px;
   color:var(--ink-faint);font-size:11.5px;letter-spacing:.04em}
+footer p{margin-block:0}
+footer p + p{margin-top:6px}
+footer a{color:inherit}
 
 @media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
 </style>
@@ -67,7 +70,7 @@ footer{border-top:1px solid var(--line);padding-block:26px;
   <section class="group" id="corporate">
     <div class="group-h">
       <h2>コーポレートサイト</h2>
-      <span class="count">4</span>
+      <span class="count">5</span>
       <span class="rule"></span>
     </div>
     <ul class="list">
@@ -122,6 +125,17 @@ footer{border-top:1px solid var(--line);padding-block:26px;
             <span class="tag">MULTI PAGE</span>
             <span class="tag">ACCESSIBILITY</span>
             <span class="tag">RESPONSIVE</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="https://norio-io.github.io/samples-wordpress/">
+          <h3>歯科医院のコーポレートサイト（WordPress 版）</h3>
+          <p>上の歯科医院のサイトを、自作のブロックテーマで WordPress に移した制作サンプル。診療時間表、お知らせ、ヘッダーとフッターを管理画面から更新できます。WordPress Playground を使い、ブラウザ上で管理画面まで操作できます。別のリポジトリで公開しています。</p>
+          <div class="tags">
+            <span class="tag">WORDPRESS</span>
+            <span class="tag">BLOCK THEME</span>
+            <span class="tag">PLAYGROUND</span>
           </div>
         </a>
       </li>
@@ -254,7 +268,9 @@ footer{border-top:1px solid var(--line);padding-block:26px;
 </main>
 
 <footer class="wrap">
-  掲載しているサンプルはすべて架空の題材です。実在の企業・団体とは関係ありません。
+  <p>掲載しているサンプルはすべて架空の題材です。実在の企業・団体とは関係ありません。</p>
+  <p>React で制作したサンプルは <a href="https://norio-io.github.io/samples-react/">React 版の一覧</a> にまとめています。</p>
+  <p>WordPress で制作したサンプルは <a href="https://norio-io.github.io/samples-wordpress/">WordPress 版の一覧</a> にまとめています。</p>
 </footer>
 
 </body>
