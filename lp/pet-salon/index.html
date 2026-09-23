@@ -18,10 +18,10 @@
 
 <style>
 :root{
-  --ink:#3a2b21; --ink-soft:#6b5748; --ink-faint:#a1907f;
+  --ink:#3a2b21; --ink-soft:#6b5748; --ink-faint:#837160;
   --line:#ece1d6; --bg:#fffdfa; --cream:#fdf5ec; --cream-2:#f8ebdc;
   --brown:#6b4a33; --green:#5c8a63;
-  --cv:#f0603c; --cv-2:#ff7b52;
+  --cv:#c43d18; --cv-2:#c8441f;
   --pad:clamp(18px,5vw,40px);
   --f:"Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic",system-ui,sans-serif;
   --f-en:"Outfit",var(--f);
@@ -52,10 +52,10 @@ button{font:inherit;color:inherit;cursor:pointer}
   background:linear-gradient(180deg,var(--cv-2),var(--cv));color:#fff;text-decoration:none;
   font-weight:900;font-size:clamp(17px,2.7vw,20px);letter-spacing:.02em;line-height:1.4;
   padding:18px 44px;border:0;border-radius:999px;
-  box-shadow:0 12px 26px -11px rgba(240,96,60,.9),inset 0 -3px 0 rgba(0,0,0,.12);
+  box-shadow:0 12px 26px -11px rgba(196,61,24,.9),inset 0 -3px 0 rgba(0,0,0,.12);
   transition:transform .18s,box-shadow .18s;
 }
-.cv:hover{transform:translateY(-3px);box-shadow:0 18px 32px -12px rgba(240,96,60,.95),inset 0 -3px 0 rgba(0,0,0,.12)}
+.cv:hover{transform:translateY(-3px);box-shadow:0 18px 32px -12px rgba(196,61,24,.95),inset 0 -3px 0 rgba(0,0,0,.12)}
 .cv:active{transform:translateY(0)}
 .cv small{font-size:12px;font-weight:500;opacity:.95;letter-spacing:.03em;margin-top:3px}
 .cv-note{font-size:12px;color:var(--ink-faint);margin-top:12px}
@@ -64,7 +64,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .fv{
   position:relative;overflow:hidden;
   background:
-    radial-gradient(620px 420px at 88% 18%,rgba(240,96,60,.14),transparent 62%),
+    radial-gradient(620px 420px at 88% 18%,rgba(196,61,24,.14),transparent 62%),
     linear-gradient(170deg,#fdf5ec,#f6e6d3);
   border-bottom:1px solid var(--line);
 }
@@ -83,7 +83,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .fv h1{font-size:clamp(30px,5.6vw,50px);font-weight:900;line-height:1.3;margin:0 0 14px;letter-spacing:.01em}
 .fv h1 .box{
   display:inline-block;background:var(--cv);color:#fff;border-radius:10px;
-  padding:2px 16px;transform:rotate(-1.2deg);box-shadow:0 8px 18px -8px rgba(240,96,60,.9);
+  padding:2px 16px;transform:rotate(-1.2deg);box-shadow:0 8px 18px -8px rgba(196,61,24,.9);
 }
 .fv .sub{font-size:clamp(14px,2.4vw,16.5px);color:var(--ink-soft);margin:0 0 20px;max-width:26em}
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 26px;padding:0;list-style:none}
@@ -134,7 +134,7 @@ section{padding-block:clamp(46px,7vw,74px)}
 .nums dt{font-size:12.5px;color:#e2cdb9;margin-bottom:4px}
 .nums dd{margin:0;font-family:var(--f-en);font-size:clamp(38px,8vw,60px);font-weight:700;line-height:1;color:#ffd86b}
 .nums dd small{font-family:var(--f);font-size:14px;font-weight:700;color:#fff;margin-left:3px}
-.nums .note{grid-column:1/-1;font-size:11.5px;color:#c8ae96;margin:18px 0 0}
+.nums .note{grid-column:1/-1;font-size:11.5px;color:#d6c2b0;margin:18px 0 0}
 
 /* 料金 */
 .price-box{
@@ -191,7 +191,7 @@ details .body{padding:0 22px 20px;color:var(--ink-soft);font-size:14.5px}
   width:100%;font:inherit;font-size:15.5px;padding:13px 14px;
   border:1.5px solid var(--line);border-radius:10px;background:#fffdfa;
 }
-.field input:focus,.field select:focus{border-color:var(--cv);outline:none;box-shadow:0 0 0 3px rgba(240,96,60,.14)}
+.field input:focus,.field select:focus{border-color:var(--cv);outline:none;box-shadow:0 0 0 3px rgba(196,61,24,.14)}
 .field.err input,.field.err select{border-color:#d6453a;background:#fff7f6}
 .msg{display:none;color:#d6453a;font-size:12.5px;margin-top:6px}
 .field.err .msg{display:block}

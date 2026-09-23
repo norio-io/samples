@@ -106,6 +106,7 @@ npm --prefix scripts ci && CHROMIUM_PATH=/opt/pw-browsers/chromium npm --prefix 
 - 作業ブランチは `feature/` を接頭辞とし、`main` へプルリクエストを作成してマージする。
 - イシューに紐づく作業は `feature/issue-<イシュー番号>` とする。
 - イシューに紐づかない作業は `feature/<短い説明>` とする。
+- リモートへ push するブランチは、上記の命名規則に従う作業ブランチのみとする。作業環境の既定ブランチなど、それ以外のブランチを作成・push しない。
 
 ### コミットおよびタイトルの書式
 
@@ -121,7 +122,6 @@ npm --prefix scripts ci && CHROMIUM_PATH=/opt/pw-browsers/chromium npm --prefix 
 | test | ✅ | テストの追加、修正 |
 
 - サンプルの追加は `feat`、表示崩れや不具合の修正は `fix`、`.github/` などの開発インフラの変更は `chore` とする。
-- この書式を導入する前のコミットは、絵文字と prefix を持たない。遡って書き換えない。
 
 ### ラベル
 
@@ -144,3 +144,4 @@ npm --prefix scripts ci && CHROMIUM_PATH=/opt/pw-browsers/chromium npm --prefix 
 - 原則として 1イシュー 1プルリクエストとする。実装上の依存により単独で検証できない場合に限り、1プルリクエストで複数のイシューを解決し、本文に `Closes #N` を列挙する。
 - コミットメッセージおよびプルリクエストの記述言語は日本語とする。
 - コミットには `Co-Authored-By` を残す。コミットメッセージおよびプルリクエストの本文には、セッションURLなど第三者にとって意味を持たない行を含めない。
+- プルリクエストの作成時やコメントの投稿時にツールが末尾へ自動で付与する行のうち、セッションURL（`https://claude.ai/code/session_` で始まるリンク）を含む行は、投稿直後に削除する。セッションURLを含まない行（`Generated with [Claude Code](https://claude.com/claude-code)` など）は残してよい。
