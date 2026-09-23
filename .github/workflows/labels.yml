@@ -1,0 +1,43 @@
+name: Labels
+
+# `.github/labels.json` の内容でラベルを作成・更新する。
+# 定義にないラベルは削除しない。手動で追加したラベルを失わないため。
+# 手動実行時に限り、GitHub がリポジトリ作成時に付与する既定のラベルを削除する。
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/labels.json
+      - .github/workflows/labels.yml
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  labels:
+    name: labels
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: 定義のラベルを作成・更新する
+        run: |
+          jq -c '.[]' .github/labels.json | while read -r label; do
+            gh label create "$(jq -r '.name' <<< "$label")" \
+              --repo "$GITHUB_REPOSITORY" \
+              --color "$(jq -r '.color' <<< "$label")" \
+              --description "$(jq -r '.description' <<< "$label")" \
+              --force
+          done
+      - name: GitHub 既定のラベルを削除する
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          for name in accessibility bug documentation duplicate enhancement "good first issue" "help wanted" invalid question wontfix; do
+            if jq -e --arg n "$name" 'any(.[]; .name == $n)' .github/labels.json > /dev/null; then
+              continue
+            fi
+            gh label delete "$name" --repo "$GITHUB_REPOSITORY" --yes 2> /dev/null || true
+          done

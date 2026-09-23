@@ -1,0 +1,15 @@
+[
+  { "name": "type: bug", "color": "e3d9fc", "description": "不具合の修正" },
+  { "name": "type: enhancement", "color": "e3d9fc", "description": "機能の追加" },
+  { "name": "type: documentation", "color": "e3d9fc", "description": "README、CLAUDE.md などの文書" },
+  { "name": "type: task", "color": "e3d9fc", "description": "基盤整備、設定変更など機能以外の作業" },
+  { "name": "type: dependency-upgrade", "color": "e3d9fc", "description": "依存関係の更新" },
+  { "name": "status: waiting-for-triage", "color": "fef2c0", "description": "内容が未精査のもの" },
+  { "name": "status: waiting-for-feedback", "color": "fef2c0", "description": "判断の回答を待つもの" },
+  { "name": "status: blocked", "color": "fef2c0", "description": "他のイシューの完了を待つもの" },
+  { "name": "status: declined", "color": "fef2c0", "description": "対応しないと決めたもの" },
+  { "name": "theme: ui", "color": "f9d0c4", "description": "画面の表示と操作性" },
+  { "name": "theme: accessibility", "color": "f9d0c4", "description": "アクセシビリティ" },
+  { "name": "theme: infrastructure", "color": "f9d0c4", "description": "ビルド、CI/CD、公開" },
+  { "name": "by: renovate", "color": "80cbc4", "description": "Renovate が作成したもの" }
+]
