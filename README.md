@@ -6,7 +6,7 @@ https://norio-io.github.io/samples/
 
 ## サンプル一覧
 
-一覧ページは制作種別ごとのセクションに分かれています。セクションのidが `corporate` `lp` `booking` `ec` `store` で、カテゴリのリダイレクト先になっています。
+一覧ページは制作種別ごとのセクションに分かれています。セクションのidは `corporate` `lp` `booking` `ec` `store` `listing` `recruit` です。このうち `corporate` `lp` `booking` `ec` `store` は、カテゴリのリダイレクト先になっています。
 
 | 制作種別 | ブランド | ソース | 公開URL |
 |---|---|---|---|
@@ -30,6 +30,9 @@ React + TypeScript や WordPress で制作したサンプルは、ビルド工�
 |---|---|---|---|
 | 予約サイト | レンタル撮影スタジオの予約管理画面 | [`norio-io/samples-react`](https://github.com/norio-io/samples-react) | https://norio-io.github.io/samples-react/booking/photo-studio-admin/ |
 | コーポレートサイト | みずき歯科クリニック（WordPress 版） | [`norio-io/samples-wordpress`](https://github.com/norio-io/samples-wordpress) | https://norio-io.github.io/samples-wordpress/ |
+| コーポレートサイト | ひびき英語スクール（WordPress 版） | [`norio-io/samples-wordpress`](https://github.com/norio-io/samples-wordpress) | https://norio-io.github.io/samples-wordpress/ |
+| 物件検索サイト | ひなた不動産（WordPress 版） | [`norio-io/samples-wordpress`](https://github.com/norio-io/samples-wordpress) | https://norio-io.github.io/samples-wordpress/ |
+| 採用サイト | 社会福祉法人もえぎ会（WordPress 版） | [`norio-io/samples-wordpress`](https://github.com/norio-io/samples-wordpress) | https://norio-io.github.io/samples-wordpress/ |
 
 ## ディレクトリの命名
 
