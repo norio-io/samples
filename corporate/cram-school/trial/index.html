@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>体験授業の申し込み｜ひのき学舎</title>
+<meta name="description" content="制作サンプル。架空の学習塾のサイトです。体験授業の申し込みフォームです。実際には送信されません。">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<p class="demo">DEMO — これは制作サンプルです。架空の学習塾であり、実在の団体・学校とは関係ありません。フォームは送信されません。</p>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="../">
+      <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 3.5v24" stroke="#24399a" stroke-width="2.2" stroke-linecap="round"/><path d="M10.5 10.5 16 5l5.5 5.5M8.5 17.5 16 10l7.5 7.5M6.5 24.5 16 15l9.5 9.5" fill="none" stroke="#24399a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 29.4h14" stroke="#f3c623" stroke-width="2.8" stroke-linecap="round"/></svg>
+      <span><b>ひのき学舎</b><small>小4〜中3の学習塾／ひのき台教室</small></span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビゲーション">
+      <ul>
+        <li><a href="../courses/">コースと料金</a></li>
+        <li><a href="../results/">合格実績</a></li>
+        <li class="gnav-cta"><a href="../trial/" aria-current="page">体験授業</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<nav class="crumb" aria-label="パンくず">
+  <ol class="wrap"><li><a href="../">トップ</a></li><li aria-current="page">体験授業の申し込み</li></ol>
+</nav>
+<div class="page-head">
+  <div class="wrap">
+    <p class="en">TRIAL LESSON</p>
+    <h1>体験授業の申し込み</h1>
+    <p class="lead">通常の授業に2回まで無料で参加できます。お申し込みのあと、教室から1営業日以内にお電話で日時を確定します。</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap trial-grid">
+    <div>
+      <div class="summary" id="summary" tabindex="-1" hidden>
+        <h2>入力内容をご確認ください</h2>
+        <ul id="summary-list"></ul>
+      </div>
+
+      <form class="form" id="trial-form" novalidate>
+        <fieldset>
+          <legend>お子さまについて</legend>
+          <div class="field" id="f-grade">
+            <p class="label" id="l-grade">学年<span class="req">必須</span></p>
+            <div class="choices grade-choices" role="radiogroup" aria-labelledby="l-grade" aria-describedby="m-grade">
+              <label class="choice"><input type="radio" name="grade" value="sho4">小学4年</label>
+              <label class="choice"><input type="radio" name="grade" value="sho5">小学5年</label>
+              <label class="choice"><input type="radio" name="grade" value="sho6">小学6年</label>
+              <label class="choice"><input type="radio" name="grade" value="chu1">中学1年</label>
+              <label class="choice"><input type="radio" name="grade" value="chu2">中学2年</label>
+              <label class="choice"><input type="radio" name="grade" value="chu3">中学3年</label>
+            </div>
+            <p class="msg" id="m-grade">学年を選んでください。</p>
+          </div>
+          <div class="field" id="f-child">
+            <label for="i-child">お子さまのお名前<span class="req">必須</span></label>
+            <input id="i-child" name="child" type="text" autocomplete="off" placeholder="檜山 ひかり" aria-describedby="m-child">
+            <p class="msg" id="m-child">お子さまのお名前を入力してください。</p>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>体験授業のご希望</legend>
+          <div class="field" id="f-course">
+            <p class="label" id="l-course">希望のコース<span class="req">必須</span></p>
+            <div class="choices" role="radiogroup" aria-labelledby="l-course" aria-describedby="m-course">
+              <label class="choice"><input type="radio" name="course" value="集団授業"><span>集団授業<small>12人までのクラス</small></span></label>
+              <label class="choice"><input type="radio" name="course" value="個別指導"><span>個別指導<small>講師1人に生徒2人まで</small></span></label>
+              <label class="choice"><input type="radio" name="course" value="相談して決めたい"><span>相談して決めたい<small>面談でご案内します</small></span></label>
+            </div>
+            <p class="msg" id="m-course">希望のコースを選んでください。</p>
+          </div>
+          <div class="field" id="f-date">
+            <label for="i-date">希望日<span class="req">必須</span></label>
+            <p class="hint" id="h-date">日曜日は休校のため選べません。本日から2か月先までの、月曜日から土曜日でお選びください。祝日を選んだ場合は、お電話で日程を調整します。</p>
+            <input id="i-date" name="date" type="date" aria-describedby="h-date m-date d-date">
+            <p class="msg" id="m-date" aria-live="polite">希望日を選んでください。</p>
+            <p class="hint echo" id="d-date" aria-live="polite"></p>
+          </div>
+          <div class="field" id="f-time">
+            <label for="i-time">希望の時間帯<span class="opt">任意</span></label>
+            <select id="i-time" name="time">
+              <option value="">指定しない</option>
+              <option>17:00ごろから（小学生の授業）</option>
+              <option>19:00ごろから（中学生の授業）</option>
+              <option>土曜の午前</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>保護者の方の連絡先</legend>
+          <div class="field" id="f-parent">
+            <label for="i-parent">保護者のお名前<span class="req">必須</span></label>
+            <input id="i-parent" name="parent" type="text" autocomplete="name" placeholder="檜山 恵" aria-describedby="m-parent">
+            <p class="msg" id="m-parent">保護者のお名前を入力してください。</p>
+          </div>
+          <div class="field" id="f-tel">
+            <label for="i-tel">電話番号<span class="req">必須</span></label>
+            <p class="hint" id="h-tel">日時の確定のため、教室からお電話します。ハイフンはあってもなくてもかまいません。</p>
+            <input id="i-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="090-0000-0000" aria-describedby="h-tel m-tel">
+            <p class="msg" id="m-tel">電話番号は、0から始まる10桁か11桁の数字で入力してください。</p>
+          </div>
+          <div class="field" id="f-mail">
+            <label for="i-mail">メールアドレス<span class="req">必須</span></label>
+            <input id="i-mail" name="mail" type="email" autocomplete="email" inputmode="email" placeholder="hinoki@example.com" aria-describedby="m-mail">
+            <p class="msg" id="m-mail">メールアドレスの形式で入力してください（例: hinoki@example.com）。</p>
+          </div>
+          <div class="field" id="f-note">
+            <label for="i-note">ご質問・ご要望<span class="opt">任意</span></label>
+            <textarea id="i-note" name="note" placeholder="苦手な単元、部活動の予定、通塾の時間帯のご希望など"></textarea>
+          </div>
+          <div class="field" id="f-agree">
+            <label class="agree"><input type="checkbox" id="i-agree" name="agree" aria-describedby="m-agree"><span>個人情報の取り扱いに同意します<span class="req">必須</span></span></label>
+            <p class="msg" id="m-agree">同意のうえでお申し込みください。</p>
+          </div>
+        </fieldset>
+
+        <button class="submit" type="submit">この内容で申し込む</button>
+        <div class="done" id="done" tabindex="-1" hidden>
+          <h2>申し込みを受け付けました（サンプル）</h2>
+          <p>これは制作サンプルです。入力内容はどこにも送信されていません。</p>
+          <dl id="done-list"></dl>
+        </div>
+      </form>
+    </div>
+
+    <aside>
+      <h2 class="aside-h">体験授業の流れ</h2>
+      <ol class="steps">
+        <li><b>このフォームで申し込む</b>希望日は第1希望だけで結構です。</li>
+        <li><b>教室からお電話</b>1営業日以内に、日時とクラスを確定します。</li>
+        <li><b>体験授業（2回まで）</b>筆記用具だけお持ちください。教材は教室で用意します。</li>
+        <li><b>保護者の方との面談</b>授業のようすと確認テストの結果をお伝えします。入塾をその場で決める必要はありません。</li>
+      </ol>
+      <p class="note">お電話でも受け付けています。<br>045-000-0000（受付 14:00–21:00／日・祝 休校）</p>
+    </aside>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-brand">ひのき学舎 ひのき台教室</p>
+      <p class="foot-addr">〒245-0000<br>神奈川県あおば市ひのき台3-2-10 ひのき台駅前ビル3F<br>TEL 045-000-0000（受付 14:00–21:00／日・祝 休校）</p>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <ul class="foot-nav">
+        <li><a href="../">トップ</a></li>
+        <li><a href="../courses/">コースと料金</a></li>
+        <li><a href="../results/">合格実績</a></li>
+        <li><a href="../trial/">体験授業の申し込み</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap foot-note">
+    <p>※ 掲載している塾名・氏名・料金・実績・学校名・所在地・電話番号は、すべてサンプル用に作成した架空のものです。</p>
+    <p>ひのき学舎（架空）／ 制作サンプル</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var form = document.getElementById('trial-form');
+  var $ = function (id) { return document.getElementById(id); };
+  var GRADES = { sho4: '小学4年', sho5: '小学5年', sho6: '小学6年', chu1: '中学1年', chu2: '中学2年', chu3: '中学3年' };
+  var WEEK = ['日', '月', '火', '水', '木', '金', '土'];
+
+  /* ---- 希望日 ----
+     日付の入力欄は曜日単位で選択肢を消せないため、min で過去の日付を選べなくしたうえで、
+     変更のたびに曜日を確かめ、日曜日ならその場で理由を示す。送信時にも同じ判定を行う。 */
+  var pad = function (n) { return String(n).padStart(2, '0'); };
+  var iso = function (d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); };
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
+  var last = new Date(today);
+  last.setMonth(last.getMonth() + 2);
+  var dateInput = $('i-date');
+  dateInput.min = iso(today);
+  dateInput.max = iso(last);
+
+  function parseDate(v) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v);
+    if (!m) return null;
+    var d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+    return d.getMonth() === Number(m[2]) - 1 ? d : null;
+  }
+  var jp = function (d) { return d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日（' + WEEK[d.getDay()] + '）'; };
+
+  // 誤りがあればその文言を、なければ空文字列を返す
+  function dateError() {
+    var d = parseDate(dateInput.value);
+    if (!d) return '希望日を選んでください。';
+    if (d < today) return '過去の日付は選べません。本日以降の日付を選んでください。';
+    if (d.getDay() === 0) return jp(d) + 'は日曜日です。日曜日は休校のため体験授業を行っていません。月曜日から土曜日でお選びください。';
+    if (d > last) return '選べるのは' + jp(last) + 'までです。それより先をご希望の場合は、お電話でご相談ください。';
+    return '';
+  }
+
+  /* ---- 項目ごとの検証 ---- */
+  var TEL = /^0\d{9,10}$/;
+  var MAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  var checked = function (name) { var el = form.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ''; };
+  var val = function (id) { return $(id).value.trim(); };
+
+  var RULES = [
+    { field: 'f-grade', label: '学年', focus: function () { return form.querySelector('input[name="grade"]'); }, test: function () { return checked('grade') ? '' : '学年を選んでください。'; } },
+    { field: 'f-child', label: 'お子さまのお名前', focus: function () { return $('i-child'); }, test: function () { return val('i-child') ? '' : 'お子さまのお名前を入力してください。'; } },
+    { field: 'f-course', label: '希望のコース', focus: function () { return form.querySelector('input[name="course"]'); }, test: function () { return checked('course') ? '' : '希望のコースを選んでください。'; } },
+    { field: 'f-date', label: '希望日', focus: function () { return dateInput; }, test: dateError },
+    { field: 'f-parent', label: '保護者のお名前', focus: function () { return $('i-parent'); }, test: function () { return val('i-parent') ? '' : '保護者のお名前を入力してください。'; } },
+    { field: 'f-tel', label: '電話番号', focus: function () { return $('i-tel'); }, test: function () { return TEL.test(val('i-tel').replace(/[-－‐ー\s()（）]/g, '')) ? '' : '電話番号は、0から始まる10桁か11桁の数字で入力してください。'; } },
+    { field: 'f-mail', label: 'メールアドレス', focus: function () { return $('i-mail'); }, test: function () { return MAIL.test(val('i-mail')) ? '' : 'メールアドレスの形式で入力してください（例: hinoki@example.com）。'; } },
+    { field: 'f-agree', label: '個人情報の取り扱いへの同意', focus: function () { return $('i-agree'); }, test: function () { return $('i-agree').checked ? '' : '同意のうえでお申し込みください。'; } }
+  ];
+
+  function show(rule, message) {
+    var box = $(rule.field);
+    box.classList.toggle('err', Boolean(message));
+    if (message) box.querySelector('.msg').textContent = message;
+    box.querySelectorAll('input, select, textarea, [role="radiogroup"]').forEach(function (el) {
+      if (el.type === 'radio') return;
+      if (message) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
+    });
+  }
+  function run(rule) { var m = rule.test(); show(rule, m); return m; }
+  var ruleOf = function (id) { return RULES.filter(function (r) { return r.field === id; })[0]; };
+
+  // 希望日は選んだ時点で判定する。曜日も併記して、選んだ日を確かめやすくする
+  function onDate() {
+    var m = run(ruleOf('f-date'));
+    var d = parseDate(dateInput.value);
+    $('d-date').textContent = !m && d ? jp(d) + 'を希望日として受け付けます。' : '';
+  }
+  dateInput.addEventListener('change', onDate);
+  dateInput.addEventListener('blur', function () { if (dateInput.value) onDate(); });
+
+  // それ以外の項目は、一度送信を試みたあとは入力のたびに判定し直す
+  var tried = false;
+  form.addEventListener('input', function (e) {
+    if (!tried || e.target === dateInput) return;
+    var box = e.target.closest('.field');
+    var rule = box && ruleOf(box.id);
+    if (rule) run(rule);
+  });
+  form.addEventListener('change', function (e) {
+    if (!tried || e.target === dateInput) return;
+    var box = e.target.closest('.field');
+    var rule = box && ruleOf(box.id);
+    if (rule) run(rule);
+  });
+
+  /* ---- 送信 ----
+     送信処理は持たない。すべての項目が正しければ、受け付けた内容をその場に表示する。 */
+  var summary = $('summary');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    tried = true;
+    var errors = RULES.map(function (r) { return { rule: r, message: run(r) }; }).filter(function (x) { return x.message; });
+    var list = $('summary-list');
+    list.textContent = '';
+    if (errors.length) {
+      $('done').hidden = true;
+      errors.forEach(function (x) {
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = '#' + x.rule.field;
+        a.textContent = x.rule.label + ': ' + x.message;
+        a.addEventListener('click', function (ev) { ev.preventDefault(); x.rule.focus().focus(); });
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+      summary.hidden = false;
+      summary.focus();
+      return;
+    }
+    summary.hidden = true;
+    var rows = [
+      ['学年', GRADES[checked('grade')]],
+      ['お子さま', val('i-child')],
+      ['コース', checked('course')],
+      ['希望日', jp(parseDate(dateInput.value))],
+      ['時間帯', $('i-time').value || '指定しない'],
+      ['保護者', val('i-parent')],
+      ['電話番号', val('i-tel')],
+      ['メール', val('i-mail')]
+    ];
+    var dl = $('done-list');
+    dl.textContent = '';
+    rows.forEach(function (r) {
+      var dt = document.createElement('dt'); dt.textContent = r[0];
+      var dd = document.createElement('dd'); dd.textContent = r[1];
+      dl.appendChild(dt); dl.appendChild(dd);
+    });
+    $('done').hidden = false;
+    $('done').focus();
+  });
+
+  /* ---- コースのページから来た場合は、学年を選んだ状態で開く ---- */
+  var g = new URLSearchParams(location.search).get('grade');
+  if (g && GRADES[g]) form.querySelector('input[name="grade"][value="' + g + '"]').checked = true;
+})();
+</script>
+</body>
+</html>
