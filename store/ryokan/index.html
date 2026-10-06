@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>山の湯宿 こだま — 奥嶺の渓谷にたたずむ源泉かけ流しの宿</title>
+<meta name="description" content="制作サンプル。架空の旅館のサイトです。客室5種類17室、源泉かけ流しの湯と、季節の料理でお迎えします。">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<p class="demo">DEMO — これは制作サンプルです。架空の旅館であり、実在の宿泊施設とは関係ありません。予約やフォームの送信は行いません。</p>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="./" aria-current="page">
+      <svg viewBox="0 0 40 40" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M3 33 L14 17 L20 25 L25 19 L37 33"/><path d="M3 36.5h34"/><path d="M22.5 11.5a4.5 4.5 0 0 1 4.5 4.5"/><path d="M22.5 6.5a9.5 9.5 0 0 1 9.5 9.5"/><path d="M17.5 11.5a4.5 4.5 0 0 0-4.5 4.5" opacity=".6"/></svg>
+      <span><b>山の湯宿 こだま</b><small>YAMA NO YUYADO KODAMA</small></span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビゲーション">
+      <ul>
+        <li><a href="rooms/">客室</a></li>
+        <li><a href="access/">交通と館内</a></li>
+        <li><a href="calendar/" class="reserve">空室と料金</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <p class="kicker">奥嶺 こだま谷の湯宿</p>
+      <h1>山あいに、<br>声がかえる宿。</h1>
+      <p class="lead">渓流の音と、向かいの山から返ってくるこだま。十七室だけの小さな宿で、源泉かけ流しの湯と、その季節の山の料理をご用意してお待ちしています。</p>
+      <form class="quick" action="calendar/" method="get">
+        <h2>空室を確認する</h2>
+        <div class="quick-row">
+          <div>
+            <label for="q-room">客室</label>
+            <select id="q-room" name="room">
+              <option value="seseragi">せせらぎ（和室）</option>
+              <option value="hibiki">ひびき（和室・二間）</option>
+              <option value="kodama">こだま（和洋室）</option>
+              <option value="yamabiko">やまびこ（露天風呂付き）</option>
+              <option value="mine">みね（露天風呂付き特別室）</option>
+            </select>
+          </div>
+          <div>
+            <label for="q-guests">人数</label>
+            <select id="q-guests" name="guests">
+              <option value="1">1名</option>
+              <option value="2" selected>2名</option>
+              <option value="3">3名</option>
+              <option value="4">4名</option>
+              <option value="5">5名</option>
+              <option value="6">6名</option>
+            </select>
+          </div>
+          <div>
+            <label for="q-month">宿泊月</label>
+            <select id="q-month" name="month">
+              <option value="">今月</option>
+            </select>
+          </div>
+          <button class="btn btn-gold" type="submit">空室カレンダーへ</button>
+        </div>
+      </form>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 600 420" role="img" aria-label="夜の山あいの図。重なる山の稜線の谷間に、窓明かりのともる宿が建ち、宿の上に声が返るこだまの弧が描かれています。">
+        <circle cx="478" cy="84" r="24" fill="#e9d6ae"/>
+        <circle cx="490" cy="78" r="22" fill="#2a231e"/>
+        <path d="M0 236 L60 190 L118 214 L196 128 L262 190 L318 158 L382 206 L470 120 L548 176 L600 150 V420 H0Z" fill="#4b3f35"/>
+        <path d="M0 290 L84 236 L162 280 L232 246 L300 272 L368 240 L452 284 L530 244 L600 270 V420 H0Z" fill="#3a3029"/>
+        <g fill="none" stroke="#c9963f" stroke-linecap="round">
+          <path d="M262 236 A40 40 0 0 1 338 236" stroke-width="2" opacity=".85"/>
+          <path d="M238 228 A66 66 0 0 1 362 228" stroke-width="1.6" opacity=".55"/>
+          <path d="M212 220 A94 94 0 0 1 388 220" stroke-width="1.2" opacity=".32"/>
+        </g>
+        <g>
+          <path d="M226 300 L300 270 L374 300 Z" fill="#1d1814" stroke="#c9963f" stroke-width="1.5" stroke-linejoin="round"/>
+          <rect x="240" y="300" width="120" height="34" fill="#2a231e" stroke="#c9963f" stroke-width="1.5"/>
+          <rect x="252" y="309" width="16" height="14" fill="#c9963f"/>
+          <rect x="276" y="309" width="16" height="14" fill="#c9963f"/>
+          <rect x="308" y="309" width="16" height="14" fill="#c9963f"/>
+          <rect x="332" y="309" width="16" height="14" fill="#c9963f" opacity=".55"/>
+          <path d="M376 320 h44 v14 h-44z" fill="#2a231e" stroke="#c9963f" stroke-width="1.2"/>
+          <path d="M386 312 q-6 -8 0 -16 q6 -8 0 -16 M398 312 q-6 -8 0 -16 q6 -8 0 -16 M410 312 q-6 -8 0 -16 q6 -8 0 -16" fill="none" stroke="#cbbfa8" stroke-width="1.2" opacity=".7"/>
+        </g>
+        <path d="M0 372 Q110 336 210 356 T420 350 T600 338 V420 H0Z" fill="#1d1814"/>
+        <path d="M60 420 C120 392 200 388 260 372 S420 360 470 344" fill="none" stroke="#8c7b66" stroke-width="3" stroke-linecap="round"/>
+        <g fill="#2a231e">
+          <path d="M96 352 l10 -26 l10 26z"/><path d="M118 350 l8 -20 l8 20z"/><path d="M500 342 l10 -28 l10 28z"/><path d="M524 342 l8 -20 l8 20z"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="en">FEATURES</p>
+      <h2>こだまの三つのこと</h2>
+    </div>
+    <ul class="points">
+      <li>
+        <span class="no">其の一</span>
+        <h3>十七室だけの宿</h3>
+        <p>客室は5種類17室です。ご家族で過ごせる二間続きの和室から、記念日のための露天風呂付きの特別室まで、人数と過ごし方で選べます。</p>
+      </li>
+      <li>
+        <span class="no">其の二</span>
+        <h3>源泉かけ流しの湯</h3>
+        <p>敷地の中の源泉から引いた湯を、大浴場、露天風呂、客室の露天風呂まで、加水も加温もせずにお使いいただけます。</p>
+      </li>
+      <li>
+        <span class="no">其の三</span>
+        <h3>夕食は仕切られた個室で</h3>
+        <p>夕食は食事処の個室でお出しします。小さなお子さまとご一緒でも、まわりを気にせず召し上がれます。お子さま向けの献立もあります。</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="en">ROOMS</p>
+      <h2>客室</h2>
+      <p>和室、和洋室、露天風呂付きの客室の5種類です。ここでは3種類をご紹介します。広さと定員、設備は客室のページで比べられます。</p>
+    </div>
+    <div class="room-pick">
+      <article>
+        <div class="plan">
+          <svg viewBox="0 0 320 200" role="img" aria-label="せせらぎの間取り図。入口の脇に内風呂とトイレ、その奥に和室10畳、窓側に広縁があります。">
+            <rect x="10" y="10" width="300" height="180" fill="#fbf8f1" stroke="#2a231e" stroke-width="2"/>
+            <rect x="10" y="10" width="62" height="64" fill="#cfd8d2" stroke="#2a231e"/>
+            <rect x="10" y="74" width="62" height="46" fill="#fbf8f1" stroke="#2a231e"/>
+            <rect x="10" y="120" width="62" height="70" fill="#e1d6bf" stroke="#2a231e"/>
+            <rect x="72" y="10" width="160" height="180" fill="#e6d8b6" stroke="#2a231e"/>
+            <path d="M72 100 H232 M152 10 V100 M112 100 V190 M192 100 V190" stroke="#b39c71"/>
+            <rect x="232" y="10" width="78" height="180" fill="#d7bf93" stroke="#2a231e"/>
+            <path d="M310 22 V178" stroke="#7f5617" stroke-width="5"/>
+            <rect x="254" y="80" width="34" height="34" fill="#fbf8f1" stroke="#2a231e"/>
+            <text x="41" y="46" font-size="11" text-anchor="middle" fill="#2a231e">内風呂</text>
+            <text x="41" y="101" font-size="11" text-anchor="middle" fill="#2a231e">トイレ</text>
+            <text x="41" y="160" font-size="11" text-anchor="middle" fill="#2a231e">入口</text>
+            <text x="152" y="150" font-size="14" text-anchor="middle" fill="#2a231e">和室 10畳</text>
+            <text x="271" y="148" font-size="12" text-anchor="middle" fill="#2a231e">広縁</text>
+          </svg>
+        </div>
+        <div class="body">
+          <p class="type">和室</p>
+          <h3>せせらぎ</h3>
+          <p>渓流側の和室10畳に広縁が付きます。窓を開けると川の音が届きます。1名さまからご利用いただけます。</p>
+          <p class="price">1名 <b>18,000</b>円〜<br><small>2名1室・平日・1泊2食付き</small></p>
+        </div>
+      </article>
+      <article>
+        <div class="plan">
+          <svg viewBox="0 0 320 200" role="img" aria-label="こだまの間取り図。入口の脇に内風呂とトイレ、その奥に和室8畳と、ツインベッドを置いた洋室が並びます。">
+            <rect x="10" y="10" width="300" height="180" fill="#fbf8f1" stroke="#2a231e" stroke-width="2"/>
+            <rect x="10" y="10" width="62" height="64" fill="#cfd8d2" stroke="#2a231e"/>
+            <rect x="10" y="74" width="62" height="46" fill="#fbf8f1" stroke="#2a231e"/>
+            <rect x="10" y="120" width="62" height="70" fill="#e1d6bf" stroke="#2a231e"/>
+            <rect x="72" y="10" width="120" height="180" fill="#e6d8b6" stroke="#2a231e"/>
+            <path d="M72 70 H192 M72 130 H192 M132 70 V130" stroke="#b39c71"/>
+            <rect x="192" y="10" width="118" height="180" fill="#dcc8a2" stroke="#2a231e"/>
+            <rect x="212" y="30" width="34" height="62" fill="#fbf8f1" stroke="#2a231e"/>
+            <rect x="256" y="30" width="34" height="62" fill="#fbf8f1" stroke="#2a231e"/>
+            <path d="M310 110 V178" stroke="#7f5617" stroke-width="5"/>
+            <text x="41" y="46" font-size="11" text-anchor="middle" fill="#2a231e">内風呂</text>
+            <text x="41" y="101" font-size="11" text-anchor="middle" fill="#2a231e">トイレ</text>
+            <text x="41" y="160" font-size="11" text-anchor="middle" fill="#2a231e">入口</text>
+            <text x="132" y="160" font-size="13" text-anchor="middle" fill="#2a231e">和室 8畳</text>
+            <text x="251" y="140" font-size="13" text-anchor="middle" fill="#2a231e">洋室</text>
+          </svg>
+        </div>
+        <div class="body">
+          <p class="type">和洋室</p>
+          <h3>こだま</h3>
+          <p>和室8畳とツインベッドの洋室が続く客室です。お子さまは畳の上で、大人はベッドで休めます。</p>
+          <p class="price">1名 <b>24,000</b>円〜<br><small>2名1室・平日・1泊2食付き</small></p>
+        </div>
+      </article>
+      <article>
+        <div class="plan">
+          <svg viewBox="0 0 320 200" role="img" aria-label="やまびこの間取り図。入口の脇にトイレ、その奥に和室10畳、縁側をはさんで渓流側に客室露天風呂があります。">
+            <rect x="10" y="10" width="300" height="180" fill="#fbf8f1" stroke="#2a231e" stroke-width="2"/>
+            <rect x="10" y="10" width="62" height="64" fill="#fbf8f1" stroke="#2a231e"/>
+            <rect x="10" y="74" width="62" height="116" fill="#e1d6bf" stroke="#2a231e"/>
+            <rect x="72" y="10" width="140" height="180" fill="#e6d8b6" stroke="#2a231e"/>
+            <path d="M72 100 H212 M142 10 V100 M107 100 V190 M177 100 V190" stroke="#b39c71"/>
+            <rect x="212" y="10" width="26" height="180" fill="#d7bf93" stroke="#2a231e"/>
+            <rect x="238" y="10" width="72" height="180" fill="#bfb39e" stroke="#2a231e"/>
+            <rect x="248" y="54" width="52" height="92" fill="#a9bcb4" stroke="#2a231e"/>
+            <path d="M262 46 q-4 -6 0 -12 q4 -6 0 -12 M276 46 q-4 -6 0 -12 q4 -6 0 -12" fill="none" stroke="#5b5045"/>
+            <text x="41" y="46" font-size="11" text-anchor="middle" fill="#2a231e">トイレ</text>
+            <text x="41" y="138" font-size="11" text-anchor="middle" fill="#2a231e">入口</text>
+            <text x="142" y="150" font-size="14" text-anchor="middle" fill="#2a231e">和室 10畳</text>
+            <text x="274" y="104" font-size="11" text-anchor="middle" fill="#2a231e">露天</text>
+          </svg>
+        </div>
+        <div class="body">
+          <p class="type">露天風呂付き和室</p>
+          <h3>やまびこ</h3>
+          <p>縁側の先に、源泉を引いた客室露天風呂があります。記念日やご夫婦での滞在に選ばれている客室です。</p>
+          <p class="price">1名 <b>32,000</b>円〜<br><small>2名1室・平日・1泊2食付き</small></p>
+        </div>
+      </article>
+    </div>
+    <p class="sec-foot"><a class="more" href="rooms/">5種類の客室を比べる</a></p>
+  </div>
+</section>
+
+<section class="dark" id="cuisine">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="en">CUISINE</p>
+      <h2>季節の料理</h2>
+      <p>奥嶺の山と川でとれるものを、季節ごとに献立の中心に据えます。夕食は八品の会席を、仕切られた個室でお出しします。</p>
+    </div>
+    <ul class="seasons">
+      <li data-season="spring">
+        <p class="sname"><b>春</b><span>三月〜五月</span></p>
+        <svg viewBox="0 0 200 130" aria-hidden="true" focusable="false" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="100" cy="92" rx="84" ry="24" stroke="#cbbfa8" stroke-width="1.5"/>
+          <ellipse cx="100" cy="88" rx="64" ry="15" stroke="#5a4c40" stroke-width="1"/>
+          <path d="M62 84 c-4 -22 8 -40 26 -40 c12 0 18 10 12 18 c-5 6 -14 2 -12 -4" stroke="#c9963f" stroke-width="2"/>
+          <path d="M110 86 c2 -20 14 -34 30 -32 c10 2 12 12 4 16 c-6 3 -11 -2 -8 -6" stroke="#c9963f" stroke-width="2"/>
+          <path d="M86 88 c6 -14 20 -30 34 -36 M98 70 l-8 -8 M106 64 l-6 -10 M114 58 l-2 -10" stroke="#f1e9d8" stroke-width="1.5"/>
+        </svg>
+        <h3>山菜の天ぷら</h3>
+        <p>こごみ、たらの芽、ふきのとう。朝に摘んだ山菜を、塩でお召し上がりいただきます。</p>
+      </li>
+      <li data-season="summer">
+        <p class="sname"><b>夏</b><span>六月〜八月</span></p>
+        <svg viewBox="0 0 200 130" aria-hidden="true" focusable="false" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="18" y="80" width="164" height="26" stroke="#cbbfa8" stroke-width="1.5"/>
+          <path d="M34 36 L168 98" stroke="#5a4c40" stroke-width="2"/>
+          <path d="M48 62 c18 -18 52 -22 80 -8 c8 4 14 10 18 16 c-6 4 -14 6 -22 6 c-26 2 -54 -2 -76 -14z" stroke="#f1e9d8" stroke-width="1.8"/>
+          <path d="M146 70 l18 -12 l-4 16 l4 14 l-18 -10" stroke="#f1e9d8" stroke-width="1.8"/>
+          <circle cx="62" cy="61" r="2.5" fill="#c9963f" stroke="none"/>
+          <path d="M84 56 c10 4 24 4 34 0" stroke="#c9963f" stroke-width="1.4"/>
+          <path d="M40 104 c6 -6 10 -6 14 0 M150 104 c6 -6 10 -6 14 0" stroke="#c9963f" stroke-width="1.4"/>
+        </svg>
+        <h3>鮎の塩焼き</h3>
+        <p>こだま谷で育った鮎を、囲炉裏の炭火で焼きます。蓼酢を添えてお出しします。</p>
+      </li>
+      <li data-season="autumn">
+        <p class="sname"><b>秋</b><span>九月〜十一月</span></p>
+        <svg viewBox="0 0 200 130" aria-hidden="true" focusable="false" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M58 58 h64 c8 0 14 10 14 24 c0 16 -12 26 -46 26 c-34 0 -46 -10 -46 -26 c0 -14 6 -24 14 -24z" stroke="#f1e9d8" stroke-width="1.8"/>
+          <path d="M70 58 c0 -10 8 -16 20 -16 c12 0 20 6 20 16" stroke="#f1e9d8" stroke-width="1.8"/>
+          <path d="M90 42 v-6 M84 36 h12" stroke="#c9963f" stroke-width="1.8"/>
+          <path d="M136 74 c14 -2 22 -10 26 -18" stroke="#f1e9d8" stroke-width="1.8"/>
+          <path d="M62 52 c10 -26 50 -26 60 0" stroke="#5a4c40" stroke-width="2"/>
+          <path d="M150 108 h30 l-4 -14 h-22z" stroke="#cbbfa8" stroke-width="1.5"/>
+          <path d="M34 108 c0 -14 4 -26 6 -34 M30 76 c4 -8 16 -8 20 0z" stroke="#c9963f" stroke-width="1.8"/>
+        </svg>
+        <h3>松茸の土瓶蒸し</h3>
+        <p>裏山の松茸と鱧を土瓶で蒸し、すだちを絞ります。〆は新米の栗ご飯です。</p>
+      </li>
+      <li data-season="winter">
+        <p class="sname"><b>冬</b><span>十二月〜二月</span></p>
+        <svg viewBox="0 0 200 130" aria-hidden="true" focusable="false" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="100" cy="62" rx="70" ry="20" stroke="#f1e9d8" stroke-width="1.8"/>
+          <path d="M30 62 c0 26 22 40 70 40 c48 0 70 -14 70 -40" stroke="#f1e9d8" stroke-width="1.8"/>
+          <path d="M22 56 h12 M166 56 h12" stroke="#f1e9d8" stroke-width="2.4"/>
+          <g stroke="#c9963f" stroke-width="1.6">
+            <path d="M100 62 c-10 -8 -22 -6 -26 0 c4 6 16 8 26 0z"/>
+            <path d="M100 62 c10 -8 22 -6 26 0 c-4 6 -16 8 -26 0z"/>
+            <path d="M100 62 c-6 -8 -4 -16 0 -18 c4 2 6 10 0 18z"/>
+            <path d="M100 62 c-6 6 -4 12 0 14 c4 -2 6 -8 0 -14z"/>
+          </g>
+          <path d="M60 112 h80 M70 120 h60" stroke="#5a4c40" stroke-width="2"/>
+        </svg>
+        <h3>牡丹鍋</h3>
+        <p>猪肉を牡丹の花のように盛り、白味噌の割下で煮ます。雪の夜にいちばん頼まれる鍋です。</p>
+      </li>
+    </ul>
+    <ol class="course" aria-label="夕食の会席の流れ">
+      <li><b>先付</b>季節の小鉢</li>
+      <li><b>八寸</b>山の幸の盛り合わせ</li>
+      <li><b>向付</b>川魚のお造り</li>
+      <li><b>椀物</b>季節の椀</li>
+      <li><b>焼物</b>炭火の焼物</li>
+      <li><b>台物</b>季節の鍋</li>
+      <li><b>食事</b>土鍋ご飯と香の物</li>
+      <li><b>水菓子</b>季節の甘味</li>
+    </ol>
+  </div>
+</section>
+
+<section id="onsen">
+  <div class="wrap onsen">
+    <div class="onsen-art">
+      <svg viewBox="0 0 520 330" role="img" aria-label="露天風呂「谺の湯」の図。屋根のかかった岩風呂から湯気が立ち、その下を渓流が流れ、向かいに山の稜線が見えます。">
+        <rect width="520" height="330" fill="#ebe2cf"/>
+        <path d="M0 120 L80 70 L150 104 L240 40 L330 96 L410 56 L520 100 V330 H0Z" fill="#d6cab3"/>
+        <path d="M0 160 L110 120 L200 150 L300 116 L400 150 L520 128 V330 H0Z" fill="#c4b59a"/>
+        <path d="M0 292 C110 270 210 300 310 284 S470 270 520 280 V330 H0Z" fill="#9fb2aa"/>
+        <path d="M30 300 c30 -6 50 -6 80 0 M200 306 c30 -6 50 -6 80 0 M360 296 c30 -6 50 -6 80 0" stroke="#fbf8f1" stroke-width="1.5" fill="none"/>
+        <path d="M120 140 L260 96 L400 140" fill="none" stroke="#2a231e" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M150 131 V218 M370 131 V218" stroke="#2a231e" stroke-width="5"/>
+        <path d="M90 226 C120 206 180 200 260 202 C340 200 400 206 430 226 C420 254 360 262 260 262 C160 262 100 254 90 226Z" fill="#7e705f" stroke="#2a231e" stroke-width="2"/>
+        <path d="M112 226 C150 214 210 212 260 212 C310 212 370 214 408 226 C392 244 340 250 260 250 C180 250 128 244 112 226Z" fill="#a9bcb4"/>
+        <path d="M200 196 q-8 -12 0 -24 q8 -12 0 -24 M248 192 q-8 -12 0 -24 q8 -12 0 -24 M296 196 q-8 -12 0 -24 q8 -12 0 -24" fill="none" stroke="#fbf8f1" stroke-width="2" stroke-linecap="round"/>
+        <g fill="#5b5045"><ellipse cx="96" cy="222" rx="18" ry="11"/><ellipse cx="428" cy="222" rx="20" ry="12"/><ellipse cx="404" cy="244" rx="14" ry="8"/></g>
+        <text x="260" y="88" font-size="15" text-anchor="middle" fill="#2a231e">露天風呂「谺の湯」</text>
+        <text x="470" y="316" font-size="13" text-anchor="middle" fill="#2a231e">こだま川</text>
+      </svg>
+    </div>
+    <div>
+      <div class="sec-head">
+        <p class="en">HOT SPRING</p>
+        <h2>源泉かけ流しの湯</h2>
+        <p>湯殿は三つあります。どの湯も、敷地の源泉から引いた湯を加水・加温せずにかけ流しています。</p>
+      </div>
+      <ul class="baths">
+        <li>
+          <h3>露天風呂「谺の湯」</h3>
+          <p>こだま川を見下ろす岩風呂です。男女の入れ替え制です。</p>
+          <p class="hours">15:00〜24:00／翌朝 5:30〜10:00</p>
+        </li>
+        <li>
+          <h3>大浴場「檜の湯」</h3>
+          <p>檜の湯船と洗い場の広い内湯です。シャンプー類は無香料のものもご用意しています。</p>
+          <p class="hours">15:00〜24:00／翌朝 5:30〜10:00</p>
+        </li>
+        <li>
+          <h3>貸切風呂（2か所）</h3>
+          <p>ご家族やお連れの方だけで入れるお風呂です。チェックインの際にお時間をご予約ください。</p>
+          <p class="hours">15:00〜22:00／1回45分・無料</p>
+        </li>
+      </ul>
+      <dl class="spec">
+        <dt>泉質</dt><dd>単純温泉（弱アルカリ性・低張性・高温泉）</dd>
+        <dt>源泉温度</dt><dd>48.6℃</dd>
+        <dt>湧出量</dt><dd>毎分 120 リットル（自然湧出）</dd>
+      </dl>
+      <p class="note">泉質と数値はサンプル用の架空のものです。</p>
+    </div>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="en">SIGHTSEEING</p>
+      <h2>周辺の観光</h2>
+      <p>宿のまわりは歩いて回れる距離に見どころがあります。地図と散策の手引きはフロントでお渡しします。</p>
+    </div>
+    <ul class="spots">
+      <li>
+        <p class="dist">徒歩5分<small>約400m</small></p>
+        <div><h3>こだま渓谷の遊歩道</h3><p>川沿いを1時間ほどで一周できる遊歩道です。新緑と紅葉の時期がとくに見ごろです。</p></div>
+      </li>
+      <li>
+        <p class="dist">徒歩15分<small>約1.1km</small></p>
+        <div><h3>奥嶺の吊り橋</h3><p>谷に架かる長さ86mの吊り橋です。橋の中ほどで声を出すと、向かいの山からこだまが返ります。</p></div>
+      </li>
+      <li>
+        <p class="dist">車で10分<small>約5km</small></p>
+        <div><h3>奥嶺の朝市</h3><p>土日の朝7時から開かれる市です。山菜、川魚の干物、地元の味噌が並びます。</p></div>
+      </li>
+      <li>
+        <p class="dist">車で20分<small>約12km</small></p>
+        <div><h3>棚田の峠</h3><p>谷に沿って段をなす棚田を見下ろす峠です。水を張る五月と、稲刈り前の九月が見ごろです。</p></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap access-sum">
+    <div>
+      <div class="sec-head">
+        <p class="en">ACCESS</p>
+        <h2>交通</h2>
+        <p>奥嶺駅から宿の車でお迎えにあがります。送迎は前日までのご予約制です。</p>
+      </div>
+      <p><a class="more" href="access/">送迎の時刻表と館内の案内</a></p>
+    </div>
+    <ul class="routes">
+      <li><b>電車</b>奥嶺駅から送迎の車で約15分（前日までにご予約ください）</li>
+      <li><b>お車</b>奥嶺インターチェンジから県道を約25分。駐車場20台・無料</li>
+      <li><b>チェックイン／アウト</b>15:00〜18:30／〜10:00</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div>
+      <h2>空室と料金を確かめる</h2>
+      <p>客室と人数を選ぶと、月ごとの空室と1名あたりの料金を日ごとに表示します。</p>
+    </div>
+    <p class="tel">0000-00-0000<small>電話受付 9:00〜20:00</small></p>
+    <a class="btn btn-gold" href="calendar/">空室カレンダーを見る</a>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-brand">山の湯宿 こだま</p>
+      <p class="foot-addr">〒000-0000 奥嶺町こだま谷 1200<br>TEL 0000-00-0000（受付 9:00〜20:00）</p>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <ul class="foot-nav">
+        <li><a href="./">ホーム</a></li>
+        <li><a href="rooms/">客室</a></li>
+        <li><a href="calendar/">空室と料金</a></li>
+        <li><a href="access/">交通と館内</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap foot-note">
+    <p>※ 掲載している宿名・所在地・電話番号・料金・空室・泉質の数値は、すべてサンプル用に作成した架空のものです。</p>
+    <p>山の湯宿 こだま（架空）／ 制作サンプル</p>
+  </div>
+</footer>
+
+<script>
+'use strict'
+;(() => {
+  const now = new Date()
+  // 宿泊月の選択肢（今月から6か月）
+  const sel = document.getElementById('q-month')
+  sel.textContent = ''
+  for (let i = 0; i < 6; i++) {
+    const d = new Date(now.getFullYear(), now.getMonth() + i, 1)
+    const opt = document.createElement('option')
+    opt.value = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
+    opt.textContent = `${d.getFullYear()}年${d.getMonth() + 1}月`
+    sel.append(opt)
+  }
+  // 今の季節の料理に印を付ける
+  const m = now.getMonth() + 1
+  const season = m >= 3 && m <= 5 ? 'spring' : m >= 6 && m <= 8 ? 'summer' : m >= 9 && m <= 11 ? 'autumn' : 'winter'
+  const li = document.querySelector(`.seasons [data-season="${season}"]`)
+  if (li) {
+    li.classList.add('now')
+    const tag = document.createElement('span')
+    tag.className = 'now-tag'
+    tag.textContent = 'いまの季節'
+    li.prepend(tag)
+  }
+})()
+</script>
+</body>
+</html>

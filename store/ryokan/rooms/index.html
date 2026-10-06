@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>客室｜山の湯宿 こだま</title>
+<meta name="description" content="制作サンプル。架空の旅館のサイトです。和室、和洋室、露天風呂付きの客室5種類の広さ、定員、設備、料金の目安。">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<p class="demo">DEMO — これは制作サンプルです。架空の旅館であり、実在の宿泊施設とは関係ありません。予約やフォームの送信は行いません。</p>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="../">
+      <svg viewBox="0 0 40 40" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M3 33 L14 17 L20 25 L25 19 L37 33"/><path d="M3 36.5h34"/><path d="M22.5 11.5a4.5 4.5 0 0 1 4.5 4.5"/><path d="M22.5 6.5a9.5 9.5 0 0 1 9.5 9.5"/><path d="M17.5 11.5a4.5 4.5 0 0 0-4.5 4.5" opacity=".6"/></svg>
+      <span><b>山の湯宿 こだま</b><small>YAMA NO YUYADO KODAMA</small></span>
+    </a>
+    <nav class="gnav" aria-label="グローバルナビゲーション">
+      <ul>
+        <li><a href="../rooms/" aria-current="page">客室</a></li>
+        <li><a href="../access/">交通と館内</a></li>
+        <li><a href="../calendar/" class="reserve">空室と料金</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<nav class="crumb" aria-label="パンくず">
+  <ol class="wrap"><li><a href="../">ホーム</a></li><li aria-current="page">客室</li></ol>
+</nav>
+
+<main>
+<div class="page-head">
+  <div class="wrap">
+    <p class="en">ROOMS</p>
+    <h1>客室</h1>
+    <p class="lead">客室は5種類17室です。広さ、定員、設備と、1名あたりの料金の目安を並べています。人数と露天風呂の有無で絞り込めます。</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <form class="filter" id="filter" aria-label="客室の絞り込み">
+      <fieldset>
+        <legend>ご利用の人数</legend>
+        <div class="seg">
+          <label><input type="radio" name="guests" value="" checked><span>指定なし</span></label>
+          <label><input type="radio" name="guests" value="1"><span>1名</span></label>
+          <label><input type="radio" name="guests" value="2"><span>2名</span></label>
+          <label><input type="radio" name="guests" value="3"><span>3名</span></label>
+          <label><input type="radio" name="guests" value="4"><span>4名</span></label>
+          <label><input type="radio" name="guests" value="5"><span>5名</span></label>
+          <label><input type="radio" name="guests" value="6"><span>6名</span></label>
+        </div>
+      </fieldset>
+      <label class="check"><input type="checkbox" name="bath" value="1">露天風呂付きの客室だけを表示</label>
+      <p class="result" id="result" aria-live="polite">5種類すべての客室を表示しています</p>
+    </form>
+
+    <div class="empty" id="empty" hidden>
+      <h2>条件に合う客室がありません</h2>
+      <p id="empty-why">選んだ条件に合う客室はありません。</p>
+      <button class="btn btn-ink" type="button" id="reset">条件を解除してすべての客室を表示する</button>
+    </div>
+
+    <div class="tbl-scroll" id="compare-wrap" role="region" aria-labelledby="compare-cap" tabindex="0">
+      <table class="compare">
+        <caption id="compare-cap">客室の比較</caption>
+        <colgroup><col class="c-name"><col class="c-area"><col class="c-cap"><col class="c-bath"><col class="c-price"></colgroup>
+        <thead>
+          <tr><th scope="col">客室</th><th scope="col" class="r">広さ</th><th scope="col" class="r">定員</th><th scope="col">露天風呂</th><th scope="col" class="r">1名あたり（2名・平日）</th></tr>
+        </thead>
+        <tbody>
+          <tr data-room="seseragi"><th scope="row">せせらぎ<small>和室・6室</small></th><td class="r">25㎡</td><td class="r">1〜4名</td><td>なし</td><td class="r">18,000円〜</td></tr>
+          <tr data-room="hibiki"><th scope="row">ひびき<small>和室（二間）・3室</small></th><td class="r">45㎡</td><td class="r">2〜6名</td><td>なし</td><td class="r">21,000円〜</td></tr>
+          <tr data-room="kodama"><th scope="row">こだま<small>和洋室・4室</small></th><td class="r">38㎡</td><td class="r">2〜4名</td><td>なし</td><td class="r">24,000円〜</td></tr>
+          <tr data-room="yamabiko"><th scope="row">やまびこ<small>露天風呂付き和室・3室</small></th><td class="r">42㎡</td><td class="r">2〜3名</td><td>あり（源泉）</td><td class="r">32,000円〜</td></tr>
+          <tr data-room="mine"><th scope="row">みね<small>露天風呂付き特別室・1室</small></th><td class="r">68㎡</td><td class="r">2〜5名</td><td>あり（源泉）</td><td class="r">42,000円〜</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="room-list">
+      <article class="room" id="seseragi" data-room="seseragi">
+        <figure class="plan">
+          <svg viewBox="0 0 320 200" role="img" aria-label="せせらぎの間取り図。入口の脇に内風呂とトイレ、その奥に和室10畳、窓側に広縁があります。">
+            <rect x="10" y="10" width="300" height="180" fill="#fbf8f1" stroke="#2a231e" stroke-width="2"/>
+            <rect x="10" y="10" width="62" height="64" fill="#cfd8d2" stroke="#2a231e"/>
+            <rect x="10" y="74" width="62" height="46" fill="#fbf8f1" stroke="#2a231e"/>
+            <rect x="10" y="120" width="62" height="70" fill="#e1d6bf" stroke="#2a231e"/>
+            <rect x="72" y="10" width="160" height="180" fill="#e6d8b6" stroke="#2a231e"/>
+            <path d="M72 100 H232 M152 10 V100 M112 100 V190 M192 100 V190" stroke="#b39c71"/>
+            <rect x="232" y="10" width="78" height="180" fill="#d7bf93" stroke="#2a231e"/>
+            <path d="M310 22 V178" stroke="#7f5617" stroke-width="5"/>
+            <rect x="254" y="80" width="34" height="34" fill="#fbf8f1" stroke="#2a231e"/>
+            <text x="41" y="46" font-size="11" text-anchor="middle" fill="#2a231e">内風呂</text>
+            <text x="41" y="101" font-size="11" text-anchor="middle" fill="#2a231e">トイレ</text>
+            <text x="41" y="160" font-size="11" text-anchor="middle" fill="#2a231e">入口</text>
+            <text x="152" y="150" font-size="14" text-anchor="middle" fill="#2a231e">和室 10畳</text>
+            <text x="271" y="148" font-size="12" text-anchor="middle" fill="#2a231e">広縁</text>
+          </svg>
+          <figcaption>間取りの略図（太線は窓）</figcaption>
+        </figure>
+        <div class="body">
+          <p class="type">和室・6室</p>
+          <h2>せせらぎ</h2>
+          <p class="desc">渓流側の和室10畳に広縁が付きます。窓を開けると川の音が届きます。おひとりでの湯治や、ご夫婦の滞在に向きます。</p>
+          <dl class="facts">
+            <div><dt>広さ</dt><dd>25㎡</dd></div>
+            <div><dt>定員</dt><dd>1〜4名</dd></div>
+            <div><dt>露天風呂</dt><dd>なし</dd></div>
+            <div><dt>間取り</dt><dd>和室10畳＋広縁</dd></div>
+            <div><dt>寝具</dt><dd>布団</dd></div>
+            <div><dt>眺め</dt><dd>渓流側</dd></div>
+          </dl>
+          <ul class="equip" aria-label="設備">
+            <li>広縁（椅子と卓）</li><li>シャワー付き内風呂</li><li>洗浄機能付きトイレ</li><li>冷蔵庫</li><li>Wi-Fi</li>
+          </ul>
+          <div class="price">
+            <p>1名あたりの料金の目安（2名1室・平日・1泊2食付き）<b>18,000<small>円〜</small></b>休前日は1名 4,000円増</p>
+            <a class="btn btn-ink cal-link" href="../calendar/?room=seseragi&amp;guests=2">空室と料金を見る</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="room" id="hibiki" data-room="hibiki">
+        <figure class="plan">
+          <svg viewBox="0 0 320 200" role="img" aria-label="ひびきの間取り図。入口の脇に檜の内風呂とトイレ、その奥に和室12.5畳と、ふすまで仕切った次の間8畳が続きます。">
+            <rect x="10" y="10" width="300" height="180" fill="#fbf8f1" stroke="#2a231e" stroke-width="2"/>
+            <rect x="10" y="10" width="62" height="64" fill="#cfd8d2" stroke="#2a231e"/>
+            <rect x="10" y="74" width="62" height="46" fill="#fbf8f1" stroke="#2a231e"/>
+            <rect x="10" y="120" width="62" height="70" fill="#e1d6bf" stroke="#2a231e"/>
+            <rect x="72" y="10" width="138" height="180" fill="#e6d8b6" stroke="#2a231e"/>
+            <path d="M72 70 H210 M72 130 H210 M118 10 V70 M164 70 V130 M118 130 V190" stroke="#b39c71"/>
+            <rect x="210" y="10" width="100" height="180" fill="#e6d8b6" stroke="#2a231e"/>
+            <path d="M210 100 H310 M260 10 V100" stroke="#b39c71"/>
+            <path d="M210 30 V170" stroke="#7f5617" stroke-width="3" stroke-dasharray="10 5"/>
+            <path d="M310 22 V178" stroke="#7f5617" stroke-width="5"/>
+            <text x="41" y="46" font-size="11" text-anchor="middle" fill="#2a231e">内風呂</text>
+            <text x="41" y="101" font-size="11" text-anchor="middle" fill="#2a231e">トイレ</text>
+            <text x="41" y="160" font-size="11" text-anchor="middle" fill="#2a231e">入口</text>
+            <text x="141" y="105" font-size="13" text-anchor="middle" fill="#2a231e">和室 12.5畳</text>
+            <text x="260" y="150" font-size="13" text-anchor="middle" fill="#2a231e">次の間 8畳</text>
+          </svg>
+          <figcaption>間取りの略図（太線は窓、破線はふすま）</figcaption>
+        </figure>
+        <div class="body">
+          <p class="type">和室（二間）・3室</p>
+          <h2>ひびき</h2>
+          <p class="desc">和室12.5畳と次の間8畳の二間続きです。ふすまを閉めれば寝る部屋と過ごす部屋を分けられます。三世代のご家族旅行に向きます。</p>
+          <dl class="facts">
+            <div><dt>広さ</dt><dd>45㎡</dd></div>
+            <div><dt>定員</dt><dd>2〜6名</dd></div>
+            <div><dt>露天風呂</dt><dd>なし</dd></div>
+            <div><dt>間取り</dt><dd>和室12.5畳＋次の間8畳</dd></div>
+            <div><dt>寝具</dt><dd>布団</dd></div>
+            <div><dt>眺め</dt><dd>山側</dd></div>
+          </dl>
+          <ul class="equip" aria-label="設備">
+            <li>二間続き</li><li>内風呂（檜の浴槽）</li><li>洗浄機能付きトイレ 2か所</li><li>冷蔵庫</li><li>Wi-Fi</li>
+          </ul>
+          <div class="price">
+            <p>1名あたりの料金の目安（2名1室・平日・1泊2食付き）<b>21,000<small>円〜</small></b>休前日は1名 4,000円増</p>
+            <a class="btn btn-ink cal-link" href="../calendar/?room=hibiki&amp;guests=2">空室と料金を見る</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="room" id="kodama" data-room="kodama">
+        <figure class="plan">
+          <svg viewBox="0 0 320 200" role="img" aria-label="こだまの間取り図。入口の脇に内風呂とトイレ、その奥に和室8畳と、ツインベッドを置いた洋室が並びます。">
+            <rect x="10" y="10" width="300" height="180" fill="#fbf8f1" stroke="#2a231e" stroke-width="2"/>
+            <rect x="10" y="10" width="62" height="64" fill="#cfd8d2" stroke="#2a231e"/>
+            <rect x="10" y="74" width="62" height="46" fill="#fbf8f1" stroke="#2a231e"/>
+            <rect x="10" y="120" width="62" height="70" fill="#e1d6bf" stroke="#2a231e"/>
+            <rect x="72" y="10" width="120" height="180" fill="#e6d8b6" stroke="#2a231e"/>
+            <path d="M72 70 H192 M72 130 H192 M132 70 V130" stroke="#b39c71"/>
+            <rect x="192" y="10" width="118" height="180" fill="#dcc8a2" stroke="#2a231e"/>
+            <rect x="212" y="30" width="34" height="62" fill="#fbf8f1" stroke="#2a231e"/>
+            <rect x="256" y="30" width="34" height="62" fill="#fbf8f1" stroke="#2a231e"/>
+            <path d="M310 110 V178" stroke="#7f5617" stroke-width="5"/>
+            <text x="41" y="46" font-size="11" text-anchor="middle" fill="#2a231e">内風呂</text>
+            <text x="41" y="101" font-size="11" text-anchor="middle" fill="#2a231e">トイレ</text>
+            <text x="41" y="160" font-size="11" text-anchor="middle" fill="#2a231e">入口</text>
+            <text x="132" y="160" font-size="13" text-anchor="middle" fill="#2a231e">和室 8畳</text>
+            <text x="251" y="140" font-size="13" text-anchor="middle" fill="#2a231e">洋室</text>
+          </svg>
+          <figcaption>間取りの略図（太線は窓）</figcaption>
+        </figure>
+        <div class="body">
+          <p class="type">和洋室・4室</p>
+          <h2>こだま</h2>
+          <p class="desc">和室8畳とツインベッドの洋室が続く、宿の名を冠した客室です。お子さまは畳の上で、大人はベッドで休めます。</p>
+          <dl class="facts">
+            <div><dt>広さ</dt><dd>38㎡</dd></div>
+            <div><dt>定員</dt><dd>2〜4名</dd></div>
+            <div><dt>露天風呂</dt><dd>なし</dd></div>
+            <div><dt>間取り</dt><dd>和室8畳＋洋室</dd></div>
+            <div><dt>寝具</dt><dd>ベッド2台＋布団</dd></div>
+            <div><dt>眺め</dt><dd>渓流側</dd></div>
+          </dl>
+          <ul class="equip" aria-label="設備">
+            <li>ベッド2台</li><li>シャワー付き内風呂</li><li>洗浄機能付きトイレ</li><li>冷蔵庫</li><li>Wi-Fi</li>
+          </ul>
+          <div class="price">
+            <p>1名あたりの料金の目安（2名1室・平日・1泊2食付き）<b>24,000<small>円〜</small></b>休前日は1名 4,000円増</p>
+            <a class="btn btn-ink cal-link" href="../calendar/?room=kodama&amp;guests=2">空室と料金を見る</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="room" id="yamabiko" data-room="yamabiko">
+        <figure class="plan">
+          <svg viewBox="0 0 320 200" role="img" aria-label="やまびこの間取り図。入口の脇にトイレ、その奥に和室10畳、縁側をはさんで渓流側に客室露天風呂があります。">
+            <rect x="10" y="10" width="300" height="180" fill="#fbf8f1" stroke="#2a231e" stroke-width="2"/>
+            <rect x="10" y="10" width="62" height="64" fill="#fbf8f1" stroke="#2a231e"/>
+            <rect x="10" y="74" width="62" height="116" fill="#e1d6bf" stroke="#2a231e"/>
+            <rect x="72" y="10" width="140" height="180" fill="#e6d8b6" stroke="#2a231e"/>
+            <path d="M72 100 H212 M142 10 V100 M107 100 V190 M177 100 V190" stroke="#b39c71"/>
+            <rect x="212" y="10" width="26" height="180" fill="#d7bf93" stroke="#2a231e"/>
+            <rect x="238" y="10" width="72" height="180" fill="#bfb39e" stroke="#2a231e"/>
+            <rect x="248" y="54" width="52" height="92" fill="#a9bcb4" stroke="#2a231e"/>
+            <path d="M262 46 q-4 -6 0 -12 q4 -6 0 -12 M276 46 q-4 -6 0 -12 q4 -6 0 -12" fill="none" stroke="#5b5045"/>
+            <text x="41" y="46" font-size="11" text-anchor="middle" fill="#2a231e">トイレ</text>
+            <text x="41" y="138" font-size="11" text-anchor="middle" fill="#2a231e">入口</text>
+            <text x="142" y="150" font-size="14" text-anchor="middle" fill="#2a231e">和室 10畳</text>
+            <text x="274" y="104" font-size="11" text-anchor="middle" fill="#2a231e">露天</text>
+          </svg>
+          <figcaption>間取りの略図（右端が客室露天風呂）</figcaption>
+        </figure>
+        <div class="body">
+          <p class="type">露天風呂付き和室・3室</p>
+          <h2>やまびこ</h2>
+          <p class="desc">縁側の先に、源泉を引いた客室露天風呂があります。夜は川音を聞きながら、朝は山の稜線を見ながら湯に浸かれます。記念日の滞在に選ばれている客室です。</p>
+          <dl class="facts">
+            <div><dt>広さ</dt><dd>42㎡</dd></div>
+            <div><dt>定員</dt><dd>2〜3名</dd></div>
+            <div><dt>露天風呂</dt><dd>あり（源泉）</dd></div>
+            <div><dt>間取り</dt><dd>和室10畳＋縁側</dd></div>
+            <div><dt>寝具</dt><dd>布団</dd></div>
+            <div><dt>眺め</dt><dd>渓流側</dd></div>
+          </dl>
+          <ul class="equip" aria-label="設備">
+            <li class="hl">客室露天風呂（源泉）</li><li>縁側</li><li>洗浄機能付きトイレ</li><li>冷蔵庫</li><li>Wi-Fi</li>
+          </ul>
+          <div class="price">
+            <p>1名あたりの料金の目安（2名1室・平日・1泊2食付き）<b>32,000<small>円〜</small></b>休前日は1名 4,000円増</p>
+            <a class="btn btn-ink cal-link" href="../calendar/?room=yamabiko&amp;guests=2">空室と料金を見る</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="room" id="mine" data-room="mine">
+        <figure class="plan">
+          <svg viewBox="0 0 320 200" role="img" aria-label="みねの間取り図。入口の脇に内風呂とトイレ、和室10畳とツインベッドの洋室が並び、角にテラスと客室露天風呂があります。">
+            <rect x="10" y="10" width="300" height="180" fill="#fbf8f1" stroke="#2a231e" stroke-width="2"/>
+            <rect x="10" y="10" width="54" height="64" fill="#cfd8d2" stroke="#2a231e"/>
+            <rect x="10" y="74" width="54" height="46" fill="#fbf8f1" stroke="#2a231e"/>
+            <rect x="10" y="120" width="54" height="70" fill="#e1d6bf" stroke="#2a231e"/>
+            <rect x="64" y="10" width="104" height="180" fill="#e6d8b6" stroke="#2a231e"/>
+            <path d="M64 100 H168 M116 10 V100 M90 100 V190 M142 100 V190" stroke="#b39c71"/>
+            <rect x="168" y="10" width="72" height="180" fill="#dcc8a2" stroke="#2a231e"/>
+            <rect x="180" y="24" width="22" height="50" fill="#fbf8f1" stroke="#2a231e"/>
+            <rect x="208" y="24" width="22" height="50" fill="#fbf8f1" stroke="#2a231e"/>
+            <rect x="240" y="10" width="70" height="88" fill="#d7bf93" stroke="#2a231e"/>
+            <path d="M240 32 H310 M240 54 H310 M240 76 H310" stroke="#b39c71"/>
+            <rect x="240" y="98" width="70" height="92" fill="#bfb39e" stroke="#2a231e"/>
+            <rect x="250" y="112" width="50" height="64" fill="#a9bcb4" stroke="#2a231e"/>
+            <path d="M310 22 V178 M252 190 H298" stroke="#7f5617" stroke-width="5"/>
+            <text x="37" y="46" font-size="10.5" text-anchor="middle" fill="#2a231e">内風呂</text>
+            <text x="37" y="101" font-size="10.5" text-anchor="middle" fill="#2a231e">トイレ</text>
+            <text x="37" y="160" font-size="10.5" text-anchor="middle" fill="#2a231e">入口</text>
+            <text x="116" y="150" font-size="13" text-anchor="middle" fill="#2a231e">和室 10畳</text>
+            <text x="204" y="140" font-size="13" text-anchor="middle" fill="#2a231e">洋室</text>
+            <text x="275" y="62" font-size="11" text-anchor="middle" fill="#2a231e">テラス</text>
+            <text x="275" y="148" font-size="11" text-anchor="middle" fill="#2a231e">露天</text>
+          </svg>
+          <figcaption>間取りの略図（右上がテラス、右下が客室露天風呂）</figcaption>
+        </figure>
+        <div class="body">
+          <p class="type">露天風呂付き特別室・1室</p>
+          <h2>みね</h2>
+          <p class="desc">最上階の角部屋です。和室と洋室に加え、山と渓流の両方を望むテラスと客室露天風呂があります。宿で一室だけの特別室です。</p>
+          <dl class="facts">
+            <div><dt>広さ</dt><dd>68㎡</dd></div>
+            <div><dt>定員</dt><dd>2〜5名</dd></div>
+            <div><dt>露天風呂</dt><dd>あり（源泉）</dd></div>
+            <div><dt>間取り</dt><dd>和室10畳＋洋室＋テラス</dd></div>
+            <div><dt>寝具</dt><dd>ベッド2台＋布団</dd></div>
+            <div><dt>眺め</dt><dd>山と渓流の角部屋</dd></div>
+          </dl>
+          <ul class="equip" aria-label="設備">
+            <li class="hl">客室露天風呂（源泉）</li><li>テラス</li><li>内風呂</li><li>洗浄機能付きトイレ 2か所</li><li>冷蔵庫</li><li>Wi-Fi</li>
+          </ul>
+          <div class="price">
+            <p>1名あたりの料金の目安（2名1室・平日・1泊2食付き）<b>42,000<small>円〜</small></b>休前日は1名 4,000円増</p>
+            <a class="btn btn-ink cal-link" href="../calendar/?room=mine&amp;guests=2">空室と料金を見る</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <ul class="notes">
+      <li>料金は1泊2食付き・1名あたり・消費税とサービス料込みです。入湯税（1名150円）は別にいただきます。</li>
+      <li>1室の人数によって1名あたりの料金が変わります。人数ごとの料金は空室カレンダーでご確認ください。</li>
+      <li>休前日は土曜日と祝日の前日です。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div>
+      <h2>空室と料金を確かめる</h2>
+      <p>客室と人数を選ぶと、月ごとの空室と1名あたりの料金を日ごとに表示します。</p>
+    </div>
+    <p class="tel">0000-00-0000<small>電話受付 9:00〜20:00</small></p>
+    <a class="btn btn-gold" href="../calendar/">空室カレンダーを見る</a>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-brand">山の湯宿 こだま</p>
+      <p class="foot-addr">〒000-0000 奥嶺町こだま谷 1200<br>TEL 0000-00-0000（受付 9:00〜20:00）</p>
+    </div>
+    <nav aria-label="フッターナビゲーション">
+      <ul class="foot-nav">
+        <li><a href="../">ホーム</a></li>
+        <li><a href="../rooms/">客室</a></li>
+        <li><a href="../calendar/">空室と料金</a></li>
+        <li><a href="../access/">交通と館内</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap foot-note">
+    <p>※ 掲載している宿名・所在地・電話番号・料金・空室・泉質の数値は、すべてサンプル用に作成した架空のものです。</p>
+    <p>山の湯宿 こだま（架空）／ 制作サンプル</p>
+  </div>
+</footer>
+<script src="../js/data.js"></script>
+<script src="../js/rooms.js"></script>
+</body>
+</html>

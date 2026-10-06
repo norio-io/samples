@@ -1,0 +1,479 @@
+@charset "utf-8";
+
+/*
+ * 山の湯宿 こだま（架空）— 制作サンプル
+ * 複数ページ構成のため、スタイルは1つのファイルにまとめて全ページから読み込む。
+ * 外部ライブラリ・外部フォント・ビルド工程は用いない。
+ *
+ * 配色: 黒橡（くろつるばみ）を基調、金茶を差し色、生成（きなり）を地とする。
+ * 角丸と影は使わず、細い罫線で区切る。
+ */
+
+:root {
+  /* 黒橡 */
+  --kuro: #2a231e;
+  --kuro-2: #3a3029;
+  --kuro-3: #4b3f35;
+  --kuro-deep: #1d1814;
+  --on-kuro: #f1e9d8;
+  --on-kuro-soft: #cbbfa8;
+  --kuro-line: #5a4c40;
+  /* 金茶 */
+  --kincha: #c9963f;       /* 黒橡の上で用いる */
+  --kincha-d: #7f5617;     /* 生成の上の文字に用いる */
+  --kincha-l: #efe0c0;
+  /* 生成 */
+  --kinari: #f4eee1;
+  --kinari-2: #ebe2cf;
+  --paper: #fbf8f1;
+  --line: #d6cab3;
+  --ink: #2a231e;
+  --ink-soft: #5b5045;
+  /* 状態 */
+  --ok: #3f5f3c;
+  --full: #8a3a28;
+  --mincho: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
+  --gothic: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "Yu Gothic",
+    "Noto Sans JP", system-ui, sans-serif;
+  --wrap: 1080px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--kinari);
+  color: var(--ink);
+  font-family: var(--gothic);
+  font-size: 15px;
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+}
+
+[hidden] { display: none !important; }
+img, svg { max-width: 100%; display: block; }
+a { color: var(--kincha-d); }
+a:hover { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--kincha-d); outline-offset: 2px; }
+.dark :focus-visible, header.site :focus-visible, footer.site :focus-visible { outline-color: var(--kincha); }
+
+.wrap { width: min(100% - 32px, var(--wrap)); margin-inline: auto; }
+.note { font-size: 13px; color: var(--ink-soft); margin: 10px 0 0; }
+.num { font-variant-numeric: tabular-nums; }
+
+.demo {
+  margin: 0;
+  background: var(--kuro-deep);
+  color: var(--on-kuro-soft);
+  font-size: 12.5px;
+  line-height: 1.6;
+  text-align: center;
+  padding: 8px 16px;
+}
+
+/* ------------------------------------------------------------ ヘッダー */
+
+header.site { background: var(--kuro); color: var(--on-kuro); border-bottom: 1px solid var(--kuro-line); }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-block: 14px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.brand svg { width: 38px; height: 38px; flex: none; color: var(--kincha); }
+.brand b { display: block; font-family: var(--mincho); font-size: 20px; font-weight: 600; letter-spacing: .14em; line-height: 1.3; }
+.brand small { display: block; font-size: 10.5px; letter-spacing: .22em; color: var(--on-kuro-soft); }
+.brand:hover { color: var(--on-kuro); }
+
+.gnav ul { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin-block: 0; padding: 0; list-style: none; }
+.gnav a { display: block; padding: 8px 12px; color: var(--on-kuro); text-decoration: none; font-size: 14px; border-bottom: 2px solid transparent; }
+.gnav a:hover { color: var(--kincha); }
+.gnav a[aria-current="page"] { color: var(--kincha); border-bottom-color: var(--kincha); font-weight: 700; }
+.gnav a.reserve { margin-left: 8px; border: 1px solid var(--kincha); color: var(--kincha); padding: 7px 16px; }
+.gnav a.reserve:hover { background: var(--kincha); color: var(--kuro); }
+.gnav a.reserve[aria-current="page"] { background: var(--kincha); color: var(--kuro); }
+
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  line-height: 1.5;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+}
+.btn-gold { background: var(--kincha); color: var(--kuro); border-color: var(--kincha); }
+.btn-gold:hover { background: var(--on-kuro); color: var(--kuro); border-color: var(--on-kuro); }
+.btn-ink { background: var(--kuro); color: var(--on-kuro); border-color: var(--kuro); }
+.btn-ink:hover { background: var(--kuro-3); color: var(--on-kuro); }
+.btn-line { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn-line:hover { background: var(--kuro); color: var(--on-kuro); }
+
+/* ------------------------------------------------------------ パンくず・ページ見出し */
+
+.crumb { background: var(--kinari-2); }
+.crumb ol { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 0; padding-block: 9px; padding-inline: 0; list-style: none; font-size: 12.5px; color: var(--ink-soft); }
+.crumb li + li::before { content: "／"; margin-right: 8px; }
+.crumb a { color: var(--ink-soft); }
+.crumb a:hover { color: var(--ink); }
+
+.page-head { background: var(--kuro); color: var(--on-kuro); padding-block: clamp(30px, 5vw, 56px); position: relative; overflow: hidden; }
+.page-head .wrap { position: relative; }
+.page-head h1 { margin: 0; font-family: var(--mincho); font-weight: 600; font-size: clamp(25px, 3.6vw, 36px); letter-spacing: .12em; line-height: 1.5; }
+.page-head .en, .sec-head .en { margin: 0 0 6px; font-size: 11px; letter-spacing: .3em; font-weight: 700; }
+.page-head .en { color: var(--kincha); }
+.page-head .lead { margin: 14px 0 0; color: var(--on-kuro-soft); max-width: 60ch; font-size: 14.5px; }
+
+/* ------------------------------------------------------------ 節 */
+
+section { padding-block: clamp(44px, 7vw, 88px); }
+section.paper { background: var(--paper); border-block: 1px solid var(--line); }
+section.dark { background: var(--kuro); color: var(--on-kuro); }
+.sec-head { margin-bottom: clamp(24px, 3.6vw, 40px); max-width: 44em; }
+.sec-head .en { color: var(--kincha-d); }
+.dark .sec-head .en { color: var(--kincha); }
+h2 { margin: 0; font-family: var(--mincho); font-weight: 600; font-size: clamp(22px, 2.9vw, 30px); letter-spacing: .1em; line-height: 1.55; }
+.sec-head p { margin: 12px 0 0; color: var(--ink-soft); font-size: 14.5px; }
+.dark .sec-head p { color: var(--on-kuro-soft); }
+h3 { font-family: var(--mincho); font-weight: 600; font-size: 19px; letter-spacing: .06em; margin: 0 0 8px; line-height: 1.5; }
+
+/* 見出しの左に金茶の縦線。節の区切りを示す */
+.rule-h { border-left: 3px solid var(--kincha); padding-left: 14px; }
+
+/* ------------------------------------------------------------ ヒーロー */
+
+.hero { background: var(--kuro); color: var(--on-kuro); padding-block: 0; border-bottom: 1px solid var(--kuro-line); }
+.hero-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(20px, 4vw, 56px); align-items: center; padding-block: clamp(36px, 6vw, 72px); }
+.hero .kicker { margin: 0 0 14px; color: var(--kincha); font-size: 13px; letter-spacing: .24em; }
+.hero h1 { margin: 0 0 18px; font-family: var(--mincho); font-weight: 600; font-size: clamp(30px, 4.6vw, 50px); line-height: 1.5; letter-spacing: .14em; }
+.hero .lead { margin: 0 0 26px; color: var(--on-kuro-soft); max-width: 34em; }
+.hero-art svg { width: 100%; height: auto; }
+
+/* 空室の確認（トップ） */
+.quick { border: 1px solid var(--kuro-line); background: var(--kuro-2); padding: 18px; }
+.quick h2 { font-size: 17px; letter-spacing: .1em; margin-bottom: 12px; }
+.quick-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; align-items: end; }
+.quick-row > div:first-child, .quick-row .btn { grid-column: 1 / -1; }
+.quick label { display: block; font-size: 12.5px; color: var(--on-kuro-soft); margin-bottom: 4px; }
+.quick select { width: 100%; }
+.quick .btn { white-space: nowrap; }
+
+select, input[type="text"], input[type="email"], input[type="tel"] {
+  font: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 9px 10px;
+  border-radius: 0;
+  max-width: 100%;
+}
+
+/* ------------------------------------------------------------ 特長 */
+
+.points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.points li { padding: 24px 24px 6px 0; }
+.points li + li { padding-left: 24px; border-left: 1px solid var(--line); }
+.points .no { display: block; font-family: var(--mincho); color: var(--kincha-d); font-size: 13px; letter-spacing: .2em; margin-bottom: 6px; }
+.points p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+
+/* ------------------------------------------------------------ 客室カード（抜粋） */
+
+.room-pick { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 28px); }
+.room-pick article { background: var(--paper); border: 1px solid var(--line); display: flex; flex-direction: column; }
+.room-pick .plan { background: var(--kinari-2); border-bottom: 1px solid var(--line); padding: 14px; }
+.room-pick .body { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
+.room-pick .type { margin: 0 0 2px; font-size: 12.5px; color: var(--kincha-d); font-weight: 700; letter-spacing: .1em; }
+.room-pick p { margin: 0 0 12px; font-size: 14px; color: var(--ink-soft); }
+.room-pick .price { margin-top: auto; font-size: 14px; color: var(--ink); }
+.room-pick .price b { font-size: 20px; font-variant-numeric: tabular-nums; }
+.more { font-weight: 700; font-size: 14px; }
+.more::after { content: " →"; }
+.sec-foot { margin-top: 26px; }
+
+/* 間取り図の SVG で共通の色 */
+.plan svg { width: 100%; height: auto; }
+
+/* ------------------------------------------------------------ 料理 */
+
+.seasons { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 0; padding: 0; list-style: none; border: 1px solid var(--kuro-line); }
+.seasons li { padding: 22px 20px 24px; position: relative; }
+.seasons li + li { border-left: 1px solid var(--kuro-line); }
+.seasons svg { width: 100%; max-width: 200px; height: auto; margin: 0 auto 14px; }
+.seasons .sname { display: flex; align-items: baseline; gap: 10px; margin: 0 0 6px; }
+.seasons .sname b { font-family: var(--mincho); font-size: 24px; color: var(--kincha); font-weight: 600; }
+.seasons .sname span { font-size: 12.5px; color: var(--on-kuro-soft); letter-spacing: .08em; }
+.seasons h3 { color: var(--on-kuro); font-size: 17px; }
+.seasons p { margin: 0; color: var(--on-kuro-soft); font-size: 14px; }
+.seasons li.now { background: var(--kuro-2); }
+.seasons .now-tag { display: inline-block; margin-bottom: 8px; font-size: 12px; font-weight: 700; color: var(--kuro); background: var(--kincha); padding: 1px 10px; letter-spacing: .1em; }
+
+.course { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); margin: 30px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--kuro-line); counter-reset: c; }
+.course li { padding: 12px 8px 0 0; font-size: 13.5px; color: var(--on-kuro-soft); counter-increment: c; }
+.course li::before { content: counter(c, cjk-ideographic); display: block; font-family: var(--mincho); color: var(--kincha); font-size: 13px; }
+.course b { display: block; color: var(--on-kuro); font-weight: 700; font-size: 14.5px; }
+
+/* ------------------------------------------------------------ 温泉 */
+
+.onsen { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(22px, 4vw, 52px); align-items: start; }
+.onsen-art { background: var(--kinari-2); border: 1px solid var(--line); padding: 12px; }
+.onsen-art svg { width: 100%; height: auto; }
+.baths { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.baths li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.baths h3 { font-size: 17px; margin: 0 0 2px; }
+.baths p { margin: 0; color: var(--ink-soft); font-size: 14px; }
+.baths .hours { font-size: 13px; color: var(--kincha-d); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.spec { margin: 22px 0 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 18px; font-size: 14px; }
+.spec dt { font-weight: 700; }
+.spec dd { margin: 0; color: var(--ink-soft); }
+
+/* ------------------------------------------------------------ 周辺の観光 */
+
+.spots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(20px, 4vw, 48px); margin: 0; padding: 0; list-style: none; }
+.spots li { display: grid; grid-template-columns: 5.5em minmax(0, 1fr); gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.spots .dist { font-size: 13px; color: var(--kincha-d); font-weight: 700; line-height: 1.6; padding-top: 3px; }
+.spots .dist small { display: block; color: var(--ink-soft); font-weight: 400; }
+.spots h3 { font-size: 16.5px; margin: 0 0 2px; }
+.spots p { margin: 0; color: var(--ink-soft); font-size: 14px; }
+
+/* ------------------------------------------------------------ 交通（トップ） */
+
+.access-sum { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 48px); align-items: start; }
+.routes { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.routes li { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+.routes b { display: block; font-size: 13px; letter-spacing: .1em; color: var(--kincha-d); }
+
+/* ------------------------------------------------------------ 客室ページ */
+
+.filter { background: var(--paper); border: 1px solid var(--line); padding: 18px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; }
+.filter fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.filter legend { font-size: 13px; font-weight: 700; padding: 0; margin-bottom: 6px; }
+.seg { display: flex; flex-wrap: wrap; gap: 0; }
+.seg label { position: relative; }
+.seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.seg span { display: block; min-width: 3.2em; padding: 6px 12px; border: 1px solid var(--line); margin: 0 -1px -1px 0; text-align: center; font-size: 14px; background: var(--paper); color: var(--ink); }
+.seg input:checked + span { background: var(--kuro); color: var(--on-kuro); border-color: var(--kuro); position: relative; }
+.seg input:focus-visible + span { outline: 2px solid var(--kincha-d); outline-offset: 2px; position: relative; }
+.check { display: flex; align-items: center; gap: 8px; font-size: 14.5px; cursor: pointer; }
+.check input { width: 18px; height: 18px; accent-color: var(--kuro); margin: 0; }
+.filter .result { margin: 0 0 0 auto; font-size: 13.5px; color: var(--ink-soft); }
+
+.empty { border: 1px solid var(--full); background: var(--paper); padding: 22px 24px; margin-top: 24px; }
+.empty h2 { font-size: 19px; letter-spacing: .06em; color: var(--full); }
+.empty p { margin: 8px 0 14px; color: var(--ink-soft); font-size: 14.5px; }
+
+.tbl-scroll { overflow-x: auto; margin-top: 24px; border: 1px solid var(--line); background: var(--paper); }
+table.compare { width: 100%; min-width: 600px; border-collapse: collapse; table-layout: fixed; font-size: 14px; }
+.compare caption { text-align: left; padding: 12px 14px 4px; font-weight: 700; font-family: var(--mincho); font-size: 16px; letter-spacing: .06em; }
+.compare th, .compare td { padding: 10px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.compare thead th { font-size: 12.5px; color: var(--ink-soft); font-weight: 700; background: var(--kinari-2); }
+.compare .c-name { width: 32%; }
+.compare .c-area { width: 14%; }
+.compare .c-cap { width: 14%; }
+.compare .c-bath { width: 16%; }
+.compare .c-price { width: 24%; }
+.compare td.r, .compare th.r { text-align: right; font-variant-numeric: tabular-nums; }
+.compare tbody th { font-weight: 700; }
+.compare tbody th small { display: block; font-weight: 400; font-size: 12.5px; color: var(--ink-soft); }
+.compare tr:last-child > * { border-bottom: 0; }
+
+.room-list { display: grid; gap: clamp(22px, 3vw, 34px); margin-top: clamp(28px, 4vw, 44px); }
+.room { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); background: var(--paper); border: 1px solid var(--line); }
+.room .plan { background: var(--kinari-2); border-right: 1px solid var(--line); padding: clamp(14px, 2vw, 24px); display: flex; flex-direction: column; justify-content: center; }
+.room .plan figcaption { font-size: 12.5px; color: var(--ink-soft); margin-top: 8px; }
+.room .plan figure { margin: 0; }
+.room .body { padding: clamp(18px, 2.6vw, 30px); }
+.room .type { margin: 0; font-size: 12.5px; color: var(--kincha-d); font-weight: 700; letter-spacing: .12em; }
+.room h2 { font-size: clamp(22px, 2.6vw, 27px); }
+.room .desc { margin: 8px 0 16px; color: var(--ink-soft); font-size: 14.5px; }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0 0 14px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.facts div { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 8px 12px; }
+.facts dt { font-size: 12px; color: var(--ink-soft); }
+.facts dd { margin: 0; font-weight: 700; font-size: 15.5px; font-variant-numeric: tabular-nums; }
+.equip { margin: 0 0 16px; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.equip li { font-size: 13px; padding: 1px 10px; border: 1px solid var(--line); color: var(--ink-soft); }
+.equip li.hl { border-color: var(--kincha-d); color: var(--kincha-d); font-weight: 700; }
+.room .price { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); padding-top: 14px; }
+.room .price p { margin: 0; font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+.room .price b { display: block; font-size: 24px; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.room .price b small { font-size: 14px; }
+
+/* ------------------------------------------------------------ カレンダーページ */
+
+.cal-ctl { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 14px 22px; background: var(--paper); border: 1px solid var(--line); padding: 16px 20px; }
+.cal-ctl label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.cal-ctl .share { margin: 0 0 0 auto; font-size: 12.5px; color: var(--ink-soft); max-width: 22em; line-height: 1.7; }
+.cal-msg { margin: 12px 0 0; font-size: 13.5px; color: var(--full); min-height: 0; }
+.cal-msg:empty { display: none; }
+
+.month-nav { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; margin: 26px 0 12px; }
+.month-nav h2 { text-align: center; font-size: clamp(22px, 3vw, 28px); }
+.month-nav h2 small { display: block; font-family: var(--gothic); font-size: 13px; font-weight: 400; letter-spacing: .04em; color: var(--ink-soft); }
+.mbtn { font: inherit; font-size: 14px; font-weight: 700; padding: 9px 14px; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); cursor: pointer; white-space: nowrap; }
+.mbtn:hover { background: var(--kuro); color: var(--on-kuro); }
+.mbtn[aria-disabled="true"] { border-color: var(--line); color: var(--ink-soft); background: var(--kinari-2); cursor: not-allowed; }
+
+table.cal { width: 100%; border-collapse: collapse; table-layout: fixed; background: var(--paper); }
+.cal th, .cal td { border: 1px solid var(--line); }
+.cal thead th { font-size: 13px; padding: 6px 2px; background: var(--kuro); color: var(--on-kuro); border-color: var(--kuro-line); font-weight: 700; }
+.cal thead th.sat { color: var(--kincha); }
+.cal thead th.sun { color: #f0b9a8; }
+.cal td { vertical-align: top; padding: 0; height: 104px; }
+.cal td.blank { background: var(--kinari-2); }
+.day { display: flex; flex-direction: column; width: 100%; height: 100%; min-height: 104px; padding: 6px 8px 8px; border: 0; background: transparent; color: var(--ink); font: inherit; text-align: left; line-height: 1.45; }
+button.day { cursor: pointer; }
+button.day:hover { background: var(--kincha-l); }
+button.day[aria-pressed="true"] { background: var(--kuro); color: var(--on-kuro); box-shadow: inset 0 0 0 2px var(--kincha); }
+button.day[aria-pressed="true"] .st, button.day[aria-pressed="true"] .pr { color: var(--on-kuro); }
+button.day[aria-pressed="true"] .eve { background: var(--kincha); color: var(--kuro); }
+button.day[aria-pressed="true"] .hol { color: #f0b9a8; }
+.day .top { display: flex; justify-content: space-between; align-items: baseline; gap: 4px; }
+.day .dn { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.day .hol { font-size: 11px; color: var(--full); font-weight: 700; margin-left: 2px; }
+.day .eve { font-size: 11px; font-weight: 700; color: var(--paper); background: var(--kincha-d); padding: 0 5px; line-height: 1.6; white-space: nowrap; }
+.day .st { display: flex; align-items: baseline; gap: 4px; margin-top: 4px; font-size: 13px; font-weight: 700; }
+.day .sym { font-size: 16px; line-height: 1; }
+.day .stx span { display: inline-block; }
+.day .pr { margin-top: auto; font-size: 13.5px; font-variant-numeric: tabular-nums; font-weight: 700; }
+.day .pr small { font-size: 11px; font-weight: 400; }
+.st-ok .st { color: var(--ok); }
+.st-few .st { color: var(--kincha-d); }
+.st-full .st { color: var(--full); }
+.st-full .pr, .st-past .pr { color: var(--ink-soft); font-weight: 400; }
+td.st-full, td.st-past { background: var(--kinari-2); }
+.st-past .st { color: var(--ink-soft); font-weight: 400; }
+.st-past .dn { color: var(--ink-soft); }
+td.is-eve:not(.st-full):not(.st-past) .pr { color: var(--kincha-d); }
+td.is-eve:not(.st-full):not(.st-past) { box-shadow: inset 0 3px 0 var(--kincha); }
+
+.legend { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 14px 0 0; padding: 0; list-style: none; font-size: 13.5px; }
+.legend li { display: flex; align-items: center; gap: 6px; }
+.legend .sym { font-weight: 700; font-size: 16px; }
+.legend .l-ok { color: var(--ok); }
+.legend .l-few { color: var(--kincha-d); }
+.legend .l-full { color: var(--full); }
+.legend .eve { font-size: 11px; font-weight: 700; color: var(--paper); background: var(--kincha-d); padding: 0 5px; }
+
+.pick { margin-top: 24px; border: 1px solid var(--line); border-left: 3px solid var(--kincha); background: var(--paper); padding: 18px 22px; }
+.pick h3 { font-size: 18px; }
+.pick p { margin: 0; font-size: 14.5px; color: var(--ink-soft); }
+.pick .total { margin-top: 8px; color: var(--ink); }
+.pick .total b { font-size: 24px; font-variant-numeric: tabular-nums; }
+.pick dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 2px 16px; margin: 6px 0 10px; font-size: 14.5px; }
+.pick dt { color: var(--ink-soft); }
+.pick dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.notes { margin: 26px 0 0; padding: 0 0 0 1.2em; font-size: 13.5px; color: var(--ink-soft); }
+.notes li { margin-bottom: 4px; }
+
+/* ------------------------------------------------------------ 交通と館内 */
+
+.access-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(22px, 3.5vw, 44px); align-items: start; }
+.map { border: 1px solid var(--line); background: var(--paper); }
+.map svg { width: 100%; height: auto; }
+
+.defs { margin: 0; border-top: 1px solid var(--line); }
+.defs > div { display: grid; grid-template-columns: 8em minmax(0, 1fr); gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.defs dt { font-weight: 700; }
+.defs dd { margin: 0; color: var(--ink-soft); }
+
+table.times { width: 100%; border-collapse: collapse; table-layout: fixed; background: var(--paper); font-size: 14.5px; }
+.times caption { text-align: left; font-family: var(--mincho); font-weight: 600; font-size: 17px; letter-spacing: .06em; padding-bottom: 8px; }
+.times th, .times td { border: 1px solid var(--line); padding: 9px 12px; text-align: left; vertical-align: top; }
+.times thead th { background: var(--kinari-2); font-size: 13px; }
+.times td.t { font-variant-numeric: tabular-nums; }
+.times .c1 { width: 30%; }
+.times .c2 { width: 30%; }
+.shuttle { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 3vw, 32px); }
+
+.floor { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(22px, 3.5vw, 44px); align-items: start; }
+.floor-art { border: 1px solid var(--kuro-line); background: var(--kuro-2); padding: 12px; }
+.floor-art svg { width: 100%; height: auto; }
+.dark table.times { background: var(--kuro); }
+.dark .times th, .dark .times td { border-color: var(--kuro-line); }
+.dark .times thead th { background: var(--kuro-2); color: var(--on-kuro); }
+.dark .times td { color: var(--on-kuro-soft); }
+.dark .times tbody th { color: var(--on-kuro); }
+.dark .note { color: var(--on-kuro-soft); }
+
+/* ------------------------------------------------------------ 予約の帯 */
+
+.cta { background: var(--kuro-2); color: var(--on-kuro); border-top: 1px solid var(--kuro-line); }
+.cta .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 28px; padding-block: clamp(28px, 4vw, 44px); }
+.cta h2 { font-size: clamp(20px, 2.4vw, 25px); }
+.cta p { margin: 6px 0 0; font-size: 14px; color: var(--on-kuro-soft); }
+.cta .tel { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: .04em; font-variant-numeric: tabular-nums; line-height: 1.4; }
+.cta .tel small { display: block; font-size: 12.5px; font-weight: 400; color: var(--on-kuro-soft); letter-spacing: .04em; }
+
+/* ------------------------------------------------------------ フッター */
+
+footer.site { background: var(--kuro-deep); color: var(--on-kuro-soft); font-size: 13.5px; }
+.foot-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 26px; padding-block: clamp(28px, 4vw, 44px); }
+.foot-brand { margin: 0 0 8px; font-family: var(--mincho); font-size: 18px; letter-spacing: .14em; color: var(--on-kuro); }
+.foot-addr { margin: 0; line-height: 1.9; }
+.foot-nav { display: grid; grid-template-columns: repeat(2, auto); gap: 6px 30px; margin: 0; padding: 0; list-style: none; }
+.foot-nav a { color: var(--on-kuro); text-decoration: none; }
+.foot-nav a:hover { color: var(--kincha); text-decoration: underline; }
+.foot-note { border-top: 1px solid var(--kuro-line); padding-block: 16px; }
+.foot-note p { margin: 0; font-size: 12.5px; }
+
+/* ------------------------------------------------------------ 狭い画面 */
+
+@media (max-width: 960px) {
+  .hero-in { grid-template-columns: minmax(0, 1fr); }
+  .hero-art { order: -1; }
+  .room-pick { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .seasons { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .seasons li:nth-child(3) { border-left: 0; }
+  .seasons li:nth-child(n+3) { border-top: 1px solid var(--kuro-line); }
+  .course { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 12px; }
+  .onsen, .access-sum, .access-grid, .floor { grid-template-columns: minmax(0, 1fr); }
+  .room { grid-template-columns: minmax(0, 1fr); }
+  .room .plan { border-right: 0; border-bottom: 1px solid var(--line); }
+  .room .plan svg { max-width: 460px; margin-inline: auto; }
+}
+
+@media (max-width: 720px) {
+  .bar { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .gnav ul { gap: 2px; }
+  .gnav a { padding: 6px 10px 6px 0; margin-right: 8px; font-size: 13.5px; }
+  .gnav a.reserve { margin-left: 0; padding: 6px 12px; }
+  .points { grid-template-columns: minmax(0, 1fr); }
+  .points li, .points li + li { padding: 18px 0; border-left: 0; }
+  .points li + li { border-top: 1px solid var(--line); }
+  .room-pick { grid-template-columns: minmax(0, 1fr); }
+  .spots { grid-template-columns: minmax(0, 1fr); }
+  .shuttle { grid-template-columns: minmax(0, 1fr); }
+  .filter .result { margin-left: 0; width: 100%; }
+  .cal-ctl .share { margin-left: 0; max-width: none; }
+  .foot-grid { grid-template-columns: minmax(0, 1fr); }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* カレンダーは1セル約50pxになるため、記号・状態・料金を縦に積む */
+  .cal thead th { font-size: 12px; }
+  .cal td { height: 92px; }
+  .day { min-height: 92px; padding: 4px 3px 5px; line-height: 1.3; }
+  .day .top { flex-direction: column; align-items: flex-start; gap: 0; }
+  .day .dn { font-size: 13px; }
+  .day .eve { font-size: 10px; padding: 0 3px; }
+  .day .st { flex-direction: column; align-items: flex-start; gap: 0; font-size: 10.5px; margin-top: 2px; }
+  .day .sym { font-size: 14px; }
+  .day .stx span { display: block; }
+  .day .pr { font-size: 11px; letter-spacing: -.02em; }
+  /* 「円」は凡例の「金額は1名あたり（円）」で示し、セルからは省く */
+  .day .pr small { display: none; }
+  .month-nav { grid-template-columns: auto minmax(0, 1fr) auto; gap: 6px; }
+  .mbtn { padding: 8px 9px; font-size: 13px; }
+}
+
+@media (max-width: 480px) {
+  .quick-row { grid-template-columns: minmax(0, 1fr); }
+  .seasons { grid-template-columns: minmax(0, 1fr); }
+  .seasons li + li { border-left: 0; border-top: 1px solid var(--kuro-line); }
+  .course { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .defs > div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .spec { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .spec dd { margin-bottom: 6px; }
+  .cta .tel { font-size: 22px; }
+}
