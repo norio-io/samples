@@ -13,6 +13,7 @@ https://norio-io.github.io/samples/
 | 予約サイト | スタジオ白日（レンタル撮影スタジオ） | [`booking/photo-studio/`](booking/photo-studio/) | https://norio-io.github.io/samples/booking/photo-studio/ |
 | ランディングページ | ひとひ（健康食品の定期購入） | [`lp/supplement/`](lp/supplement/) | https://norio-io.github.io/samples/lp/supplement/ |
 | ランディングページ | ドッグサロン こもれび | [`lp/pet-salon/`](lp/pet-salon/) | https://norio-io.github.io/samples/lp/pet-salon/ |
+| ランディングページ | かなえ住まい工房（リフォーム） | [`lp/renovation/`](lp/renovation/) | https://norio-io.github.io/samples/lp/renovation/ |
 | ECサイト | 灯し器（うつわ） | [`ec/tableware/`](ec/tableware/) | https://norio-io.github.io/samples/ec/tableware/ |
 | コーポレートサイト | みずき歯科クリニック | [`corporate/dental-clinic/`](corporate/dental-clinic/) | https://norio-io.github.io/samples/corporate/dental-clinic/ |
 | コーポレートサイト | 常磐法律事務所 | [`corporate/law-office/`](corporate/law-office/) | https://norio-io.github.io/samples/corporate/law-office/ |
@@ -40,7 +41,7 @@ React + TypeScript や WordPress で制作したサンプルは、ビルド工�
 `<制作種別>/<業種の抽象名>/` の2階層にしています。
 
 - 第1階層は制作種別（`booking` / `lp` / `ec` / `corporate` / `store`）
-- 第2階層は業種を表す抽象名（`photo-studio` / `supplement` / `pet-salon` / `tableware` / `law-office` / `manufacturing` / `cram-school` / `cafe-bakery`）
+- 第2階層は業種を表す抽象名（`photo-studio` / `supplement` / `pet-salon` / `renovation` / `tableware` / `law-office` / `manufacturing` / `cafe-bakery` / `cram-school`）
 
 ブランド名は使いません。`komorebi` のような固有名だけでは、何のサイトか分からないためです。同じ制作種別でサンプルが増えても、第2階層が増えるだけで済みます。
 
