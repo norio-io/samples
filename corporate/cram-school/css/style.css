@@ -1,0 +1,427 @@
+@charset "utf-8";
+
+/*
+ * ひのき学舎（架空）— 制作サンプル
+ * 複数ページ構成のため、スタイルは1つのファイルにまとめて全ページから読み込む。
+ * 外部ライブラリ・外部フォント・ビルド工程は用いない。
+ *
+ * 配色: 瑠璃色を基調に、学習の印（確認テストの丸、要点の下線、選択中のタブ）だけに黄を差す。
+ * 黄は文字色に使わない。黄の上に置く文字は --ink、瑠璃の上に置く文字は白か黄とする。
+ */
+
+:root {
+  --ink: #181b2e;
+  --ink-soft: #4a4f66;
+  --ink-faint: #5f6479;
+  --line: #d8dbe8;
+  --line-soft: #e9ebf3;
+  --bg: #fff;
+  --surface: #f4f5fa;
+  --ruri: #24399a;
+  --ruri-d: #1a2a75;
+  --ruri-l: #e8ebf8;
+  --on-ruri: #dfe4ff;
+  --ki: #f3c623;
+  --ki-l: #fdf1bf;
+  --err: #b3261e;
+  --gothic: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "Yu Gothic",
+    "Noto Sans JP", system-ui, sans-serif;
+  --wrap: 1080px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--gothic);
+  font-size: 15px;
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { max-width: 100%; display: block; }
+a { color: var(--ruri); }
+a:hover { color: var(--ruri-d); }
+:focus-visible { outline: 3px solid var(--ki); outline-offset: 2px; box-shadow: 0 0 0 5px var(--ruri-d); }
+
+.wrap { width: min(100% - 32px, var(--wrap)); margin-inline: auto; }
+.note { font-size: 13px; color: var(--ink-soft); margin: 10px 0 0; }
+.num { font-variant-numeric: tabular-nums; }
+
+.demo {
+  margin: 0;
+  background: var(--ink);
+  color: #dfe2ee;
+  font-size: 12.5px;
+  line-height: 1.6;
+  text-align: center;
+  padding: 9px 16px;
+}
+
+/* 要点に引く黄の下線（蛍光ペンの印） */
+.mark { background: linear-gradient(transparent 62%, var(--ki) 62%, var(--ki) 92%, transparent 92%); padding-inline: 2px; }
+/* 瑠璃の上では背景を敷かず、黄の太い下線で印を付ける（白い文字と黄の背景はコントラストが取れないため） */
+.uline { text-decoration: underline; text-decoration-color: var(--ki); text-decoration-thickness: .16em; text-underline-offset: .2em; text-decoration-skip-ink: none; }
+
+/* ------------------------------------------------------------ ヘッダー */
+
+header.site { background: #fff; border-bottom: 1px solid var(--line); }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-block: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.brand svg { width: 34px; height: 34px; flex: none; }
+.brand b { display: block; font-size: 20px; font-weight: 700; letter-spacing: .14em; line-height: 1.3; }
+.brand small { display: block; font-size: 11px; letter-spacing: .08em; color: var(--ink-faint); font-weight: 400; line-height: 1.4; }
+
+.gnav ul { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin: 0; padding: 0; list-style: none; }
+.gnav a {
+  display: block;
+  padding: 8px 14px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+}
+.gnav a:hover { color: var(--ruri); }
+.gnav a[aria-current="page"] { color: var(--ruri); border-bottom-color: var(--ki); }
+.gnav .gnav-cta a { background: var(--ruri); color: #fff; border: 0; padding: 9px 18px; border-radius: 2px; }
+.gnav .gnav-cta a:hover { background: var(--ruri-d); color: #fff; }
+.gnav .gnav-cta a[aria-current="page"] { background: var(--ruri-d); box-shadow: inset 0 -3px 0 var(--ki); }
+
+/* ------------------------------------------------------------ ボタン */
+
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-decoration: none;
+  text-align: center;
+}
+.btn-ki { background: var(--ki); color: var(--ink); border-color: var(--ki); }
+.btn-ki:hover { background: #fff; color: var(--ink); }
+.btn-line { border-color: #fff; color: #fff; }
+.btn-line:hover { background: #fff; color: var(--ruri); }
+.btn-ruri { background: var(--ruri); color: #fff; border-color: var(--ruri); }
+.btn-ruri:hover { background: var(--ruri-d); border-color: var(--ruri-d); color: #fff; }
+.btn-sub { border-color: var(--ruri); color: var(--ruri); background: #fff; }
+.btn-sub:hover { background: var(--ruri-l); color: var(--ruri-d); }
+
+/* ------------------------------------------------------------ パンくず・ページ見出し */
+
+.crumb { border-bottom: 1px solid var(--line-soft); background: #fff; }
+.crumb ol { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 0; padding-block: 10px; padding-inline: 0; list-style: none; font-size: 12.5px; color: var(--ink-faint); }
+.crumb li + li::before { content: "／"; margin-right: 8px; color: var(--line); }
+.crumb a { color: var(--ink-soft); text-decoration: none; }
+.crumb a:hover { color: var(--ruri); text-decoration: underline; }
+
+.page-head { background: var(--ruri); color: #fff; padding-block: clamp(30px, 5vw, 52px); }
+.page-head .en { margin: 0 0 4px; font-size: 11.5px; letter-spacing: .26em; color: var(--ki); font-weight: 700; }
+.page-head h1 { margin: 0; font-size: clamp(24px, 3.4vw, 34px); letter-spacing: .06em; line-height: 1.5; }
+.page-head .lead { margin: 14px 0 0; color: var(--on-ruri); font-size: 14.5px; max-width: 64ch; }
+
+/* ------------------------------------------------------------ セクション */
+
+section { padding-block: clamp(44px, 6vw, 76px); }
+section.tint { background: var(--surface); }
+.sec-head { margin-bottom: clamp(22px, 3.5vw, 34px); }
+.sec-head .en { margin: 0 0 4px; font-size: 11.5px; letter-spacing: .26em; color: var(--ruri); font-weight: 700; }
+h2 { margin: 0; font-size: clamp(20px, 2.7vw, 27px); letter-spacing: .05em; line-height: 1.55; }
+.sec-head p { margin: 12px 0 0; color: var(--ink-soft); font-size: 14.5px; max-width: 64ch; }
+h3 { font-size: 17px; letter-spacing: .03em; line-height: 1.6; margin: 0 0 8px; }
+
+/* ------------------------------------------------------------ ヒーロー */
+
+.hero { background: var(--ruri); color: #fff; }
+.hero-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(24px, 4vw, 56px); align-items: center; padding-block: clamp(36px, 6vw, 72px); }
+.hero .kicker { margin: 0 0 12px; font-size: 13px; letter-spacing: .12em; color: var(--ki); font-weight: 700; }
+.hero h1 { margin: 0 0 20px; font-size: clamp(28px, 4.4vw, 46px); line-height: 1.5; letter-spacing: .06em; }
+.hero p.lead { margin: 0 0 26px; color: var(--on-ruri); max-width: 34em; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero-art svg { width: 100%; height: auto; }
+.hero-facts { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 26px 0 0; padding: 18px 0 0; border-top: 1px solid rgba(255, 255, 255, .28); list-style: none; font-size: 13.5px; color: var(--on-ruri); }
+.hero-facts b { color: #fff; font-size: 17px; margin-right: 2px; font-variant-numeric: tabular-nums; }
+
+/* ------------------------------------------------------------ 学年から選ぶ */
+
+.grades { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.grades h3 { font-size: 14px; color: var(--ink-soft); letter-spacing: .1em; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 0; }
+.grade-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; border-left: 1px solid var(--line); }
+.grade-list a {
+  display: block;
+  height: 100%;
+  padding: 16px 14px 18px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--ink);
+  box-shadow: inset 0 4px 0 transparent;
+}
+.grade-list a:hover { background: var(--ruri-l); box-shadow: inset 0 4px 0 var(--ki); }
+.grade-list .g { display: block; font-size: 24px; font-weight: 700; color: var(--ruri); line-height: 1.3; }
+.grade-list .g small { font-size: 14px; margin-left: 2px; }
+.grade-list .c { display: block; margin-top: 6px; font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; }
+
+/* ------------------------------------------------------------ 指導の特長 */
+
+.features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 36px); margin: 0; padding: 0; list-style: none; counter-reset: feat; }
+.features li { counter-increment: feat; border-top: 3px solid var(--ruri); padding-top: 16px; }
+.features li::before { content: "0" counter(feat); display: block; font-size: 13px; font-weight: 700; letter-spacing: .14em; color: var(--ruri); }
+.features svg { width: 100%; max-width: 260px; height: auto; margin: 10px 0 14px; }
+.features p { margin: 0; font-size: 14px; color: var(--ink-soft); }
+
+/* ------------------------------------------------------------ 合格実績（抜粋）・一覧 */
+
+.result-grid { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: clamp(22px, 4vw, 48px); align-items: start; }
+.tally { margin: 0; border: 1px solid var(--line); background: #fff; }
+.tally > div { padding: 16px 20px; border-bottom: 1px solid var(--line); }
+.tally > div:last-child { border-bottom: 0; }
+.tally dt { font-size: 13px; color: var(--ink-soft); }
+.tally dd { margin: 2px 0 0; font-size: 30px; font-weight: 700; line-height: 1.3; color: var(--ruri); font-variant-numeric: tabular-nums; }
+.tally dd small { font-size: 14px; margin-left: 4px; color: var(--ink); }
+
+.fiction {
+  margin: 0 0 26px;
+  padding: 14px 18px;
+  border-left: 4px solid var(--ki);
+  background: var(--ki-l);
+  font-size: 14px;
+  color: var(--ink);
+}
+.fiction b { display: block; }
+
+.schools { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 14.5px; background: #fff; }
+.schools caption { text-align: left; font-weight: 700; padding-bottom: 10px; letter-spacing: .04em; }
+.schools th, .schools td { border-bottom: 1px solid var(--line); padding: 11px 10px; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+.schools thead th { background: var(--surface); font-size: 13px; color: var(--ink-soft); border-top: 1px solid var(--line); }
+.schools tbody th { font-weight: 700; }
+.schools .col-kind { width: 7.5em; }
+.schools .col-n { width: 5.5em; }
+.schools td.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.schools th.n { text-align: right; }
+.kind { display: inline-block; padding: 0 8px; border: 1px solid var(--ruri); border-radius: 2px; font-size: 12px; color: var(--ruri); white-space: nowrap; }
+
+.year-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 8px; padding: 0; list-style: none; }
+.year-nav a { display: block; padding: 6px 16px; border: 1px solid var(--ruri); color: var(--ruri); text-decoration: none; font-weight: 700; font-size: 14px; }
+.year-nav a:hover { background: var(--ruri-l); }
+.year { scroll-margin-top: 16px; }
+.year + .year { margin-top: clamp(40px, 6vw, 64px); padding-top: clamp(32px, 5vw, 52px); border-top: 1px solid var(--line); }
+.year-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 18px; }
+.year-head p { margin: 0; color: var(--ink-soft); font-size: 14px; }
+.year-head p b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.year-cols { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(22px, 3.5vw, 40px); align-items: start; }
+
+/* ------------------------------------------------------------ 教室の案内・講師 */
+
+.room-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(22px, 4vw, 48px); align-items: start; }
+.room-art { margin: 0; border: 1px solid var(--line); background: #fff; }
+.room-art svg { width: 100%; height: auto; }
+.room-art figcaption { padding: 10px 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-soft); }
+
+.defs { margin: 0; }
+.defs > div { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.defs > div:first-child { border-top: 1px solid var(--line); }
+.defs dt { font-weight: 700; margin: 0; font-size: 14px; }
+.defs dd { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+
+.staff { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2.6vw, 28px); margin: clamp(32px, 5vw, 48px) 0 0; padding: 0; list-style: none; }
+.staff li { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 14px; align-items: start; }
+.staff svg { width: 84px; height: 84px; }
+.staff .role { margin: 0; font-size: 12px; letter-spacing: .1em; color: var(--ruri); font-weight: 700; }
+.staff h3 { margin: 0 0 4px; font-size: 16px; }
+.staff p { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.8; }
+
+/* ------------------------------------------------------------ 学年タブ */
+
+.tablist { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-bottom: 2px solid var(--ruri); }
+.tab {
+  appearance: none;
+  margin: 0;
+  padding: 10px 4px 12px;
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  background: var(--surface);
+  color: var(--ink-soft);
+  font: inherit;
+  line-height: 1.3;
+  cursor: pointer;
+  text-align: center;
+}
+.tab + .tab { border-left: 0; }
+.tab small { display: block; font-size: 12px; }
+.tab b { display: block; font-size: 20px; font-variant-numeric: tabular-nums; }
+.tab:hover { background: var(--ruri-l); color: var(--ruri-d); }
+.tab[aria-selected="true"] { background: var(--ruri); border-color: var(--ruri); color: #fff; box-shadow: inset 0 4px 0 var(--ki); }
+.tab-sep { box-shadow: inset 2px 0 0 var(--line); }
+.tab:focus-visible { outline-offset: -5px; box-shadow: none; }
+
+.panel { padding-top: clamp(24px, 4vw, 36px); }
+.panel:focus-visible { outline-offset: 6px; }
+.panel h2 { margin-bottom: 6px; }
+.panel .lead { margin: 0 0 22px; color: var(--ink-soft); font-size: 14.5px; max-width: 64ch; }
+
+.course { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 14.5px; }
+.course caption, .annual caption { text-align: left; font-weight: 700; font-size: 16px; padding-bottom: 10px; letter-spacing: .04em; }
+.course th, .course td { border-bottom: 1px solid var(--line); padding: 14px 12px; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+.course thead th { background: var(--surface); font-size: 13px; color: var(--ink-soft); border-top: 1px solid var(--line); }
+.course .col-time { width: 30%; }
+.course .col-fee { width: 22%; }
+.course tbody th { font-weight: 700; }
+.course tbody th .type { display: inline-block; margin-bottom: 4px; padding: 0 8px; font-size: 12px; font-weight: 700; color: #fff; background: var(--ruri); border-radius: 2px; }
+.course tbody th .type.solo { background: #fff; color: var(--ruri); box-shadow: inset 0 0 0 1px var(--ruri); }
+.course tbody th small, .course td small { display: block; font-weight: 400; font-size: 12.5px; color: var(--ink-faint); line-height: 1.7; margin-top: 2px; }
+.course td.fee, .course th.fee { text-align: right; }
+.course td.fee { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.course td.fee small { font-size: 12px; }
+
+.annual-box { margin-top: clamp(28px, 4vw, 40px); }
+.annual { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 14px; }
+.annual th, .annual td { border-bottom: 1px solid var(--line); padding: 10px 10px; vertical-align: top; overflow-wrap: anywhere; }
+.annual thead th { background: var(--surface); font-size: 12.5px; color: var(--ink-soft); text-align: right; border-top: 1px solid var(--line); line-height: 1.6; }
+.annual thead th:first-child { text-align: left; }
+.annual col.col-item { width: 31%; }
+.annual tbody th { text-align: left; font-weight: 400; font-size: 13.5px; }
+.annual tbody th small { display: block; font-size: 12px; color: var(--ink-faint); }
+.annual td { text-align: right; font-variant-numeric: tabular-nums; }
+.annual tr.total th, .annual tr.total td { font-weight: 700; font-size: 15px; border-top: 2px solid var(--ruri); border-bottom: 2px solid var(--ruri); background: var(--ki-l); }
+.annual tr.avg th, .annual tr.avg td { color: var(--ink-soft); font-size: 13px; }
+
+.panel-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; margin-top: 26px; padding: 18px 20px; background: var(--ruri-l); }
+.panel-foot p { margin: 0; font-size: 14px; }
+
+.rules { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 32px; }
+.rules li { position: relative; padding-left: 24px; font-size: 14.5px; color: var(--ink-soft); }
+.rules li b { color: var(--ink); }
+.rules li::before { content: ""; position: absolute; left: 2px; top: .7em; width: 10px; height: 10px; border: 2px solid var(--ki); border-radius: 50%; background: var(--ruri); }
+
+/* ------------------------------------------------------------ 体験授業フォーム */
+
+.trial-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: clamp(24px, 4vw, 52px); align-items: start; }
+.steps { margin: 0; padding: 0; list-style: none; counter-reset: st; border: 1px solid var(--line); background: #fff; }
+.steps li { counter-increment: st; position: relative; padding: 14px 16px 14px 54px; border-bottom: 1px solid var(--line); font-size: 13.5px; color: var(--ink-soft); }
+.steps li:last-child { border-bottom: 0; }
+.steps li::before { content: counter(st); position: absolute; left: 16px; top: 14px; width: 26px; height: 26px; display: grid; place-items: center; background: var(--ruri); color: #fff; font-weight: 700; font-size: 13px; line-height: 1; }
+.steps b { display: block; color: var(--ink); font-size: 14.5px; }
+.aside-h { margin: 0 0 10px; font-size: 15px; }
+
+.form fieldset { margin: 0 0 26px; padding: 0; border: 0; min-width: 0; }
+.form legend { padding: 0; margin-bottom: 14px; font-size: 17px; font-weight: 700; width: 100%; border-bottom: 2px solid var(--ruri); padding-bottom: 6px; }
+.field { margin-bottom: 20px; }
+.field > label, .field .label { display: block; font-weight: 700; font-size: 14.5px; margin-bottom: 6px; }
+.req, .opt { display: inline-block; margin-left: 8px; padding: 0 6px; font-size: 11.5px; font-weight: 700; line-height: 1.7; vertical-align: 1px; border-radius: 2px; }
+.req { background: var(--ruri); color: #fff; }
+.opt { background: var(--surface); color: var(--ink-soft); box-shadow: inset 0 0 0 1px var(--line); }
+.hint { margin: 0 0 8px; font-size: 13px; color: var(--ink-soft); }
+.hint.echo { margin: 6px 0 0; color: var(--ruri-d); font-weight: 700; }
+.hint.echo:empty { display: none; }
+.form input[type="text"], .form input[type="tel"], .form input[type="email"], .form input[type="date"], .form select, .form textarea {
+  width: 100%;
+  max-width: 30em;
+  padding: 11px 12px;
+  border: 1px solid #8f94ab;
+  border-radius: 2px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  line-height: 1.5;
+}
+.form textarea { max-width: none; min-height: 7.5em; resize: vertical; }
+.form input:focus-visible, .form select:focus-visible, .form textarea:focus-visible { outline: 3px solid var(--ki); outline-offset: 0; box-shadow: none; border-color: var(--ruri); }
+.choices { display: flex; flex-wrap: wrap; gap: 8px 10px; }
+.choice { position: relative; display: flex; align-items: flex-start; gap: 8px; padding: 10px 14px; border: 1px solid #8f94ab; border-radius: 2px; background: #fff; cursor: pointer; font-size: 14.5px; line-height: 1.6; }
+.choice input { margin: 4px 0 0; accent-color: var(--ruri); flex: none; }
+.choice:has(input:checked) { border-color: var(--ruri); background: var(--ruri-l); box-shadow: inset 0 0 0 1px var(--ruri); }
+.choice small { display: block; font-size: 12.5px; color: var(--ink-soft); }
+.choices.grade-choices .choice { min-width: 6.5em; }
+.msg { display: none; margin: 6px 0 0; font-size: 13.5px; color: var(--err); font-weight: 700; }
+.field.err .msg { display: block; }
+.field.err input, .field.err select, .field.err textarea, .field.err .choice { border-color: var(--err); }
+.field.err input[type="date"], .field.err input[type="text"], .field.err input[type="tel"], .field.err input[type="email"] { box-shadow: inset 0 0 0 1px var(--err); }
+.agree { display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; }
+.agree input { margin-top: 6px; accent-color: var(--ruri); flex: none; }
+
+.summary { margin: 0 0 24px; padding: 14px 18px; border: 2px solid var(--err); background: #fff; }
+.summary h2 { font-size: 16px; color: var(--err); margin: 0 0 6px; }
+.summary ul { margin: 0; padding-left: 1.2em; font-size: 14px; }
+.summary a { color: var(--err); }
+
+.submit { appearance: none; border: 0; border-radius: 2px; padding: 15px 34px; background: var(--ruri); color: #fff; font: inherit; font-weight: 700; font-size: 16px; cursor: pointer; }
+.submit:hover { background: var(--ruri-d); }
+.done { margin-top: 22px; padding: 18px 20px; border-left: 4px solid var(--ki); background: var(--ruri-l); }
+.done h2 { font-size: 17px; margin: 0 0 6px; }
+.done p { margin: 0; font-size: 14px; color: var(--ink-soft); }
+.done dl { margin: 12px 0 0; font-size: 14px; display: grid; grid-template-columns: 7em minmax(0, 1fr); gap: 4px 12px; }
+.done dt { font-weight: 700; }
+.done dd { margin: 0; overflow-wrap: anywhere; }
+
+/* ------------------------------------------------------------ 申し込みの帯 */
+
+.cta { background: var(--ruri-d); color: #fff; }
+.cta .wrap { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 18px 32px; padding-block: clamp(30px, 4.5vw, 48px); }
+.cta h2 { color: #fff; }
+.cta p { margin: 8px 0 0; font-size: 14px; color: var(--on-ruri); }
+.cta .tel { margin: 6px 0 0; font-size: 14px; color: var(--on-ruri); }
+.cta .tel b { color: #fff; font-size: 18px; font-variant-numeric: tabular-nums; margin-left: 6px; }
+
+/* ------------------------------------------------------------ フッター */
+
+footer.site { background: var(--surface); border-top: 1px solid var(--line); }
+.foot-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 26px; padding-block: clamp(28px, 4vw, 44px); }
+.foot-brand { margin: 0 0 8px; font-weight: 700; letter-spacing: .12em; }
+.foot-addr { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.9; }
+.foot-nav { display: grid; grid-template-columns: repeat(2, auto); gap: 6px 30px; margin: 0; padding: 0; list-style: none; font-size: 13.5px; }
+.foot-nav a { color: var(--ink-soft); text-decoration: none; }
+.foot-nav a:hover { color: var(--ruri); text-decoration: underline; }
+.foot-note { border-top: 1px solid var(--line); padding-block: 16px; }
+.foot-note p { margin: 0; font-size: 12.5px; color: var(--ink-faint); }
+
+/* ------------------------------------------------------------ 狭い画面 */
+
+@media (max-width: 960px) {
+  .hero-in { grid-template-columns: minmax(0, 1fr); }
+  .hero-art { max-width: 560px; }
+  .grades { grid-template-columns: minmax(0, 1fr); }
+  .features { grid-template-columns: minmax(0, 1fr); }
+  .features li { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 0 22px; }
+  .features li::before { grid-column: 1 / -1; }
+  .features svg { grid-row: 2 / 4; margin-top: 4px; }
+  .result-grid, .room-grid, .year-cols, .trial-grid { grid-template-columns: minmax(0, 1fr); }
+  .staff { grid-template-columns: minmax(0, 1fr); }
+  .rules { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .brand b { font-size: 18px; }
+  .gnav { width: 100%; }
+  .gnav ul { justify-content: space-between; }
+  .gnav a { padding: 7px 8px; font-size: 14px; }
+  .gnav .gnav-cta a { padding: 8px 12px; }
+  .features li { grid-template-columns: minmax(0, 1fr); }
+  .features svg { grid-row: auto; max-width: 220px; }
+  .grade-list .g { font-size: 21px; }
+  .grade-list a { padding: 14px 10px 16px; }
+  .tab { padding-inline: 2px; }
+  .tab b { font-size: 17px; }
+  .tab small { font-size: 11px; }
+  .course, .schools { font-size: 13.5px; }
+  .course th, .course td { padding: 12px 6px; }
+  .course .col-time { width: 31%; }
+  .course .col-fee { width: 27%; }
+  .course td.fee { font-size: 15px; }
+  .annual { font-size: 13px; }
+  .annual th, .annual td { padding: 9px 5px; }
+  .annual col.col-item { width: 28%; }
+  .annual tr.total th, .annual tr.total td { font-size: 13.5px; }
+  .schools th, .schools td { padding: 10px 6px; }
+  .schools .col-kind { width: 5.4em; }
+  .schools .col-n { width: 3.8em; }
+  .defs > div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .cta .wrap { grid-template-columns: minmax(0, 1fr); }
+  .foot-grid { grid-template-columns: minmax(0, 1fr); }
+  .panel-foot { padding: 16px; }
+}
