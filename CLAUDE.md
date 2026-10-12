@@ -140,6 +140,22 @@ npm --prefix scripts ci && CHROMIUM_PATH=/opt/pw-browsers/chromium npm --prefix 
 | `theme:` | 対象領域 |
 | `by:` | 作成元（自動化ツール） |
 
+ラベルの色は、次の対応に従う。同じ接頭辞のラベルはすべて同じ色とし、`priority:` のラベルに限り値ごとに色を分ける。ラベルを追加する場合も、この対応に従う。
+
+| 対象 | 色 |
+|---|---|
+| `type:` | `e3d9fc` |
+| `status:` | `fef2c0` |
+| `theme:` | `f9d0c4` |
+| `in:` | `e8f9de` |
+| `for:` | `c5def5` |
+| `by:` | `80cbc4` |
+| `priority: high` | `f7c6c7` |
+| `priority: normal` | `e4e4e4` |
+| `priority: low` | `bfd4f2` |
+
+`priority:` の色は、優先度の区分を設ける場合に使う。
+
 ### レビュー
 
 - レビュースレッドの解決はレビュー者が行う。実装者は解決しない。
